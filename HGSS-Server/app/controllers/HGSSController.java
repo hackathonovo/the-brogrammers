@@ -41,7 +41,7 @@ public class HGSSController extends Controller {
         return ok(views.html.stations.render(stations));
     }
 
-    public Result registerUser(){
+    public Result saveUser() {
         DynamicForm userForm = formFactory.form().bindFromRequest();
 
         if (userForm == null) return null;
@@ -56,6 +56,11 @@ public class HGSSController extends Controller {
         HGSSUser user = new HGSSUser(username,password,firstName,lastName,role,skill);
         user.save();
 
+        flash("success", "Korisnik dodan!");
+        return redirect(routes.HGSSController.getUsers());
+    }
+
+    public Result user(){
         return ok(views.html.registerUser.render(null));
     }
 

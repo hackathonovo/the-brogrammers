@@ -43,6 +43,8 @@ public class HGSSUser extends Model {
 
     public Boolean isAvailable;
 
+    public Integer phoneNumber;
+
     public HGSSUser(String username, String password, String firstName, String lastName,
                     String role, String skill){
         this.username = username;
