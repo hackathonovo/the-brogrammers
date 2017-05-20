@@ -2,10 +2,7 @@ package models;
 
 import com.avaje.ebean.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -25,6 +22,9 @@ public class HGSSStation extends Model {
 
     public Double latitude;
 
+    @OneToMany
+    public HGSSUser users;
+
     public HGSSStation(String stationName, Double longitude, Double latitude) {
         this.stationName = stationName;
         this.longitude = longitude;
@@ -33,7 +33,7 @@ public class HGSSStation extends Model {
 
     @Override
     public String toString() {
-        return "StationName=" + stationName + ", longitude=" + longitude + ", latitude=" + latitude;
+        return "{name=" + stationName + ", longitude=" + longitude + ", latitude=" + latitude + "}";
     }
 
     public static Finder<Long, HGSSStation> finder = new Finder<>(HGSSStation.class);

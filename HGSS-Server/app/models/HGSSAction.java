@@ -18,8 +18,27 @@ public class HGSSAction extends Model {
 
     public String description;
 
+    public Double longitude;
+    public Double latitude;
+
+    @ManyToOne
+    public HGSSUser owner;
+
     @OneToMany(cascade = CascadeType.ALL)
     public List<HGSSZone> zones;
+
+    public HGSSAction(HGSSUser owner, Double longitude, Double latitude, String description){
+        this.owner = owner;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "{owner=" + owner.username + ", longitude=" + longitude + ", latitude=" + latitude + ", description="
+                + description + "}";
+    }
 
     public static Finder<Long, HGSSAction> finder = new Finder<>(HGSSAction.class);
 
