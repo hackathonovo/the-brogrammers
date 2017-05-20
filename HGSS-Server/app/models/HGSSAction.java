@@ -30,11 +30,14 @@ public class HGSSAction extends Model {
     @OneToMany(cascade = CascadeType.ALL)
     public List<HGSSZone> zones;
 
+    public Boolean isActive;
+
     public HGSSAction(HGSSUser owner, Double longitude, Double latitude, String description){
         this.owner = owner;
         this.longitude = longitude;
         this.latitude = latitude;
         this.description = description;
+        this.isActive = true;
     }
 
     @Override
@@ -49,5 +52,8 @@ public class HGSSAction extends Model {
         return finder.all();
     }
 
+    public static List<HGSSAction> findActiveActions(){
+        return finder.where().eq("isActive", true).findList();
+    }
 
 }
