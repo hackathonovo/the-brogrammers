@@ -31,10 +31,6 @@ public class HGSSUser extends Model {
     public String firstName;
     public String lastName;
 
-    @Column(unique = true)
-    @Constraints.Email
-    public String email;
-
     @Enumerated(EnumType.STRING)
     public HGSSRole role;
 
@@ -44,6 +40,16 @@ public class HGSSUser extends Model {
     //@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     //@JoinColumn(name = "owner_id")
     //public java.util.List<BTTrip> trips = new ArrayList<>();
+
+    public HGSSUser(String username, String password, String firstName, String lastName,
+                    HGSSRole role, HGSSSkill skill){
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.role = role;
+        this.skill = skill;
+    }
 
     @Override
     public String toString() {
