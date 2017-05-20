@@ -24,7 +24,7 @@ public class HGSSController extends Controller {
         users.add(new HGSSUser("user3", "pass3", "Pero", "Peric",
                 HGSSRole.ROLE_3, HGSSSkill.SKILL_3));
 
-        return ok(Json.toJson(users));
+        return ok(views.html.users.render(users));
     }
 
 }
