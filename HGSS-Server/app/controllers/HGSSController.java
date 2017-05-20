@@ -1,5 +1,6 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.HGSSAction;
@@ -77,14 +78,14 @@ public class HGSSController extends Controller {
     }
 
     public Result setAvailibility(){
-        Logger.debug("Request: login");
+        Logger.debug("----------- Request: setAvailability -----------");
 
         JsonNode json = request().body().asJson();
-        String username = json.findPath("username").textValue();
-        String isAvailableStr = json.findPath("isAvailable").textValue();
-        Boolean isAvailable = (isAvailableStr.equalsIgnoreCase("true")) ? true : false;
 
         Logger.debug("Received json: " + json);
+
+        String username = json.findPath("username").textValue();
+        Boolean isAvailable = json.findPath("isAvailable").booleanValue();
 
         HGSSUser user = HGSSUser.findUserByUsername(username);
 
@@ -134,6 +135,7 @@ public class HGSSController extends Controller {
     }
 
     public Result getActions() {
+        Logger.debug("----------- Request: Actions -----------");
         List<HGSSAction> actions = HGSSAction.findAll();
         return ok(views.html.actions.render(actions));
     }
@@ -199,5 +201,24 @@ public class HGSSController extends Controller {
 
         return badRequest();
     }
+
+    public Result saveAction() {
+        return ok();
+    }
+
+    public Result saveMap() {
+        JsonNode node = request().body().asJson();
+        String nodeString;
+        try {
+            nodeString = new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(node);
+        } catch (Exception ex) {
+            Logger.error(ex.getMessage());
+            return badRequest();
+        }
+        Logger.debug(nodeString);
+        return ok();
+
+    }
+
 
 }

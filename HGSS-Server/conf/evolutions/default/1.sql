@@ -51,6 +51,7 @@ create table hgssaction (
   longitude                     float,
   latitude                      float,
   owner_id                      bigint,
+  is_active                     boolean,
   constraint pk_hgssaction primary key (id)
 );
 create sequence hgssaction_seq;
@@ -60,6 +61,12 @@ create table hgsslocation (
   longitude                     float,
   latitude                      float
 );
+
+create table hgssmap (
+  id                            bigint not null,
+  constraint pk_hgssmap primary key (id)
+);
+create sequence hgssmap_seq;
 
 create table hgssstation (
   id                            bigint not null,
@@ -170,6 +177,9 @@ drop table if exists hgssaction cascade;
 drop sequence if exists hgssaction_seq;
 
 drop table if exists hgsslocation cascade;
+
+drop table if exists hgssmap cascade;
+drop sequence if exists hgssmap_seq;
 
 drop table if exists hgssstation cascade;
 drop sequence if exists hgssstation_seq;
