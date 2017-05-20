@@ -51,6 +51,7 @@ create table hgssaction (
   longitude                     float,
   latitude                      float,
   owner_id                      bigint,
+  is_active                     boolean,
   constraint pk_hgssaction primary key (id)
 );
 create sequence hgssaction_seq;

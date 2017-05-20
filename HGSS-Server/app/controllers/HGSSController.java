@@ -68,14 +68,14 @@ public class HGSSController extends Controller {
     }
 
     public Result setAvailibility(){
-        Logger.debug("Request: login");
+        Logger.debug("----------- Request: setAvailability -----------");
 
         JsonNode json = request().body().asJson();
-        String username = json.findPath("username").textValue();
-        String isAvailableStr = json.findPath("isAvailable").textValue();
-        Boolean isAvailable = (isAvailableStr.equalsIgnoreCase("true")) ? true : false;
 
         Logger.debug("Received json: " + json);
+
+        String username = json.findPath("username").textValue();
+        Boolean isAvailable = json.findPath("isAvailable").booleanValue();
 
         HGSSUser user = HGSSUser.findUserByUsername(username);
 
