@@ -4,7 +4,11 @@
     <div class="containter">
         @*defines button which appears when device is small*@
         <div class="navbar-header">
-            <a class="navbar-brand" href="@routes.Public.landing()"> HGSS </a>
+            <a class="navbar-brand" href="@routes.Public.landing()">
+                <div id="abbrvText" class="foldText">
+                    H<span id="rvatska">rvatska&nbsp;</span>G<span id="orska">orska&nbsp;</span>S<span id="luzba">luzba&nbsp;</span>S<span id="pasavanja">pasavanja&nbsp;</span>
+                </div>
+            </a>
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <!--defines these button which appears on xs devices, icon bar is line on the button-->
                 <span class="sr-only">Toggle navigation</span>
@@ -37,6 +41,12 @@
 
 
 </div>
+
+<script src="@routes.Assets.at("javascripts/abbreviText.js")" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/abbreviText.css")"/>
+<script>
+        abbreviText("abbrvText", ["rvatska", "orska", "luzba", "pasavanja"]);
+</script>
 
 
 
