@@ -1,5 +1,6 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import models.HGSSAction;
 import models.HGSSStation;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -130,6 +131,70 @@ public class HGSSController extends Controller {
     public Result action() {
         return ok(views.html.action.render(null));
     }
+
+    public Result saveAction() {
+        return ok();
+    }
+
+    public Result saveMap() {
+        JsonNode node = request().body().asJson();
+        String nodeString;
+        try {
+            nodeString = new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(node);
+        } catch (Exception ex) {
+            Logger.error(ex.getMessage());
+            return badRequest();
+        }
+        Logger.debug(nodeString);
+        return ok();
+
+    }
+
+//    /* Right now used only for ajax calls*/
+//    public Result saveSWTYear() {
+//        return SUDrequest(true, request().body().asJson());
+//    }
+//
+//    /* Right now used only for ajax calls*/
+//    public Result deleteSWTYear() {
+//        return SUDrequest(false, request().body().asJson());
+//    }
+//
+//    private Result SUDrequest(boolean save, JsonNode node) {
+//        String agency;
+//        Integer year;
+//        Long userId;
+//        String nodeString;
+//        try {
+//            nodeString = new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(node);
+//        } catch (Exception ex) {
+//            logger.error(ex.getMessage());
+//            return badRequest();
+//        }
+//        logger.debug("Got request to do year (save:" + save + "): " + nodeString);
+//
+//        try {
+//            agency = node.get("agency").asText();
+//            year = Integer.parseInt(node.get("year").asText());
+//            userId = Long.parseLong(node.get("userId").asText());
+//        } catch (Exception e) {
+//            return badRequest(e.getMessage());
+//        }
+//        SWTYear swtYear = SWTYear.findYear(agency, year, userId);
+//        if (save) {
+//            if (swtYear != null) {
+//                return badRequest("Want to save swtYear but there is already one");
+//            }
+//            swtYear = new SWTYear(year, agency, SWTUser.findUserById(userId));
+//            swtYear.save();
+//        } else {
+//            if (swtYear == null) {
+//                return badRequest("Want to delete swtYear but there is none like it");
+//            }
+//            swtYear.delete();
+//        }
+//        return ok();
+//    }
 
 
 }

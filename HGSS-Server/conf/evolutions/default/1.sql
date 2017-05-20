@@ -58,6 +58,12 @@ create table hgsslocation (
   latitude                      float
 );
 
+create table hgssmap (
+  id                            bigint not null,
+  constraint pk_hgssmap primary key (id)
+);
+create sequence hgssmap_seq;
+
 create table hgssstation (
   id                            bigint not null,
   station_name                  varchar(255),
@@ -87,7 +93,7 @@ create sequence hgssuser_seq;
 
 create table hgsszone (
   id                            bigint not null,
-  hgssaction_id                 bigint not null,
+  hgssmap_id                    bigint not null,
   constraint pk_hgsszone primary key (id)
 );
 create sequence hgsszone_seq;
@@ -110,8 +116,8 @@ create index ix_bttrip_btuser_btuser on bttrip_btuser (btuser_id);
 alter table hgsslocation add constraint fk_hgsslocation_hgsszone_id foreign key (hgsszone_id) references hgsszone (id) on delete restrict on update restrict;
 create index ix_hgsslocation_hgsszone_id on hgsslocation (hgsszone_id);
 
-alter table hgsszone add constraint fk_hgsszone_hgssaction_id foreign key (hgssaction_id) references hgssaction (id) on delete restrict on update restrict;
-create index ix_hgsszone_hgssaction_id on hgsszone (hgssaction_id);
+alter table hgsszone add constraint fk_hgsszone_hgssmap_id foreign key (hgssmap_id) references hgssmap (id) on delete restrict on update restrict;
+create index ix_hgsszone_hgssmap_id on hgsszone (hgssmap_id);
 
 
 # --- !Downs
@@ -134,8 +140,8 @@ drop index if exists ix_bttrip_btuser_btuser;
 alter table if exists hgsslocation drop constraint if exists fk_hgsslocation_hgsszone_id;
 drop index if exists ix_hgsslocation_hgsszone_id;
 
-alter table if exists hgsszone drop constraint if exists fk_hgsszone_hgssaction_id;
-drop index if exists ix_hgsszone_hgssaction_id;
+alter table if exists hgsszone drop constraint if exists fk_hgsszone_hgssmap_id;
+drop index if exists ix_hgsszone_hgssmap_id;
 
 drop table if exists btlocation cascade;
 drop sequence if exists btlocation_seq;
@@ -154,6 +160,9 @@ drop table if exists hgssaction cascade;
 drop sequence if exists hgssaction_seq;
 
 drop table if exists hgsslocation cascade;
+
+drop table if exists hgssmap cascade;
+drop sequence if exists hgssmap_seq;
 
 drop table if exists hgssstation cascade;
 drop sequence if exists hgssstation_seq;

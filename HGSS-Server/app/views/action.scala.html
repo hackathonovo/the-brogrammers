@@ -8,74 +8,15 @@
   <script src="@routes.Assets.at("validetta/validetta.min.js")" type="text/javascript"></script>
   <link rel="stylesheet" type="text/css" href="@routes.Assets.at("validetta/validetta.min.css")">
 
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOVsLLDx5MQmY4CUaD9-kt5Dqw5tPjJV4&libraries=places&callback=initAutocomplete"
-  async defer></script>
-
   @*clockpicker*@
   <script src="@routes.Assets.at("javascripts/clockpicker.js")" type="text/javascript"></script>
   <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/clockpicker.css")">
 
-
-  <script>
-          function getRandomColor() {
-            var letters = '0123456789ABCDEF';
-            var color = '#';
-            for (var i = 0; i < 6; i++ ) {
-              color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
-          }
-          // This example requires the Places library. Include the libraries=places
-          // parameter when you first load the API. For example:
-          // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-          function initMap() {
-
-            var colors = ["#d63351","#1f98d1","#","#","#","#","#","#","#","#","#","#"];
-
-            var map = new google.maps.Map(document.getElementById("map"), {
-              zoom: 7,
-              center: new google.maps.LatLng(44.629573,16.66626 ),
-              mapTypeId: google.maps.MapTypeId.ROADMAP
-            });
-
-            var drawingManager = new google.maps.drawing.DrawingManager({
-              drawingControl: true,
-              drawingControlOptions: {
-                position: google.maps.ControlPosition.TOP_CENTER,
-                drawingModes: ['marker', 'polygon']
-              },
-              markerOptions: {
-                icon: '@routes.Assets.at("images/pointer-gss.png")',
-                draggable: true
-              },
-              polygonOptions: {
-                editable: true,
-                fillColor: getRandomColor()
-              },
-              circleOptions: {
-                fillColor: '#ffff00',
-                fillOpacity: 1,
-                strokeWeight: 5,
-                clickable: false,
-                editable: true,
-                zIndex: 1
-              }
-            });
-            drawingManager.setMap(map);
-
-
-            google.maps.event.addListener(map, 'idle', function() {
-              alert("woooo")
-            });
-
-          }
-
-
-
-  </script>
+  @*jscolor*@
+  <script src="@routes.Assets.at("javascripts/jscolor.min.js")" type="text/javascript"></script>
 
   <div class="window">
-    <form action="" method="post" id="register_form">
+    <form id="actionForm" action="" method="post" id="register_form">
       <div class="row separate">
         <div class="col-md-offset-3 col-md-6">
           <div class="form-group">
@@ -129,6 +70,15 @@
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOVsLLDx5MQmY4CUaD9-kt5Dqw5tPjJV4&libraries=drawing&callback=initMap">
             </script>
           </div>
+          <div class="polygonPanel">
+
+            <button id="polyColor" class="btn btn-default jscolor {valueElement:null,value:'66ccff'}">
+              Boja zone
+            </button>
+            <button id="okColor" class="btn btn-default">Ok</button>
+          </div>
+
+
           <button type="submit" class="btn btn-primary separate">Submit</button>
 
         </div>
@@ -138,11 +88,142 @@
 
 
   <script>
+
+            var polyArray = [];
+            var base;
+            var polyColors = [];
+            var currentColor;
+
+
+          function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++ ) {
+              color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+          }
+          // This example requires the Places library. Include the libraries=places
+          // parameter when you first load the API. For example:
+          // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+          function initMap() {
+
+            var map = new google.maps.Map(document.getElementById("map"), {
+              zoom: 7,
+              center: new google.maps.LatLng(44.629573,16.66626 ),
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+
+            var drawingManager = new google.maps.drawing.DrawingManager({
+              drawingControl: true,
+              drawingControlOptions: {
+                position: google.maps.ControlPosition.TOP_CENTER,
+                drawingModes: ['marker', 'polygon']
+              },
+              markerOptions: {
+                icon: '@routes.Assets.at("images/pointer-gss.png")',
+                draggable: true
+              },
+              polygonOptions: {
+                editable: true,
+                fillColor: getRandomColor(),
+                opacity: 0.2
+              }
+            });
+            drawingManager.setMap(map);
+
+            google.maps.event.addListener(drawingManager, 'overlaycomplete', function(event) {
+              if (event.type == google.maps.drawing.OverlayType.POLYGON) {
+                //Add 'event.overlay', which is Circle, to array
+                polyArray.push(event.overlay);
+                polyColors.push(currentColor);
+                alert(event.overlay.getPath().length);
+              }
+              if (event.type == google.maps.drawing.OverlayType.MARKER) {
+                base = event.overlay;
+              }
+            });
+
+            $('#okColor').click(function () {
+              drawingManager.setMap(null);
+              drawingManager = new google.maps.drawing.DrawingManager({
+                drawingControl: true,
+                drawingControlOptions: {
+                  position: google.maps.ControlPosition.TOP_CENTER,
+                  drawingModes: ['marker', 'polygon']
+                },
+                markerOptions: {
+                  icon: '@routes.Assets.at("images/pointer-gss.png")',
+                  draggable: true
+                },
+                polygonOptions: {
+                  editable: true,
+                  fillColor: $('#polyColor').css("background-color"),
+                  opacity: 0.2
+                }
+              });
+              drawingManager.setMap(map);
+              currentColor = $('#polyColor').css("background-color");
+            });
+
+          }
+
+            $('#actionForm').submit(function(e) {
+              e.preventDefault();
+              e.returnValue = false;
+              alert(polyColors.length);
+              var polys = [];
+              for(var index=0;index<polyArray.length;index++) {
+                alert(polyColors[index]);
+              }
+
+
+//              $.ajax({
+//                type: 'POST',
+//                url: '/saveMap',
+//                data: JSON.stringify(polyArray),
+//                headers: {
+//                  'Content-Type': 'application/json'
+//                },
+//                success: function() { // your success handler
+//                  alert("nice!")
+//                },
+//                error: function() { // your error handler
+//                  alert("bed :(((")
+//                }
+//              });
+
+
+              @*var $form = $(this);*@
+              @*// this is the important part. you want to submit*@
+              @*// the form but only after the ajax call is completed*@
+              @*$.ajax({*@
+              @*type: 'post',*@
+              @*url: '@routes.HGSSController.saveAction()',*@
+              @*context: $form, // context will be "this" in your handlers*@
+              @*success: function() { // your success handler*@
+              @*},*@
+              @*error: function() { // your error handler*@
+              @*},*@
+              @*complete: function() {*@
+              @*// make sure that you are no longer handling the submit event; clear handler*@
+              @*this.off('submit');*@
+              @*// actually submit the form*@
+              @*this.submit();*@
+              @*}*@
+              @*});*@
+            });
+
+  </script>
+
+
+  <script>
           $("#register_form").validetta({
             realTime: true,
             display : 'inline',
             errorTemplateClass : 'validetta-inline'
           });
+
   </script>
 
   @*activate all tooltips*@
