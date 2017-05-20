@@ -28,5 +28,6 @@ GET     /registracijaSpasitelj  controllers.HGSSController.registerUser()
 GET     /users              controllers.HGSSController.getUsers()
 GET     /stations           controllers.HGSSController.getStations()
 POST    /login              controllers.HGSSController.login()
+GET     /actions            controllers.HGSSController.getActions()
 
 

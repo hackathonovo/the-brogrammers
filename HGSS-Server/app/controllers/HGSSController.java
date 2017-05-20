@@ -1,6 +1,7 @@
 package controllers;
 
 
+import models.HGSSAction;
 import models.HGSSStation;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -68,6 +69,11 @@ public class HGSSController extends Controller {
 
     public Result registerUser() {
         return ok(views.html.registerUser.render());
+    }
+
+    public Result getActions() {
+        List<HGSSAction> actions = HGSSAction.findAll();
+        return ok(views.html.actions.render(actions));
     }
 
 

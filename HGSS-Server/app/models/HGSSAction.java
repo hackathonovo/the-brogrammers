@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.List;
 
 /**
  * Created by penic on 20.05.17..
@@ -19,6 +20,12 @@ public class HGSSAction extends Model {
 
     public String description;
 
+
     public static Finder<Long, HGSSAction> finder = new Finder<>(HGSSAction.class);
+
+    public static List<HGSSAction> findAll() {
+        return finder.all();
+    }
+
 
 }
