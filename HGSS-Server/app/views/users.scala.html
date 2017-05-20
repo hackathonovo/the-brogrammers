@@ -1,0 +1,30 @@
+@(users: List[HGSSUser])
+@main("Users") {
+
+  <div class="window">
+    <h1 class="horizontalLine"><span>Users</span></h1>
+    <div class="row separate">
+
+      <table class="table table-bordered separate">
+        <thead>
+          <tr><th>Username</th><th>First name</th><th>Last name</th></tr>
+        </thead>
+        <tbody>
+        @for(user <- users) {
+          <tr>
+            <td>
+            @user.username
+            </td>
+            <td>
+            @user.firstName
+            </td>
+            <td>
+            @user.lastName
+            </td>
+          </tr>
+        }
+        </tbody>
+      </table>
+    </div>
+  </div>
+}

@@ -13,6 +13,7 @@ libraryDependencies ++= Seq(
   "org.webjars" %% "webjars-play" % "2.4.0-1",
   "org.webjars" % "bootstrap" % "3.3.7-1",
   "org.ocpsoft.prettytime" % "prettytime" % "3.2.7.Final",
+  "com.typesafe.play" %% "play-json" % "2.3.4",
   "org.postgresql" % "postgresql" % "9.4-1206-jdbc42"
 )
 

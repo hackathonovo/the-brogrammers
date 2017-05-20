@@ -1,19 +1,19 @@
 package models;
 
 import com.avaje.ebean.Model;
+import models.enumerations.HGSSRole;
+import models.enumerations.HGSSSkill;
 import play.data.validation.Constraints;
 import play.libs.F;
 
 import javax.persistence.*;
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
- * Created by penic on 08.04.17..
+ * Created by penic on 20.05.17..
  */
 @Entity
-public class BTUser extends Model {
+public class HGSSUser extends Model {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -30,38 +30,45 @@ public class BTUser extends Model {
 
     public String firstName;
     public String lastName;
-    public Image profilePicture;
 
-    @Column(unique = true)
-    @Constraints.Email
-    public String email;
+    @Enumerated(EnumType.STRING)
+    public HGSSRole role;
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
-    @JoinColumn(name = "owner_id")
-    public List<BTTrip> trips = new ArrayList<>();
+    @Enumerated(EnumType.STRING)
+    public HGSSSkill skill;
+
+    //@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    //@JoinColumn(name = "owner_id")
+    //public java.util.List<BTTrip> trips = new ArrayList<>();
+
+    public HGSSUser(String username, String password, String firstName, String lastName,
+                    HGSSRole role, HGSSSkill skill){
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.role = role;
+        this.skill = skill;
+    }
 
     @Override
     public String toString() {
         return "Username=" + username + ", firstName=" + firstName + ", lastName=" + lastName;
     }
 
-    public static Finder<Long, BTUser> finder = new Finder<>(BTUser.class);
+    public static Finder<Long, HGSSUser> finder = new Finder<>(HGSSUser.class);
 
-    public static List<BTUser> findAll() {
+    public static List<HGSSUser> findAll() {
         return finder.all();
     }
 
-    public static BTUser checkUser(String username, String password) {
+    public static HGSSUser checkUser(String username, String password) {
         return finder.where().eq("username", username).and().eq("password", password).findUnique();
     }
 
-    public static BTUser findUserByUsername(String username) {
+    public static HGSSUser findUserByUsername(String username) {
         return null;
         //return finder.where().eq("username", username).findUnique();
-    }
-
-    public static BTUser findUserById(Long id) {
-        return finder.where().eq("id", id).findUnique();
     }
 
     public static class UsernameValidator extends Constraints.Validator<String> {

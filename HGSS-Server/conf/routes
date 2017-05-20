@@ -22,6 +22,8 @@ GET     /trips              controllers.BTController.trips(from: String, to: Str
 GET     /createtrip         controllers.BTController.createTrip()
 POST    /saveTrip           controllers.BTController.saveTrip()
 
+
 #HGSS
 GET     /registracijaSpasitelj  controllers.Public.registracijaSpasitelj()
+GET     /users              controllers.HGSSController.getUsers()
 
