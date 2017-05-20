@@ -6,6 +6,13 @@ h1 {
     font-weight: bold;
 }
 
+.main-container {
+    background: white;
+    padding: 0;
+    box-shadow: 0 0 8px rgba(0,0,0,0.3);
+    min-height: 100vh;
+}
+
 #mynavbar {
     margin-bottom: 0;
     /*padding: 0 50px 0px 50px;*/
@@ -58,4 +65,45 @@ be overwritten */
         font-size: 1.7em;
         /* 0.8x default size */
     }
+}
+
+/* navbar */
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: #000;  /*Sets the text hover color on navbar*/
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active >
+a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    color: white; /*BACKGROUND color for active*/
+    background-color: #030033;
+}
+
+.navbar-default {
+    background-color: #0478AF;
+    border-color: #030033;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+    color: #262626;
+    text-decoration: none;
+    background-color: #66CCFF;  /*change color of links in drop down here*/
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus {
+    text-decoration: none;
+    background-color: silver; /*Change rollover cell color here*/
+}
+
+
+.navbar-default .navbar-nav > li > a {
+    color: white; /*Change active text color here*/
+}
+
+.navbar-default .navbar-brand {
+    color: white;
+}
+.navbar-default .navbar-brand:hover{
+    color: black;
 }

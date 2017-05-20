@@ -52,6 +52,12 @@ create table hgssaction (
 );
 create sequence hgssaction_seq;
 
+create table hgsslocation (
+  hgsszone_id                   bigint not null,
+  longitude                     float,
+  latitude                      float
+);
+
 create table hgssstation (
   id                            bigint not null,
   station_name                  varchar(255),
@@ -69,10 +75,18 @@ create table hgssuser (
   last_name                     varchar(255),
   role                          varchar(255),
   skill                         varchar(255),
+  is_available                  boolean,
   constraint uq_hgssuser_username unique (username),
   constraint pk_hgssuser primary key (id)
 );
 create sequence hgssuser_seq;
+
+create table hgsszone (
+  id                            bigint not null,
+  hgssaction_id                 bigint not null,
+  constraint pk_hgsszone primary key (id)
+);
+create sequence hgsszone_seq;
 
 alter table bttrip add constraint fk_bttrip_owner_id foreign key (owner_id) references btuser (id) on delete restrict on update restrict;
 create index ix_bttrip_owner_id on bttrip (owner_id);
@@ -88,6 +102,12 @@ create index ix_bttrip_btuser_bttrip on bttrip_btuser (bttrip_id);
 
 alter table bttrip_btuser add constraint fk_bttrip_btuser_btuser foreign key (btuser_id) references btuser (id) on delete restrict on update restrict;
 create index ix_bttrip_btuser_btuser on bttrip_btuser (btuser_id);
+
+alter table hgsslocation add constraint fk_hgsslocation_hgsszone_id foreign key (hgsszone_id) references hgsszone (id) on delete restrict on update restrict;
+create index ix_hgsslocation_hgsszone_id on hgsslocation (hgsszone_id);
+
+alter table hgsszone add constraint fk_hgsszone_hgssaction_id foreign key (hgssaction_id) references hgssaction (id) on delete restrict on update restrict;
+create index ix_hgsszone_hgssaction_id on hgsszone (hgssaction_id);
 
 
 # --- !Downs
@@ -107,6 +127,12 @@ drop index if exists ix_bttrip_btuser_bttrip;
 alter table if exists bttrip_btuser drop constraint if exists fk_bttrip_btuser_btuser;
 drop index if exists ix_bttrip_btuser_btuser;
 
+alter table if exists hgsslocation drop constraint if exists fk_hgsslocation_hgsszone_id;
+drop index if exists ix_hgsslocation_hgsszone_id;
+
+alter table if exists hgsszone drop constraint if exists fk_hgsszone_hgssaction_id;
+drop index if exists ix_hgsszone_hgssaction_id;
+
 drop table if exists btlocation cascade;
 drop sequence if exists btlocation_seq;
 
@@ -123,9 +149,14 @@ drop sequence if exists btuser_seq;
 drop table if exists hgssaction cascade;
 drop sequence if exists hgssaction_seq;
 
+drop table if exists hgsslocation cascade;
+
 drop table if exists hgssstation cascade;
 drop sequence if exists hgssstation_seq;
 
 drop table if exists hgssuser cascade;
 drop sequence if exists hgssuser_seq;
+
+drop table if exists hgsszone cascade;
+drop sequence if exists hgsszone_seq;
 

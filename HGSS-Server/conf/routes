@@ -5,8 +5,8 @@
 # Home page
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file      controllers.Assets.at(path="/public", file)
-GET     /webjars/*file     controllers.WebJarAssets.at(file)
+GET     /assets/*file       controllers.Assets.at(path="/public", file)
+GET     /webjars/*file      controllers.WebJarAssets.at(file)
 
 GET     /register2           controllers.Public.registerForm()
 POST    /register2           controllers.Public.register()
@@ -22,6 +22,8 @@ GET     /trips              controllers.BTController.trips(from: String, to: Str
 GET     /createtrip         controllers.BTController.createTrip()
 POST    /saveTrip           controllers.BTController.saveTrip()
 
+#HGSS
+GET     /user               controllers.HGSSController.registerUser()
 GET     /users              controllers.HGSSController.getUsers()
 GET     /stations           controllers.HGSSController.getStations()
 POST    /login              controllers.HGSSController.login()

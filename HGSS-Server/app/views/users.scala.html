@@ -1,30 +1,210 @@
 @(users: List[HGSSUser])
 @main("Users") {
 
-  <div class="window">
-    <h1 class="horizontalLine"><span>Users</span></h1>
-    <div class="row separate">
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/users.css")" >
+    @*datatable*@
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+            $(document).ready(function () {
+                $('#example').DataTable();
+            });
+    </script>
 
-      <table class="table table-bordered separate">
-        <thead>
-          <tr><th>Username</th><th>First name</th><th>Last name</th></tr>
-        </thead>
-        <tbody>
-        @for(user <- users) {
-          <tr>
-            <td>
-            @user.username
-            </td>
-            <td>
-            @user.firstName
-            </td>
-            <td>
-            @user.lastName
-            </td>
-          </tr>
-        }
-        </tbody>
-      </table>
+    <script>
+            // This example requires the Places library. Include the libraries=places
+            // parameter when you first load the API. For example:
+            // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+            function initMap() {
+
+                var markers = [{
+                    "name": "Bjelovar",
+                    "coords": "45.887861,16.854645",
+                    "desc": "Mlinovac 21<br\/>Bjelovar<br\/>+385 91 721 0041<br\/>hgss.stanica.bjelovar@@gmail.com"
+                }, {
+                    "name": "\u010cakovec",
+                    "coords": "46.392259763332476,16.418029212310785",
+                    "desc": "\u0160portska 2<br\/>\u010cakovec<br\/>+385 91 172 1050<br\/>hgss.cakovec@@gmail.com"
+                }, {
+                    "name": "Delnice",
+                    "coords": "45.39964,14.8035",
+                    "desc": "Matice Hrvatske 21<br\/>Delnice<br\/>+385 91 721 0004<br\/>delnice@@gss.hr"
+                }, {
+                    "name": "Dubrovnik",
+                    "coords": "42.6475617999797,18.078630896186837",
+                    "desc": "Dr. Roka Mi\u0161eti\u0107a bb<br\/>Dubrovnik<br\/>+385 91 212 3003 (vpn 22736)<br\/>hgssdubrovnik@@gmail.com"
+                }, {
+                    "name": "Gospi\u0107",
+                    "coords": "44.53987,15.35033",
+                    "desc": "Kani\u017ea Gospi\u0107ka 4<br\/>Gospi\u0107<br\/>+385 91 721 0007<br\/>hgssgospic1@@gmail.com"
+                }, {
+                    "name": "Karlovac",
+                    "coords": "45.49208,15.54172",
+                    "desc": "Vlatka Ma\u010deka 48<br\/>Karlovac<br\/>+385 91 721 0005<br\/>hgss.karlovac@@gmail.com"
+                }, {
+                    "name": "Koprivnica",
+                    "coords": "46.16264932080369,16.82886853153991",
+                    "desc": "Hrvatske dr\u017eavnosti 7<br\/>Koprivnica<br\/>+385 91 604 8367<br\/>hgss.koprivnica@@gmail.com"
+                }, {
+                    "name": "Krapina",
+                    "coords": "46.0450326,16.0840833",
+                    "desc": "Vladimira Nazora 56, Zlatar Bistrica<br\/>Zlatar Bistrica<br\/>+385 91 721 0208<br\/>hgss.stanica.krapina@@gmail.com"
+                }, {
+                    "name": "Makarska",
+                    "coords": "43.298307,17.01838",
+                    "desc": "A.G. Mato\u0161a 1<br\/>Makarska<br\/>+385 91 721 0201<br\/>hgss.makarska@@gmail.com"
+                }, {
+                    "name": "Novska",
+                    "coords": "45.3379,16.9808",
+                    "desc": "Osje\u010dka 20<br\/>Novska<br\/>+385 91 721 0049<br\/>hgss.stanica.novska@@gmail.com"
+                }, {
+                    "name": "Ogulin",
+                    "coords": "45.26268253834021,15.229263906745928",
+                    "desc": "Bernardina Frankopana 18<br\/>Ogulin<br\/>+385 91 721 0003<br\/>ogulin@@gss.hr"
+                }, {
+                    "name": "Orahovica",
+                    "coords": "45.5306,17.8834",
+                    "desc": "Trg sv. Florijana 2<br\/>Orahovica<br\/>+385 98 968 4058<br\/>hgss.orahovica@@net.hr"
+                }, {
+                    "name": "Orebi\u0107",
+                    "coords": "42.97687,17.18978",
+                    "desc": "\u0160etali\u0161te kneza Domagoja 32<br\/>Orebi\u0107<br\/>+385 91 721 0013<br\/>gssorebic@@gmail.com"
+                }, {
+                    "name": "Osijek",
+                    "coords": "45.54888539732564,18.692864322021478",
+                    "desc": "Kneza Trpimira 23<br\/>Osijek<br\/>+385 91 721 0082<br\/>soldoslobodan1@@net.hr,  hgssosijek@@gmail.com"
+                }, {
+                    "name": "Po\u017eega",
+                    "coords": "45.33307,17.66826",
+                    "desc": "Republike Hrvatske 1 C<br\/>Po\u017eega<br\/>+385 91 112 9340<br\/>gss.pozega@@hotmail.com"
+                }, {
+                    "name": "Pula",
+                    "coords": "45.23979,13.93578",
+                    "desc": "Narodnog Doma 2<br\/>Pazin<br\/>+385 91 721 0006<br\/>hgss.stanica.pula@@gmail.com"
+                }, {
+                    "name": "Rijeka",
+                    "coords": "45.320194783622604,14.474340640544824",
+                    "desc": "Franje Matkovi\u0107a 7a<br\/>Rijeka<br\/>+385 91 721 0000<br\/>gss_rijeka@@yahoo.com"
+                }, {
+                    "name": "Samobor",
+                    "coords": "45.80075,15.71767",
+                    "desc": "Perkov\u010deva 59<br\/>Samobor<br\/>+385 91 721 0008<br\/>info@@gss-samobor.hr"
+                }, {
+                    "name": "\u0160ibenik",
+                    "coords": "43.741227,15.885143",
+                    "desc": "Put Tvornice 33<br\/>\u0160ibenik<br\/>+385 91 112 9220<br\/>hgss.stanicasibenik@@gmail.com"
+                }, {
+                    "name": "Slavonski Brod",
+                    "coords": "45.1698,18.0075",
+                    "desc": "Ulica fra Kaje Ad\u017ei\u0107a 10B<br\/>Slavonski Brod<br\/>+385 98 611 484<br\/>slavonski.brod@@gss.hr"
+                }, {
+                    "name": "Split",
+                    "coords": "43.51966,16.45696",
+                    "desc": "\u0160ibenska ulica 41<br\/>Split<br\/>+385 91 721 0001<br\/>stanica.split@@gss.hr"
+                }, {
+                    "name": "Vara\u017edin",
+                    "coords": "46.30752,16.33327",
+                    "desc": "Stanka Vraza 15<br\/>Vara\u017edin<br\/>+385 91 721 00 12<br\/>procelnikgssvz@@gmail.com"
+                }, {
+                    "name": "Vinkovci",
+                    "coords": "45.28789,18.8057",
+                    "desc": "Glagolja\u0161ka 27 A<br\/>Vinkovci<br\/>+385 91 721 0202<br\/>hgss.vinkovci@@gmail.com"
+                }, {
+                    "name": "Zadar",
+                    "coords": "44.1171,15.24246",
+                    "desc": "Andrije Hebranga 11a<br\/>Zadar<br\/>+385 91 721 0010<br\/>info@@hgsszd.hr"
+                }, {
+                    "name": "Zagreb",
+                    "coords": "45.815,15.97554",
+                    "desc": "Radi\u0107eva 23<br\/>Zagreb<br\/>+385 91 5082 556<br\/>stanica-zagreb@@gss.hr"
+                }];
+
+                var map = new google.maps.Map(document.getElementById("map"), {
+                    zoom: 7,
+                    center: new google.maps.LatLng(44.629573,16.66626 ),
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                });
+
+                var map_infowindow = new google.maps.InfoWindow({
+                    content: 'map_infowindow'
+                });
+
+                $(markers).each(function() {
+
+                    // console.log(typeof(this.p));
+
+                    var lat_lon = this.coords.split(',');
+                    var icon = '@routes.Assets.at("images/pointer-gss.png")';
+
+                    var marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(lat_lon[0],lat_lon[1]),
+                        title: this.name,
+                        desc: this.desc,
+                        icon: icon,
+                        map: map
+                    });
+
+
+                    google.maps.event.addListener( marker, 'click', function() {
+                        map_infowindow.setContent('<div><p><strong>' + marker.title + '</strong><br/>' + marker.desc + '</p></div>');
+                        map_infowindow.open(map, this);
+
+                        $(".input-sm").val(marker.title).focus();
+                        $(".input-sm").blur(function() {
+                            var e = jQuery.Event("keydown");
+                            e.which = 13; // Enter
+                            $(".input-sm").trigger(e);
+                        });
+                    });
+                });
+
+            }
+
+
+
+    </script>
+
+    <div class="window">
+        <div class="row">
+            <a class="btn btn-primary" type="button" href="@routes.HGSSController.registerUser()">Dodaj novog <i class="fa fa-plus"> </i></a>
+        </div>
+        <div class="row separate">
+            <table id="example" class="display" cellspacing="0" width="100%">
+                <thead><tr><th>username</th><th>firstname</th><th>lastname</th></tr></thead>
+                <tbody>
+                @for(user <- users) {
+                    <tr>
+                        <td>
+                        @user.username
+                        </td>
+                        <td>
+                        @user.firstName
+                        </td>
+                        <td>
+                        @user.lastName
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div id="map"></div>
+            <div id="infowindow-content">
+                <img src="" width="16" height="16" id="place-icon">
+                <span id="place-name" class="title"></span><br>
+                <span id="place-address"></span>
+            </div>
+            <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOVsLLDx5MQmY4CUaD9-kt5Dqw5tPjJV4&libraries=places&callback=initMap">
+            </script>
+        </div>
     </div>
-  </div>
+    @*super cool table*@
+    <script type="text/javascript">
+            // For demo to fit into DataTables site builder...
+            $('#example')
+                    .removeClass('display')
+                    .addClass('table table-striped table-bordered');
+    </script>
 }
