@@ -24,6 +24,9 @@ public class HGSSAction extends Model {
     public Double longitude;
     public Double latitude;
 
+    @OneToMany (cascade = CascadeType.ALL)
+    public List<HGSSChatMessage> messages;
+
     @ManyToOne
     public HGSSUser owner;
 

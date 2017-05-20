@@ -3,6 +3,7 @@ package controllers;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.HGSSAction;
+import models.HGSSChatMessage;
 import models.HGSSStation;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.HGSSUser;
@@ -41,6 +42,14 @@ public class HGSSController extends Controller {
         List<HGSSStation> stations = HGSSStation.findAll();
 
         return ok(views.html.stations.render(stations));
+    }
+
+    public Result getMessages(){
+        JsonNode json = request().body().asJson();
+        
+        List<HGSSChatMessage> messages = action.messages;
+
+
     }
 
     public Result saveUser() {
