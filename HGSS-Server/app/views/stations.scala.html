@@ -1,0 +1,31 @@
+@(stations: List[HGSSStation])
+@main("Stations") {
+
+  <div class="window">
+    <h1 class="horizontalLine">
+      <span>Stations</span></h1>
+    <div class="row separate">
+
+      <table class="table table-bordered separate">
+        <thead>
+          <tr><th>Station name</th><th>Longitude</th><th>Latitude</th></tr>
+        </thead>
+        <tbody>
+        @for(station <- stations) {
+          <tr>
+            <td>
+            @station.stationName
+            </td>
+            <td>
+            @station.longitude
+            </td>
+            <td>
+            @station.latitude
+            </td>
+          </tr>
+        }
+        </tbody>
+      </table>
+    </div>
+  </div>
+}

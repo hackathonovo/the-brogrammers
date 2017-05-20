@@ -1,5 +1,6 @@
 package controllers;
 
+import models.HGSSStation;
 import models.HGSSUser;
 import models.enumerations.HGSSRole;
 import models.enumerations.HGSSSkill;
@@ -25,6 +26,15 @@ public class HGSSController extends Controller {
                 HGSSRole.ROLE_3, HGSSSkill.SKILL_3));
 
         return ok(views.html.users.render(users));
+    }
+
+    public Result getStations(){
+        List<HGSSStation> stations = new ArrayList<>();
+        stations.add(new HGSSStation("Bjelovar", 20.33, 21.33));
+        stations.add(new HGSSStation("Delnice", 100.33, 91.33));
+        stations.add(new HGSSStation("Čakovec", 180.33, 1.33));
+
+        return ok(views.html.stations.render(stations));
     }
 
 }
