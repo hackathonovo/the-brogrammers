@@ -51,10 +51,8 @@ create table hgssuser (
   password                      varchar(255),
   first_name                    varchar(255),
   last_name                     varchar(255),
-  role                          varchar(6),
-  skill                         varchar(7),
-  constraint ck_hgssuser_role check (role in ('ROLE_1','ROLE_2','ROLE_3')),
-  constraint ck_hgssuser_skill check (skill in ('SKILL_1','SKILL_2','SKILL_3')),
+  role                          varchar(255),
+  skill                         varchar(255),
   constraint uq_hgssuser_username unique (username),
   constraint pk_hgssuser primary key (id)
 );

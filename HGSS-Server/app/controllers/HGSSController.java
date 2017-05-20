@@ -1,13 +1,12 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import models.HGSSUser;
-import models.enumerations.HGSSRole;
-import models.enumerations.HGSSSkill;
 import play.libs.Json;
+import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,16 +14,31 @@ import java.util.List;
  */
 public class HGSSController extends Controller {
 
+    private static final int UNKNOWN_USER_STATUS = 488;
+
     public Result getUsers(){
-        List<HGSSUser> users = new ArrayList<>();
-        users.add(new HGSSUser("user1", "pass1", "Marko", "Markic",
-                HGSSRole.ROLE_1, HGSSSkill.SKILL_1));
-        users.add(new HGSSUser("user2", "pass2", "Ivan", "Ivic",
-                HGSSRole.ROLE_2, HGSSSkill.SKILL_2));
-        users.add(new HGSSUser("user3", "pass3", "Pero", "Peric",
-                HGSSRole.ROLE_3, HGSSSkill.SKILL_3));
+        List<HGSSUser> users = HGSSUser.findAll();
 
         return ok(views.html.users.render(users));
+    }
+
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result login(){
+        // Get fields from the request
+        JsonNode json = request().body().asJson();
+        String username = json.findPath("username").textValue();
+        String password = json.findPath("password").textValue();
+
+        System.out.println(username);
+        System.out.println(password);
+
+        HGSSUser user = HGSSUser.checkUser(username, password);
+
+        if(user == null){
+            return status(UNKNOWN_USER_STATUS);
+        }
+
+        return ok(Json.toJson(user));
     }
 
 }

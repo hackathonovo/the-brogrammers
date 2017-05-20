@@ -1,8 +1,6 @@
 package models;
 
 import com.avaje.ebean.Model;
-import models.enumerations.HGSSRole;
-import models.enumerations.HGSSSkill;
 import play.data.validation.Constraints;
 import play.libs.F;
 
@@ -21,7 +19,7 @@ public class HGSSUser extends Model {
 
     @Constraints.Required
     @Column(unique=true)
-    @Constraints.ValidateWith(value= BTUser.UsernameValidator.class, message = "Username must contain " +
+    @Constraints.ValidateWith(value= HGSSUser.UsernameValidator.class, message = "Username must contain " +
             "at least 3 characters. All letters, numbers, points, dashes and underscores allowed.")
     public String username;
 
@@ -31,18 +29,11 @@ public class HGSSUser extends Model {
     public String firstName;
     public String lastName;
 
-    @Enumerated(EnumType.STRING)
-    public HGSSRole role;
-
-    @Enumerated(EnumType.STRING)
-    public HGSSSkill skill;
-
-    //@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
-    //@JoinColumn(name = "owner_id")
-    //public java.util.List<BTTrip> trips = new ArrayList<>();
+    public String role;
+    public String skill;
 
     public HGSSUser(String username, String password, String firstName, String lastName,
-                    HGSSRole role, HGSSSkill skill){
+                    String role, String skill){
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -67,8 +58,7 @@ public class HGSSUser extends Model {
     }
 
     public static HGSSUser findUserByUsername(String username) {
-        return null;
-        //return finder.where().eq("username", username).findUnique();
+        return finder.where().eq("username", username).findUnique();
     }
 
     public static class UsernameValidator extends Constraints.Validator<String> {
