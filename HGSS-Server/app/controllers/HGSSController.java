@@ -4,6 +4,7 @@ import models.HGSSAction;
 import models.HGSSStation;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.HGSSUser;
+import play.data.DynamicForm;
 import play.data.Form;
 import play.Logger;
 import play.libs.Json;
@@ -41,11 +42,18 @@ public class HGSSController extends Controller {
     }
 
     public Result registerUser(){
-        Form<HGSSUser> userForm = formFactory.form(HGSSUser.class).bindFromRequest();
+        DynamicForm userForm = formFactory.form().bindFromRequest();
 
         if (userForm == null) return null;
 
-        HGSSUser user = userForm.get();
+        String username = userForm.get("username");
+        String password = userForm.get("password");
+        String firstName = userForm.get("firstName");
+        String lastName = userForm.get("lastName");
+        String role = userForm.get("role");
+        String skill = userForm.get("skill");
+
+        HGSSUser user = new HGSSUser(username,password,firstName,lastName,role,skill);
         user.save();
 
         return ok(views.html.registerUser.render(null));
