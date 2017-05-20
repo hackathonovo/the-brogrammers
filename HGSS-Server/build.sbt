@@ -1,4 +1,4 @@
-name := """noplaynogain"""
+name := """HGSS-Server"""
 
 version := "1.0-SNAPSHOT"
 
