@@ -45,11 +45,21 @@ create table btuser (
 );
 create sequence btuser_seq;
 
+create table hgssaction (
+  id                            bigint not null,
+  description                   varchar(255),
+  constraint pk_hgssaction primary key (id)
+);
+create sequence hgssaction_seq;
+
 create table hgssstation (
+  id                            bigint not null,
   station_name                  varchar(255),
   longitude                     float,
-  latitude                      float
+  latitude                      float,
+  constraint pk_hgssstation primary key (id)
 );
+create sequence hgssstation_seq;
 
 create table hgssuser (
   id                            bigint not null,
@@ -110,7 +120,11 @@ drop table if exists bttrip_btuser cascade;
 drop table if exists btuser cascade;
 drop sequence if exists btuser_seq;
 
+drop table if exists hgssaction cascade;
+drop sequence if exists hgssaction_seq;
+
 drop table if exists hgssstation cascade;
+drop sequence if exists hgssstation_seq;
 
 drop table if exists hgssuser cascade;
 drop sequence if exists hgssuser_seq;
