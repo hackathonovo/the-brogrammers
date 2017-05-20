@@ -30,6 +30,7 @@ POST    /login              controllers.HGSSController.login()
 POST    /user               controllers.HGSSController.saveUser()
 GET     /actions            controllers.HGSSController.getActions()
 GET     /action             controllers.HGSSController.action()
+POST    /available          controllers.HGSSController.setAvailibility()
 
 
 

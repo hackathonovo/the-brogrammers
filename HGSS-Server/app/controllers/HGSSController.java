@@ -64,6 +64,35 @@ public class HGSSController extends Controller {
         return ok(views.html.registerUser.render(null));
     }
 
+    public Result setAvailibility(){
+        Logger.debug("Request: login");
+
+        JsonNode json = request().body().asJson();
+        String username = json.findPath("username").textValue();
+        String isAvailableStr = json.findPath("isAvailable").textValue();
+        Boolean isAvailable = (isAvailableStr.equalsIgnoreCase("true")) ? true : false;
+
+        Logger.debug("Received json: " + json);
+
+        HGSSUser user = HGSSUser.findUserByUsername(username);
+
+        Logger.debug("User found: " + user);
+
+        if(user == null){
+            Logger.debug("Return: " + UNKNOWN_USER_STATUS);
+            return status(UNKNOWN_USER_STATUS);
+        }
+
+
+        user.isAvailable = isAvailable;
+
+        Logger.debug("Is available: " + user.isAvailable);
+        user.update();
+
+        return ok();
+
+    }
+
     @BodyParser.Of(BodyParser.Json.class)
     public Result login(){
         Logger.debug("Request: login");
