@@ -28,5 +28,7 @@ GET     /users              controllers.HGSSController.getUsers()
 GET     /stations           controllers.HGSSController.getStations()
 POST    /login              controllers.HGSSController.login()
 POST    /user               controllers.HGSSController.registerUser()
+GET     /actions            controllers.HGSSController.getActions()
+
 
 

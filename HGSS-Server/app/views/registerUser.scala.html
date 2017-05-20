@@ -1,4 +1,6 @@
-@()
+@(user: HGSSUser)
+@edit = @{user!=null}
+
 @main("Registracija spasitelj") {
 
   <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/register.css")" >
@@ -6,86 +8,29 @@
   <script src="@routes.Assets.at("validetta/validetta.min.js")" type="text/javascript"></script>
   <link rel="stylesheet" type="text/css" href="@routes.Assets.at("validetta/validetta.min.css")">
 
-  @*<script src="@routes.Assets.at("javascripts/googlePlaces.js")" type="text/javascript"></script>*@
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOVsLLDx5MQmY4CUaD9-kt5Dqw5tPjJV4&libraries=places&callback=initAutocomplete"
-  async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOVsLLDx5MQmY4CUaD9-kt5Dqw5tPjJV4&libraries=places&callback=initAutocomplete"
+    async defer></script>
 
   @*clockpicker*@
   <script src="@routes.Assets.at("javascripts/clockpicker.js")" type="text/javascript"></script>
   <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/clockpicker.css")">
 
 
-  <script>
-          // This example requires the Places library. Include the libraries=places
-          // parameter when you first load the API. For example:
-          // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-          function initMap() {
-            var map = new google.maps.Map(document.getElementById('map'), {
-              center: {lat: 44.798056, lng: 16.4019217},
-              zoom: 7
-            });
-            var input = document.getElementById('pac-input');
-
-            var autocomplete = new google.maps.places.Autocomplete(input);
-
-            // Bind the map's bounds (viewport) property to the autocomplete object,
-            // so that the autocomplete requests use the current map bounds for the
-            // bounds option in the request.
-            autocomplete.bindTo('bounds', map);
-
-            var infowindow = new google.maps.InfoWindow();
-            var infowindowContent = document.getElementById('infowindow-content');
-            infowindow.setContent(infowindowContent);
-            var marker = new google.maps.Marker({
-              map: map,
-              anchorPoint: new google.maps.Point(0, -29),
-              animation: google.maps.Animation.DROP
-            });
-            var bounds = new google.maps.LatLngBounds();
-            autocomplete.addListener('place_changed', function() {
-//                    infowindow.close();
-//                    marker.setVisible(false);
-              var place = autocomplete.getPlace();
-              if (!place.geometry) {
-                // User entered the name of a Place that was not suggested and
-                // pressed the Enter key, or the Place Details request failed.
-                window.alert("No details available for input: '" + place.name + "'");
-                return;
-              }
-              // If the place has a geometry, then present it on a map.
-              if (place.geometry.viewport) {
-//                        map.fitBounds(place.geometry.viewport);
-              } else {
-//                        map.setCenter(place.geometry.location);
-//                        map.setZoom(17);  // Why 17? Because it looks good.
-              }
-              var marker = new google.maps.Marker({
-                map: map,
-              });
-              marker.setPosition(place.geometry.location);
-              marker.setVisible(true);
-              bounds.extend(marker.getPosition());
-              var address = '';
-              if (place.address_components) {
-                address = [
-                  (place.address_components[0] && place.address_components[0].short_name || '')
-                ].join(' ');
-              }
-              $(function () {
-                var listContainer = $('#list');
-                // value of input
-                inputValue = place.name;
-                // add new list item
-                listContainer.prepend('<li class="list-group-item"> ' + inputValue + '</li>');
-                listContainer.prepend('<input type="hidden" name="locations[]" value="' + inputValue + '"/>');
-                $('#pac-input').val('');
-                $('#pac-input').focus();
-              });
-            });
-          }
-  </script>
-
-
+    <script>
+            function initAutocomplete() {
+                var input = document.getElementById('pac-input');
+                var searchBox = new google.maps.places.SearchBox(input);
+                searchBox.addListener('places_changed', function () {
+                    var places = searchBox.getPlaces();
+                    if (places.length == 1) {
+                        $('#pac-input').val(place.name);
+                    } else {
+                        alert("Odaberi samo jednu lokaciju!");
+                        return;
+                    }
+                });
+            }
+    </script>
 
   <div class="window">
     <form action="" method="post" id="register_form">
@@ -95,42 +40,24 @@
         <div class="col-md-6">
           <div class="form-group">
             <label for="firstName">Ime</label>
-            <input type="text" class="form-control" name="firstName" id="firstName" data-validetta="required">
+            <input type="text" class="form-control" name="firstName" id="firstName" data-validetta="required"
+            value="@if(edit){user.firstName}">
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
             <label for="lastName">Prezime</label>
-            <input type="text" class="form-control" name="lastName" id="lastName" data-validetta="required">
+            <input type="text" class="form-control" name="lastName" id="lastName" data-validetta="required"
+            value="@if(edit){user.lastName}">
           </div>
         </div>
       </div>
-          <div class="form-group">
-            <label for="date">Datum rodenja</label>
-            <input type="date" class="form-control" id="date" name="date" data-validetta="required">
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="text" class="form-control" name="email" id="email"
-            data-validetta="required,email,remote[check_email]">
-          </div>
-          <div class="form-group">
-            <label for="email">Broj mobitela</label>
-            <input type="text" class="form-control" name="email" id="email"
-            data-validetta="required,number">
-          </div>
-          <div class="form-group">
-            @* should be changed to fill out radio buttons *@
-            <label><input type="radio" name="gender" value="male" checked="checked"> Musko</label>
-            <label><input type="radio" name="gender" value="female">
-              Zensko</label>
-          </div>
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="dostupanOd">Dostupan od</label>
                 <div class="input-group clockpicker">
-                  <input type="text" id="dostupanOd" class="form-control" value="09:00">
+                  <input type="text" id="dostupanOd" class="form-control" value="@if(edit){user.availableFrom}else{09:00}">
                   <span class="input-group-addon">
                     <span class="glyphicon glyphicon-time"></span>
                   </span>
@@ -141,7 +68,7 @@
               <div class="form-group">
                 <label for="dostupanDo">Dostupan do</label>
                 <div class="input-group clockpicker">
-                  <input type="text" id="dostupanDo" class="form-control" value="17:00">
+                  <input type="text" id="dostupanDo" class="form-control" value="@if(edit){user.availableUntil}else{17:00}">
                   <span class="input-group-addon">
                     <span class="glyphicon glyphicon-time"></span>
                   </span>
@@ -152,24 +79,14 @@
         <div class="form-group">
           <label for="places">Lokacije</label>
           <div class="input-group">
-            <input type="text" id="pac-input" class="form-control" placeholder="Radno mjesto, stan" />
-            <span class="input-group-btn">
-              <button class="btn btn-primary" type="button">
-                <span class="glyphicon glyphicon-plus"></span>
-              </button>
+            <input type="text" id="pac-input" class="form-control" name="location" placeholder="Radno mjesto, stan"
+            value="@if(edit){user.location}"/>
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-search"></span>
             </span>
           </div>
           <ul id="list" class="list-group location-list"></ul>
         </div>
-          <div id="map"></div>
-          <div id="infowindow-content">
-            <img src="" width="16" height="16" id="place-icon">
-            <span id="place-name"  class="title"></span><br>
-            <span id="place-address"></span>
-          </div>
-          <script async defer
-          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOVsLLDx5MQmY4CUaD9-kt5Dqw5tPjJV4&libraries=places&callback=initMap">
-          </script>
           <button type="submit" class="btn btn-primary separate">Submit</button>
 
         </div>

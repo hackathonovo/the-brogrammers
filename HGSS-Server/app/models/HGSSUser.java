@@ -32,6 +32,15 @@ public class HGSSUser extends Model {
     public String role;
     public String skill;
 
+    //living location
+    public String location;
+
+    //time available from
+    public String availableFrom;
+
+    //time available until
+    public String availableUntil;
+
     public Boolean isAvailable;
 
     public HGSSUser(String username, String password, String firstName, String lastName,

@@ -2,7 +2,10 @@ package models;
 
 import com.avaje.ebean.Model;
 import models.geo.HGSSZone;
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.*;
 import java.util.List;
 
@@ -22,5 +25,10 @@ public class HGSSAction extends Model {
     public List<HGSSZone> zones;
 
     public static Finder<Long, HGSSAction> finder = new Finder<>(HGSSAction.class);
+
+    public static List<HGSSAction> findAll() {
+        return finder.all();
+    }
+
 
 }

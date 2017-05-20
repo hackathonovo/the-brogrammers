@@ -1,5 +1,6 @@
 package controllers;
 
+import models.HGSSAction;
 import models.HGSSStation;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.HGSSUser;
@@ -10,7 +11,6 @@ import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
-
 import java.util.List;
 
 import play.data.FormFactory;
@@ -56,7 +56,7 @@ public class HGSSController extends Controller {
         HGSSUser user = new HGSSUser(username,password,firstName,lastName,role,skill);
         user.save();
 
-        return ok(views.html.registerUser.render());
+        return ok(views.html.registerUser.render(null));
     }
 
     @BodyParser.Of(BodyParser.Json.class)
@@ -86,5 +86,12 @@ public class HGSSController extends Controller {
         return ok(jsonUser);
 
     }
+
+
+    public Result getActions() {
+        List<HGSSAction> actions = HGSSAction.findAll();
+        return ok(views.html.actions.render(actions));
+    }
+
 
 }
