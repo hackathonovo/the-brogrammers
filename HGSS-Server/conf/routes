@@ -15,7 +15,7 @@ GET     /profile            controllers.Users.profile()
 GET     /landing            controllers.Public.landing()
 GET     /                   controllers.Public.loginForm()
 GET     /                   controllers.Public.notAuthLoginForm()
-POST    /login              controllers.Public.login()
+POST    /login2              controllers.Public.login2()
 
 GET     /landing            controllers.Public.landing()
 GET     /trips              controllers.BTController.trips(from: String, to: String)
@@ -24,4 +24,6 @@ POST    /saveTrip           controllers.BTController.saveTrip()
 
 GET     /users              controllers.HGSSController.getUsers()
 GET     /stations           controllers.HGSSController.getStations()
+POST    /login              controllers.HGSSController.login()
+
 

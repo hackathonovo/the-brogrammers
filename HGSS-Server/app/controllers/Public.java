@@ -55,7 +55,7 @@ public class Public extends Controller {
         return redirect(routes.Public.loginForm());
     }
 
-    public Result login() {
+    public Result login2() {
         Form<BTUser> boundForm = formFactory.form(BTUser.class).bindFromRequest();
 
         BTUser enteredUser;
