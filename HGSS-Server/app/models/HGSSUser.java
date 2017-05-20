@@ -32,6 +32,8 @@ public class HGSSUser extends Model {
     public String role;
     public String skill;
 
+    public Boolean isAvailable;
+
     public HGSSUser(String username, String password, String firstName, String lastName,
                     String role, String skill){
         this.username = username;
@@ -44,7 +46,7 @@ public class HGSSUser extends Model {
 
     @Override
     public String toString() {
-        return "Username=" + username + ", firstName=" + firstName + ", lastName=" + lastName;
+        return "{Username=" + username + ", firstName=" + firstName + ", lastName=" + lastName + "}";
     }
 
     public static Finder<Long, HGSSUser> finder = new Finder<>(HGSSUser.class);

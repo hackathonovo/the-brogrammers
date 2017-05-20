@@ -69,6 +69,7 @@ create table hgssuser (
   last_name                     varchar(255),
   role                          varchar(255),
   skill                         varchar(255),
+  is_available                  boolean,
   constraint uq_hgssuser_username unique (username),
   constraint pk_hgssuser primary key (id)
 );
