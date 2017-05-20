@@ -98,5 +98,9 @@ public class HGSSController extends Controller {
         return ok(views.html.actions.render(actions));
     }
 
+    public Result action() {
+        return ok(views.html.action.render(null));
+    }
+
 
 }

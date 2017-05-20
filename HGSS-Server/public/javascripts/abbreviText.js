@@ -18,7 +18,7 @@ async function abbreviText(abbrvTextId,textElementIds) {
         var step = initialWidth / steps;
         stepPerElement.push(step);
         textElements.push(textElement);
-        textElementsCurrentWidths.push(initialWidth);
+        textElementsCurrentWidths.push(0);
         textElementsInitialWidths.push(initialWidth);
         textElement.style.maxWidth = 0 + "px";
     }
