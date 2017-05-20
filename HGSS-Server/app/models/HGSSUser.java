@@ -2,6 +2,7 @@ package models;
 
 import com.avaje.ebean.Model;
 import com.avaje.ebean.QueryEachConsumer;
+import models.geo.HGSSLocation;
 import play.data.validation.Constraints;
 import play.libs.F;
 
@@ -45,6 +46,9 @@ public class HGSSUser extends Model {
     public Boolean isAvailable;
 
     public Integer phoneNumber;
+
+    @OneToMany (cascade = CascadeType.ALL)
+    public List<HGSSLocation> currentLocations;
 
     @ManyToOne(fetch = FetchType.LAZY)
     public HGSSStation station;

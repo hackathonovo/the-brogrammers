@@ -8,6 +8,7 @@ import models.HGSSChatMessage;
 import models.HGSSStation;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.HGSSUser;
+import models.geo.HGSSLocation;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.Logger;
@@ -48,9 +49,39 @@ public class HGSSController extends Controller {
     public Result getMessages(){
         JsonNode json = request().body().asJson();
         
-        List<HGSSChatMessage> messages = action.messages;
+       // List<HGSSChatMessage> messages = action.messages;
 
+        return ok();
+    }
 
+    public Result updateLocation(){
+
+        JsonNode json = request().body().asJson();
+
+        Logger.debug("Recieved json: " + json);
+
+        String username = json.findPath("username").textValue();
+        Double longitude = json.findPath("longitude").doubleValue();
+        Double latitude = json.findPath("latitude").doubleValue();
+
+        HGSSLocation location = new HGSSLocation(longitude,latitude);
+
+        Logger.debug("Location to be added: long:" + location.longitude + " lat: " + location.latitude);
+
+        HGSSUser user = HGSSUser.findUserByUsername(username);
+
+        if(user == null){
+            Logger.debug("Return: " + UNKNOWN_USER_STATUS);
+            return status(UNKNOWN_USER_STATUS);
+        }
+
+        user.currentLocations.add(location);
+
+        user.update();
+
+        Logger.debug("Location added to user: " + user.username);
+
+        return ok();
     }
 
     public Result saveUser() {
