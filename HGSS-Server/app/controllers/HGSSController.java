@@ -125,6 +125,7 @@ public class HGSSController extends Controller {
     }
 
     public Result getActions() {
+        Logger.debug("----------- Request: Actions -----------");
         List<HGSSAction> actions = HGSSAction.findAll();
         return ok(views.html.actions.render(actions));
     }
