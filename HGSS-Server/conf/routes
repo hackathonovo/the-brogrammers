@@ -31,6 +31,7 @@ POST    /user               controllers.HGSSController.saveUser()
 GET     /actions            controllers.HGSSController.getActions()
 GET     /action             controllers.HGSSController.action()
 POST    /available          controllers.HGSSController.setAvailibility()
-
+POST    /initaction         controllers.HGSSController.initAction()
+POST    /addforaction       controllers.HGSSController.addUsersForAction()
 
 

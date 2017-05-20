@@ -30,7 +30,6 @@ public class BTUser extends Model {
 
     public String firstName;
     public String lastName;
-    public Image profilePicture;
 
     @Column(unique = true)
     @Constraints.Email
