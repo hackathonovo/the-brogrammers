@@ -2,11 +2,14 @@ package models;
 
 import com.avaje.ebean.Model;
 
+import javax.persistence.Entity;
 import java.util.List;
 
 /**
  * Created by Hari on 20.5.2017..
  */
+
+@Entity
 public class HGSSStation extends Model {
 
 

@@ -45,6 +45,12 @@ create table btuser (
 );
 create sequence btuser_seq;
 
+create table hgssstation (
+  station_name                  varchar(255),
+  longitude                     float,
+  latitude                      float
+);
+
 create table hgssuser (
   id                            bigint not null,
   username                      varchar(255),
@@ -103,6 +109,8 @@ drop table if exists bttrip_btuser cascade;
 
 drop table if exists btuser cascade;
 drop sequence if exists btuser_seq;
+
+drop table if exists hgssstation cascade;
 
 drop table if exists hgssuser cascade;
 drop sequence if exists hgssuser_seq;

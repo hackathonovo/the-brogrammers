@@ -29,10 +29,7 @@ public class HGSSController extends Controller {
 
 
     public Result getStations(){
-        List<HGSSStation> stations = new ArrayList<>();
-        stations.add(new HGSSStation("Bjelovar", 20.33, 21.33));
-        stations.add(new HGSSStation("Delnice", 100.33, 91.33));
-        stations.add(new HGSSStation("Čakovec", 180.33, 1.33));
+        List<HGSSStation> stations = HGSSStation.findAll();
 
         return ok(views.html.stations.render(stations));
     }
