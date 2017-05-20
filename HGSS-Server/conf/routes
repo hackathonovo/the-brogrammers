@@ -24,7 +24,7 @@ POST    /saveTrip           controllers.BTController.saveTrip()
 
 
 #HGSS
-GET     /registracijaSpasitelj  controllers.Public.registracijaSpasitelj()
+GET     /registracijaSpasitelj  controllers.HGSSController.registerUser()
 GET     /users              controllers.HGSSController.getUsers()
 GET     /stations           controllers.HGSSController.getStations()
 POST    /login              controllers.HGSSController.login()

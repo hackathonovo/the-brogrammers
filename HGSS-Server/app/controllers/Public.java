@@ -85,9 +85,6 @@ public class Public extends Controller {
         return ok(register.render(formFactory.form(BTUser.class).bindFromRequest()));
     }
 
-    public Result registracijaSpasitelj() {
-        return ok(views.html.registracijaSpasitelj.render());
-    }
 
 
 }

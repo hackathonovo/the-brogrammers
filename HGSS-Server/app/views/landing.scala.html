@@ -1,66 +1,19 @@
-@main("Watplaces") {
+@main("HGSS") {
 
 
   <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/landing.css")">
-  <script src="@routes.Assets.at("javascripts/googlePlaces.js")" type="text/javascript"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOVsLLDx5MQmY4CUaD9-kt5Dqw5tPjJV4&libraries=places&callback=initAutocomplete"
-  async defer></script>
 
-
-  <div class="window" id="headingWindow">
-    <h1 class="text-center" >Find your ride</h1>
-    <div class="row">
-    <form class="form-inline text-center boaty-search" action="/trips">
-      <div class="form-group">
-        @*<label for="email">Email address:</label>*@
-        <div class="form-group has-feedback">
-          <input type="text" name="from" class="form-control input-lg pac-inputs"  id="pac-input" placeholder="From..">
-          <i class="text-muted glyphicon glyphicon-map-marker form-control-feedback"></i>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="form-group has-feedback">
-        <input type="text" name="to" class="form-control input-lg pac-inputs" id="pac-input2" placeholder="To..">
-          <i class="text-muted glyphicon glyphicon-map-marker form-control-feedback"></i>
-        </div>
-      </div>
-      <button type="submit" value="Submit" class="btn btn-info btn-lg">Go</button>
-    </form>
+  <div class="window">
+    <div class="row text-center separate">
+      <a type="button" style="text-decoration:none;" class="btn-lg btn-primary categoryButton"
+      href="@routes.HGSSController.getUsers()">
+        Spasavatelji <i class="fa fa-user"></i>
+      </a>
+      <a type="button" style="text-decoration:none;" class="btn-lg btn-primary categoryButton">
+        Akcije <i class="fa fa-exclamation-circle"></i>
+      </a>
     </div>
 
   </div>
-
-  <img src="@routes.Assets.at("images/cro_island_1.png")" class="img-responsive" alt="skyline">
-
-
-  <div class="window" id="missionWindow">
-    <div class="row">
-      <h2 class="text-center horizontalLine"><span>How does Boaty work?</span></h2>
-      <div class="col-md-4 separate">
-        <h3><span class="glyphicon glyphicon-user text-info"></span> Shared economy </h3>
-        <p> Sharing boat trips between people. Fill any empty seats on your boat on your trip.
-        Have some company and earn money for it!</p>
-      </div>
-      <div class="col-md-4 separate">
-        <h3><span class="glyphicon glyphicon-search text-info"></span> Find a trip</h3>
-        <p>Search for a specific trip you want to participate in. Filter by all the possible
-        destinations or filter the trips by the price if you're not sure where to go!</p>
-      </div>
-      <div class="col-md-4 separate">
-        <h3><span class="glyphicon glyphicon-plus text-info"></span> Create a ride</h3>
-        <p>Easily connect to people going to the same city or island! Share your experience
-        with other registered users and save some money while enjoying it!</p>
-      </div>
-
-
-    </div>
-  </div>
-
-
-  <script>
-
-//          $("#firstWindow").css("height", $(window).height() ); /*- $(".navbar").height()*/
-
-  </script>
 
 }

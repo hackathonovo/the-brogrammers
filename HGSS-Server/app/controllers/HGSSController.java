@@ -19,6 +19,7 @@ import java.util.List;
  */
 public class HGSSController extends Controller {
 
+
     private static final int UNKNOWN_USER_STATUS = 488;
 
     public Result getUsers(){
@@ -54,5 +55,10 @@ public class HGSSController extends Controller {
         return ok(Json.toJson(user));
 
     }
+
+    public Result registerUser() {
+        return ok(views.html.registerUser.render());
+    }
+
 
 }
