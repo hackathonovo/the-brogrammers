@@ -1,25 +1,28 @@
 package controllers;
 
-
 import models.HGSSAction;
 import models.HGSSStation;
-
 import com.fasterxml.jackson.databind.JsonNode;
-
 import models.HGSSUser;
+import play.data.Form;
 import play.Logger;
 import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
-
 import java.util.List;
+
+import play.data.FormFactory;
+
+import javax.inject.Inject;
 
 /**
  * Created by penic on 20.05.17..
  */
 public class HGSSController extends Controller {
 
+    @Inject
+    FormFactory formFactory;
 
     private static final int UNKNOWN_USER_STATUS = 488;
 
@@ -30,7 +33,6 @@ public class HGSSController extends Controller {
         return ok(views.html.users.render(users));
     }
 
-
     public Result getStations(){
         Logger.debug("Request: getStations");
         List<HGSSStation> stations = HGSSStation.findAll();
@@ -38,6 +40,16 @@ public class HGSSController extends Controller {
         return ok(views.html.stations.render(stations));
     }
 
+    public Result registerUser(){
+        Form<HGSSUser> userForm = formFactory.form(HGSSUser.class).bindFromRequest();
+
+        if (userForm == null) return null;
+
+        HGSSUser user = userForm.get();
+        user.save();
+
+        return ok(views.html.registerUser.render(null));
+    }
 
     @BodyParser.Of(BodyParser.Json.class)
     public Result login(){
@@ -67,9 +79,6 @@ public class HGSSController extends Controller {
 
     }
 
-    public Result registerUser() {
-        return ok(views.html.registerUser.render());
-    }
 
     public Result getActions() {
         List<HGSSAction> actions = HGSSAction.findAll();

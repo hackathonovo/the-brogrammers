@@ -47,22 +47,17 @@
         <div class="col-md-6">
           <div class="form-group">
             <label for="lastName">Prezime</label>
-            <input type="text" class="form-control" name="lastName" id="lastName" data-validetta="required">
+            <input type="text" class="form-control" name="lastName" id="lastName" data-validetta="required"
+            value="@if(edit){user.lastName}">
           </div>
         </div>
       </div>
-          <div class="form-group">
-            @* should be changed to fill out radio buttons *@
-            <label><input type="radio" name="gender" value="male" checked="checked"> Musko</label>
-            <label><input type="radio" name="gender" value="female">
-              Zensko</label>
-          </div>
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="dostupanOd">Dostupan od</label>
                 <div class="input-group clockpicker">
-                  <input type="text" id="dostupanOd" class="form-control" value="09:00">
+                  <input type="text" id="dostupanOd" class="form-control" value="@if(edit){user.availableFrom}else{09:00}">
                   <span class="input-group-addon">
                     <span class="glyphicon glyphicon-time"></span>
                   </span>
@@ -73,7 +68,7 @@
               <div class="form-group">
                 <label for="dostupanDo">Dostupan do</label>
                 <div class="input-group clockpicker">
-                  <input type="text" id="dostupanDo" class="form-control" value="17:00">
+                  <input type="text" id="dostupanDo" class="form-control" value="@if(edit){user.availableUntil}else{17:00}">
                   <span class="input-group-addon">
                     <span class="glyphicon glyphicon-time"></span>
                   </span>
@@ -84,7 +79,8 @@
         <div class="form-group">
           <label for="places">Lokacije</label>
           <div class="input-group">
-            <input type="text" id="pac-input" class="form-control" name="location" placeholder="Radno mjesto, stan" />
+            <input type="text" id="pac-input" class="form-control" name="location" placeholder="Radno mjesto, stan"
+            value="@if(edit){user.location}"/>
             <span class="input-group-addon">
                 <span class="glyphicon glyphicon-search"></span>
             </span>
