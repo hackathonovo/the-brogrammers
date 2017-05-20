@@ -45,6 +45,23 @@ create table btuser (
 );
 create sequence btuser_seq;
 
+create table hgssuser (
+  id                            bigint not null,
+  username                      varchar(255),
+  password                      varchar(255),
+  first_name                    varchar(255),
+  last_name                     varchar(255),
+  email                         varchar(255),
+  role                          varchar(6),
+  skill                         varchar(7),
+  constraint ck_hgssuser_role check (role in ('ROLE_1','ROLE_2','ROLE_3')),
+  constraint ck_hgssuser_skill check (skill in ('SKILL_1','SKILL_2','SKILL_3')),
+  constraint uq_hgssuser_username unique (username),
+  constraint uq_hgssuser_email unique (email),
+  constraint pk_hgssuser primary key (id)
+);
+create sequence hgssuser_seq;
+
 alter table bttrip add constraint fk_bttrip_owner_id foreign key (owner_id) references btuser (id) on delete restrict on update restrict;
 create index ix_bttrip_owner_id on bttrip (owner_id);
 
@@ -90,4 +107,7 @@ drop table if exists bttrip_btuser cascade;
 
 drop table if exists btuser cascade;
 drop sequence if exists btuser_seq;
+
+drop table if exists hgssuser cascade;
+drop sequence if exists hgssuser_seq;
 
