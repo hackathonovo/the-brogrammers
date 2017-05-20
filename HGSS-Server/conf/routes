@@ -8,8 +8,8 @@
 GET     /assets/*file      controllers.Assets.at(path="/public", file)
 GET     /webjars/*file     controllers.WebJarAssets.at(file)
 
-GET     /register           controllers.Public.registerForm()
-POST    /register           controllers.Public.register()
+GET     /register2           controllers.Public.registerForm()
+POST    /register2           controllers.Public.register()
 GET     /logout             controllers.Users.logout()
 GET     /profile            controllers.Users.profile()
 GET     /landing            controllers.Public.landing()
@@ -25,5 +25,6 @@ POST    /saveTrip           controllers.BTController.saveTrip()
 GET     /users              controllers.HGSSController.getUsers()
 GET     /stations           controllers.HGSSController.getStations()
 POST    /login              controllers.HGSSController.login()
+POST    /register           controllers.HGSSController.registerUser()
 
 
