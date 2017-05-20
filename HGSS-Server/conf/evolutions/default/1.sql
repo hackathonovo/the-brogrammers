@@ -79,6 +79,7 @@ create table hgssuser (
   available_from                varchar(255),
   available_until               varchar(255),
   is_available                  boolean,
+  phone_number                  integer,
   constraint uq_hgssuser_username unique (username),
   constraint pk_hgssuser primary key (id)
 );

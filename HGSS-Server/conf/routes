@@ -23,11 +23,11 @@ GET     /createtrip         controllers.BTController.createTrip()
 POST    /saveTrip           controllers.BTController.saveTrip()
 
 #HGSS
-GET     /user               controllers.HGSSController.registerUser()
+GET     /user               controllers.HGSSController.user()
 GET     /users              controllers.HGSSController.getUsers()
 GET     /stations           controllers.HGSSController.getStations()
 POST    /login              controllers.HGSSController.login()
-POST    /user               controllers.HGSSController.registerUser()
+POST    /user               controllers.HGSSController.saveUser()
 GET     /actions            controllers.HGSSController.getActions()
 POST    /available          controllers.HGSSController.setAvailibility()
 
