@@ -1,6 +1,8 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.HGSSAction;
 import models.HGSSStation;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -29,20 +31,21 @@ public class HGSSController extends Controller {
     private static final int UNKNOWN_USER_STATUS = 488;
 
     public Result getUsers(){
-        Logger.debug("Request: getUsers");
+        Logger.debug("----------- Request: getUsers -----------");
         List<HGSSUser> users = HGSSUser.findAll();
 
         return ok(views.html.users.render(users));
     }
 
     public Result getStations(){
-        Logger.debug("Request: getStations");
+        Logger.debug("----------- Request: getStations -----------");
         List<HGSSStation> stations = HGSSStation.findAll();
 
         return ok(views.html.stations.render(stations));
     }
 
     public Result saveUser() {
+        Logger.debug("----------- Request: registerUser -----------");
         DynamicForm userForm = formFactory.form().bindFromRequest();
 
         if (userForm == null) return null;
@@ -54,7 +57,7 @@ public class HGSSController extends Controller {
         String role = userForm.get("role");
         String skill = userForm.get("skill");
 
-        HGSSUser user = new HGSSUser(username,password,firstName,lastName,role,skill);
+        HGSSUser user = new HGSSUser(username, password, firstName, lastName, role, skill, null);
         user.save();
 
         flash("success", "Korisnik dodan!");
@@ -66,14 +69,14 @@ public class HGSSController extends Controller {
     }
 
     public Result setAvailibility(){
-        Logger.debug("Request: login");
+        Logger.debug("----------- Request: setAvailability -----------");
 
         JsonNode json = request().body().asJson();
-        String username = json.findPath("username").textValue();
-        String isAvailableStr = json.findPath("isAvailable").textValue();
-        Boolean isAvailable = (isAvailableStr.equalsIgnoreCase("true")) ? true : false;
 
         Logger.debug("Received json: " + json);
+
+        String username = json.findPath("username").textValue();
+        Boolean isAvailable = json.findPath("isAvailable").booleanValue();
 
         HGSSUser user = HGSSUser.findUserByUsername(username);
 
@@ -96,7 +99,7 @@ public class HGSSController extends Controller {
 
     @BodyParser.Of(BodyParser.Json.class)
     public Result login(){
-        Logger.debug("Request: login");
+        Logger.debug("----------- Request: login -----------");
 
         // Get fields from the request
         JsonNode json = request().body().asJson();
@@ -122,14 +125,72 @@ public class HGSSController extends Controller {
 
     }
 
-
     public Result getActions() {
+        Logger.debug("----------- Request: Actions -----------");
         List<HGSSAction> actions = HGSSAction.findAll();
         return ok(views.html.actions.render(actions));
     }
 
     public Result action() {
         return ok(views.html.action.render(null));
+    }
+
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result initAction(){
+        Logger.debug("----------- Request: initAction -----------");
+
+        JsonNode json = request().body().asJson();
+        String username = json.findPath("username").textValue();
+        Double longitude = json.findPath("longitude").doubleValue();
+        Double latitude = json.findPath("latitude").doubleValue();
+        String description = json.findPath("description").textValue();
+
+        Logger.debug("Received json: " + json);
+
+        HGSSUser owner = HGSSUser.findUserByUsername(username);
+
+        Logger.debug("User owner: " + owner);
+
+        if(owner == null){
+            Logger.debug("Return: " + UNKNOWN_USER_STATUS);
+            return status(UNKNOWN_USER_STATUS);
+        }
+
+        HGSSStation station = owner.station;
+        Logger.debug("User station: " + station);
+
+        List<HGSSUser> users = HGSSUser.findAvailableUsers(station);
+        HGSSAction action = new HGSSAction(owner, longitude, latitude, description);
+
+        ArrayNode jsonUsers = Json.newArray();
+
+        for(HGSSUser user : users){
+            ObjectNode jsonUser = Json.newObject();
+            jsonUser.put("username", user.username);
+            jsonUser.put("firstName", user.firstName);
+            jsonUser.put("lastName", user.lastName);
+            jsonUser.put("skill", user.skill);
+            jsonUser.put("role", user.role);
+            jsonUsers.add(jsonUser);
+        }
+
+        Logger.debug("Creating a new action...");
+        action.save();
+        Logger.debug("Action created: " + action);
+
+        Logger.debug("Return: " + jsonUsers);
+
+        return ok(jsonUsers);
+    }
+
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result addUsersForAction(){
+        Logger.debug("----------- Request: addUsersForAction -----------");
+
+        JsonNode json = request().body().asJson();
+        List<String> usernames = json.findValuesAsText("username");
+
+        return badRequest();
     }
 
     public Result saveAction() {
@@ -149,52 +210,6 @@ public class HGSSController extends Controller {
         return ok();
 
     }
-
-//    /* Right now used only for ajax calls*/
-//    public Result saveSWTYear() {
-//        return SUDrequest(true, request().body().asJson());
-//    }
-//
-//    /* Right now used only for ajax calls*/
-//    public Result deleteSWTYear() {
-//        return SUDrequest(false, request().body().asJson());
-//    }
-//
-//    private Result SUDrequest(boolean save, JsonNode node) {
-//        String agency;
-//        Integer year;
-//        Long userId;
-//        String nodeString;
-//        try {
-//            nodeString = new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(node);
-//        } catch (Exception ex) {
-//            logger.error(ex.getMessage());
-//            return badRequest();
-//        }
-//        logger.debug("Got request to do year (save:" + save + "): " + nodeString);
-//
-//        try {
-//            agency = node.get("agency").asText();
-//            year = Integer.parseInt(node.get("year").asText());
-//            userId = Long.parseLong(node.get("userId").asText());
-//        } catch (Exception e) {
-//            return badRequest(e.getMessage());
-//        }
-//        SWTYear swtYear = SWTYear.findYear(agency, year, userId);
-//        if (save) {
-//            if (swtYear != null) {
-//                return badRequest("Want to save swtYear but there is already one");
-//            }
-//            swtYear = new SWTYear(year, agency, SWTUser.findUserById(userId));
-//            swtYear.save();
-//        } else {
-//            if (swtYear == null) {
-//                return badRequest("Want to delete swtYear but there is none like it");
-//            }
-//            swtYear.delete();
-//        }
-//        return ok();
-//    }
 
 
 }

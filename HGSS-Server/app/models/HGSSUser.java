@@ -1,6 +1,7 @@
 package models;
 
 import com.avaje.ebean.Model;
+import com.avaje.ebean.QueryEachConsumer;
 import play.data.validation.Constraints;
 import play.libs.F;
 
@@ -45,14 +46,18 @@ public class HGSSUser extends Model {
 
     public Integer phoneNumber;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    public HGSSStation station;
+
     public HGSSUser(String username, String password, String firstName, String lastName,
-                    String role, String skill){
+                    String role, String skill, HGSSStation station){
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
         this.skill = skill;
+        this.station = station;
     }
 
     @Override
@@ -72,6 +77,10 @@ public class HGSSUser extends Model {
 
     public static HGSSUser findUserByUsername(String username) {
         return finder.where().eq("username", username).findUnique();
+    }
+
+    public static List<HGSSUser> findAvailableUsers(HGSSStation station){
+        return finder.where().eq("station", station).eq("isAvailable", true).findList();
     }
 
     public static class UsernameValidator extends Constraints.Validator<String> {
