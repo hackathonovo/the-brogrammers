@@ -22,8 +22,10 @@ INSERT INTO hgssuser (id, username, password, first_name, last_name, role, skill
 
 ALTER SEQUENCE hgssuser_seq RESTART WITH 10;
 
-INSERT INTO hgssaction (id, description) VALUES (1, 'Description of Action1');
-INSERT INTO hgssaction (id, description) VALUES (2, 'Description of Action2');
+INSERT INTO hgssaction (id, title, longitude, latitude, owner_id, description, is_active)
+  VALUES (1, 'Title1', 45.323, 15.898, 2, 'Description of Action1', TRUE);
+INSERT INTO hgssaction (id, title, longitude, latitude, owner_id, description, is_active)
+  VALUES (2, 'Title2', 46.323, 16.898, 2, 'Description of Action2', TRUE);
 
 ALTER SEQUENCE hgssaction_seq RESTART WITH 10;
 
