@@ -1,0 +1,9 @@
+[debug] Copy resource mappings: 
+[debug] 	(/home/penic/Workspace/Intellij/noplaynogain/conf/application.conf,/home/penic/Workspace/Intellij/noplaynogain/target/scala-2.11/classes/application.conf)
+[debug] 	(/home/penic/Workspace/Intellij/noplaynogain/conf/messages.pl,/home/penic/Workspace/Intellij/noplaynogain/target/scala-2.11/classes/messages.pl)
+[debug] 	(/home/penic/Workspace/Intellij/noplaynogain/conf/routes,/home/penic/Workspace/Intellij/noplaynogain/target/scala-2.11/classes/routes)
+[debug] 	(/home/penic/Workspace/Intellij/noplaynogain/conf/evolutions,/home/penic/Workspace/Intellij/noplaynogain/target/scala-2.11/classes/evolutions)
+[debug] 	(/home/penic/Workspace/Intellij/noplaynogain/conf/messages,/home/penic/Workspace/Intellij/noplaynogain/target/scala-2.11/classes/messages)
+[debug] 	(/home/penic/Workspace/Intellij/noplaynogain/conf/initial-data.yml,/home/penic/Workspace/Intellij/noplaynogain/target/scala-2.11/classes/initial-data.yml)
+[debug] 	(/home/penic/Workspace/Intellij/noplaynogain/conf/evolutions/default,/home/penic/Workspace/Intellij/noplaynogain/target/scala-2.11/classes/evolutions/default)
+[debug] 	(/home/penic/Workspace/Intellij/noplaynogain/conf/evolutions/default/1.sql,/home/penic/Workspace/Intellij/noplaynogain/target/scala-2.11/classes/evolutions/default/1.sql)

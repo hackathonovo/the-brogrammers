@@ -1,0 +1,18 @@
+@(userForm: Form[BTUser])
+
+@main("Login") {
+
+  <div class="window"><h1 class="text-center horizontalLine"><span>Login</span></h1>
+    <div class="col-4-md col-md-offset-5">
+        @helper.form(action=routes.Public.login()) {
+          <fieldset class="separate">
+            @helper.inputText(userForm("username"), '_showConstraints -> false, '_showErrors -> false)
+            @helper.inputPassword(userForm("password"), '_showConstraints -> false, '_showErrors -> false)
+          </fieldset>
+          <button type="submit" class="btn btn-primary"> Login </button>
+          <a class="btn btn-primary" href="@routes.Public.registerForm()"> Register </a>
+        }
+    </div>
+  </div>
+
+}
