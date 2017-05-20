@@ -47,6 +47,7 @@ create sequence btuser_seq;
 
 create table hgssaction (
   id                            bigint not null,
+  title                         varchar(255),
   description                   varchar(255),
   longitude                     float,
   latitude                      float,
@@ -56,17 +57,18 @@ create table hgssaction (
 );
 create sequence hgssaction_seq;
 
+create table hgsschat_message (
+  hgssaction_id                 bigint not null,
+  user_id                       bigint,
+  message                       varchar(255),
+  date                          timestamp
+);
+
 create table hgsslocation (
   hgsszone_id                   bigint not null,
   longitude                     float,
   latitude                      float
 );
-
-create table hgssmap (
-  id                            bigint not null,
-  constraint pk_hgssmap primary key (id)
-);
-create sequence hgssmap_seq;
 
 create table hgssstation (
   id                            bigint not null,
@@ -121,6 +123,12 @@ create index ix_bttrip_btuser_btuser on bttrip_btuser (btuser_id);
 alter table hgssaction add constraint fk_hgssaction_owner_id foreign key (owner_id) references hgssuser (id) on delete restrict on update restrict;
 create index ix_hgssaction_owner_id on hgssaction (owner_id);
 
+alter table hgsschat_message add constraint fk_hgsschat_message_hgssaction_id foreign key (hgssaction_id) references hgssaction (id) on delete restrict on update restrict;
+create index ix_hgsschat_message_hgssaction_id on hgsschat_message (hgssaction_id);
+
+alter table hgsschat_message add constraint fk_hgsschat_message_user_id foreign key (user_id) references hgssuser (id) on delete restrict on update restrict;
+create index ix_hgsschat_message_user_id on hgsschat_message (user_id);
+
 alter table hgsslocation add constraint fk_hgsslocation_hgsszone_id foreign key (hgsszone_id) references hgsszone (id) on delete restrict on update restrict;
 create index ix_hgsslocation_hgsszone_id on hgsslocation (hgsszone_id);
 
@@ -151,6 +159,12 @@ drop index if exists ix_bttrip_btuser_btuser;
 alter table if exists hgssaction drop constraint if exists fk_hgssaction_owner_id;
 drop index if exists ix_hgssaction_owner_id;
 
+alter table if exists hgsschat_message drop constraint if exists fk_hgsschat_message_hgssaction_id;
+drop index if exists ix_hgsschat_message_hgssaction_id;
+
+alter table if exists hgsschat_message drop constraint if exists fk_hgsschat_message_user_id;
+drop index if exists ix_hgsschat_message_user_id;
+
 alter table if exists hgsslocation drop constraint if exists fk_hgsslocation_hgsszone_id;
 drop index if exists ix_hgsslocation_hgsszone_id;
 
@@ -176,10 +190,9 @@ drop sequence if exists btuser_seq;
 drop table if exists hgssaction cascade;
 drop sequence if exists hgssaction_seq;
 
-drop table if exists hgsslocation cascade;
+drop table if exists hgsschat_message cascade;
 
-drop table if exists hgssmap cascade;
-drop sequence if exists hgssmap_seq;
+drop table if exists hgsslocation cascade;
 
 drop table if exists hgssstation cascade;
 drop sequence if exists hgssstation_seq;

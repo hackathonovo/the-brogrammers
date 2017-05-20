@@ -46,15 +46,9 @@ public class HGSSController extends Controller {
         return ok(views.html.stations.render(stations));
     }
 
-    public Result getMessages(){
-        JsonNode json = request().body().asJson();
-        
-       // List<HGSSChatMessage> messages = action.messages;
 
-        return ok();
-    }
 
-    public Result updateLocation(){
+    public Result updateLocation() {
 
         JsonNode json = request().body().asJson();
 
@@ -64,13 +58,13 @@ public class HGSSController extends Controller {
         Double longitude = json.findPath("longitude").doubleValue();
         Double latitude = json.findPath("latitude").doubleValue();
 
-        HGSSLocation location = new HGSSLocation(longitude,latitude);
+        HGSSLocation location = new HGSSLocation(longitude, latitude);
 
         Logger.debug("Location to be added: long:" + location.longitude + " lat: " + location.latitude);
 
         HGSSUser user = HGSSUser.findUserByUsername(username);
 
-        if(user == null){
+        if (user == null) {
             Logger.debug("Return: " + UNKNOWN_USER_STATUS);
             return status(UNKNOWN_USER_STATUS);
         }
@@ -82,6 +76,36 @@ public class HGSSController extends Controller {
         Logger.debug("Location added to user: " + user.username);
 
         return ok();
+    }
+
+    public Result getActionsApp(){
+        Logger.debug("----------- Request: getActionsApp -----------");
+
+        List<HGSSAction> actions = HGSSAction.findActiveActions();
+
+        ArrayNode jsonUsers = Json.newArray();
+
+        for(HGSSAction action : actions){
+            ObjectNode jsonAction = Json.newObject();
+            jsonAction.put("id", action.id);
+            jsonAction.put("title", action.title);
+            jsonUsers.add(jsonAction);
+        }
+
+        return ok(Json.toJson(jsonUsers));
+    }
+
+    public Result getAction(Long id){
+        Logger.debug("----------- Request: getAction(id) -----------");
+        Logger.debug("Received id: " + id);
+
+        HGSSAction action = HGSSAction.findById(id);
+
+        JsonNode jsonAction = Json.toJson(action);
+        ((ObjectNode) jsonAction).put("owner", action.owner.username);
+        Logger.debug("Response action: " + jsonAction);
+
+        return ok(jsonAction);
     }
 
     public Result saveUser() {
@@ -181,6 +205,7 @@ public class HGSSController extends Controller {
 
         JsonNode json = request().body().asJson();
         String username = json.findPath("username").textValue();
+        String title = json.findPath("title").textValue();
         Double longitude = json.findPath("longitude").doubleValue();
         Double latitude = json.findPath("latitude").doubleValue();
         String description = json.findPath("description").textValue();
@@ -200,7 +225,7 @@ public class HGSSController extends Controller {
         Logger.debug("User station: " + station);
 
         List<HGSSUser> users = HGSSUser.findAvailableUsers(station);
-        HGSSAction action = new HGSSAction(owner, longitude, latitude, description);
+        HGSSAction action = new HGSSAction(owner, title, longitude, latitude, description);
 
         ArrayNode jsonUsers = Json.newArray();
 
