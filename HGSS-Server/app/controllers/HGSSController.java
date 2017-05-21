@@ -55,17 +55,36 @@ public class HGSSController extends Controller {
         String firstName = userForm.get("firstName");
         String lastName = userForm.get("lastName");
         String role = userForm.get("role");
+        String location = userForm.get("location");
         String skill = userForm.get("skill");
+        String stationName = userForm.get("station");
+        String phoneNumber = userForm.get("phoneNumber");
+        String availableFrom = userForm.get("availableFrom");
+        String availableUntil = userForm.get("availableUntil");
+        Double stationLng = Double.parseDouble(userForm.get("station-lng"));
+        Double stationLat = Double.parseDouble(userForm.get("station-lat"));
+        HGSSStation station = new HGSSStation(stationName, stationLng, stationLat);
+        station.save();
 
-        HGSSUser user = new HGSSUser(username, password, firstName, lastName, role, skill, null);
+        HGSSUser user = new HGSSUser(username, password, firstName, lastName, role, skill, location,
+                phoneNumber, availableFrom, availableUntil, station);
+
+        if (HGSSUser.findUserByPhoneNumber(phoneNumber) != null) {
+            user.update();
+        } else {
         user.save();
+        }
 
         flash("success", "Korisnik dodan!");
         return redirect(routes.HGSSController.getUsers());
     }
 
-    public Result user(){
-        return ok(views.html.registerUser.render(null));
+    public Result user(Long id){
+        if (id == null) {
+            return ok(views.html.registerUser.render(null));
+        }
+        HGSSUser user = HGSSUser.findUserById(id);
+        return ok(views.html.registerUser.render(user));
     }
 
     public Result setAvailibility(){

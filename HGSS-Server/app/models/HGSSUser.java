@@ -2,6 +2,7 @@ package models;
 
 import com.avaje.ebean.Model;
 import com.avaje.ebean.QueryEachConsumer;
+import com.avaje.ebeaninternal.server.lib.util.Str;
 import play.data.validation.Constraints;
 import play.libs.F;
 
@@ -44,13 +45,14 @@ public class HGSSUser extends Model {
 
     public Boolean isAvailable;
 
-    public Integer phoneNumber;
+    public String phoneNumber;
 
     @ManyToOne(fetch = FetchType.LAZY)
     public HGSSStation station;
 
     public HGSSUser(String username, String password, String firstName, String lastName,
-                    String role, String skill, HGSSStation station){
+                    String role, String skill, String location, String phoneNumber,
+                    String availableFrom, String availableUntil, HGSSStation station){
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -58,7 +60,13 @@ public class HGSSUser extends Model {
         this.role = role;
         this.skill = skill;
         this.station = station;
+        this.location = location;
+        this.phoneNumber = phoneNumber;
+        this.availableFrom = availableFrom;
+        this.availableUntil = availableUntil;
     }
+
+
 
     @Override
     public String toString() {
@@ -77,6 +85,14 @@ public class HGSSUser extends Model {
 
     public static HGSSUser findUserByUsername(String username) {
         return finder.where().eq("username", username).findUnique();
+    }
+
+    public static HGSSUser findUserById(Long id) {
+        return finder.where().eq("id", id).findUnique();
+    }
+
+    public static HGSSUser findUserByPhoneNumber(String phoneNumber) {
+        return finder.where().eq("phoneNumber", phoneNumber).findUnique();
     }
 
     public static List<HGSSUser> findAvailableUsers(HGSSStation station){

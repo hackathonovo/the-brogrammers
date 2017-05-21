@@ -166,22 +166,31 @@
 
     <div class="window">
         <div class="row">
-            <a class="btn btn-primary" type="button" href="@routes.HGSSController.user()">Dodaj novog <i class="fa fa-plus"> </i></a>
+            <a class="btn btn-primary" type="button" href="@routes.HGSSController.user(null)">Dodaj novog <i class="fa fa-plus"> </i></a>
         </div>
         <div class="row separate">
             <table id="example" class="display" cellspacing="0" width="100%">
-                <thead><tr><th>username</th><th>firstname</th><th>lastname</th></tr></thead>
+                <thead><tr><th>Ime</th><th>Prezime</th><th>Rank</th><th>Iskustvo</th><th>Broj mobitela</th><th>Postaja</th></tr></thead>
                 <tbody>
                 @for(user <- users) {
-                    <tr>
+                    <tr class='clickable-row' data-href='@routes.HGSSController.user(user.id)'>
                         <td>
-                        @user.username
-                        </td>
-                        <td>
-                        @user.firstName
+                        @user.firstName.toString
                         </td>
                         <td>
                         @user.lastName
+                        </td>
+                        <td>
+                        @user.role
+                        </td>
+                        <td>
+                        @user.skill
+                        </td>
+                        <td>
+                        @user.phoneNumber
+                        </td>
+                        <td>
+                        @user.station.stationName
                         </td>
                     </tr>
                 }
@@ -206,5 +215,11 @@
             $('#example')
                     .removeClass('display')
                     .addClass('table table-striped table-bordered');
+
+            jQuery(document).ready(function($) {
+                $(".clickable-row").click(function() {
+                    window.location = $(this).data("href");
+                });
+            });
     </script>
 }
