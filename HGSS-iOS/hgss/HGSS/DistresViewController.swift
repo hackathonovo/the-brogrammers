@@ -43,7 +43,7 @@ class DistresViewController: MenuItemContentViewController, MFMessageComposeView
         if (MFMessageComposeViewController.canSendText()) {
             let controller = MFMessageComposeViewController()
             controller.body = "\((locationManager.location?.coordinate.latitude)!), \((locationManager.location?.coordinate.longitude)!)"
-            controller.recipients = ["+\(385995109450)"]
+            controller.recipients = ["+385995109450"]
             controller.messageComposeDelegate = self
             self.present(controller, animated: true, completion: nil)
         }

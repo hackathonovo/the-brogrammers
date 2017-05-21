@@ -45,10 +45,8 @@ class NewActionViewController: MenuItemContentViewController
     
     @IBAction func proced(_ sender: Any)
     {
-        btnProced.isEnabled = false
         if pin == nil || actionDesc.text == "Opis akcije..."
         {
-            btnProced.isEnabled  = true
             let alert = UIAlertController(title: "Error", message: "Molim napišite opis akcije i odaberite lokaciju", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -111,7 +109,8 @@ extension NewActionViewController: UITextViewDelegate
             textView.text = "Opis akcije..."
             textView.textColor = .lightGray
         }
-        textView.resignFirstResponder()
+        nameOfAction.resignFirstResponder()
+        nameOfAction.resignFirstResponder()
     }
 }
 

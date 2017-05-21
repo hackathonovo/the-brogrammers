@@ -12,9 +12,11 @@ import InteractiveSideMenu
 class MainViewController: MenuItemContentViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
-    
+    let ns = NetworkService()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        ns.getActions(username: AppDelegate.user.username!)
         let nib = UINib.init(nibName: Constants.nibMainCollCell, bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: Constants.nibMainCollCell)
         collectionView.delegate = self

@@ -34,6 +34,7 @@ class PushViewController: MenuContainerViewController {
         contentList.append(MainViewController())
         contentList.append(NewActionViewController())
         contentList.append(ActionsViewController())
+        contentList.append(NewRouteViewController())
         contentList.append(DistresViewController())
         return contentList
     }

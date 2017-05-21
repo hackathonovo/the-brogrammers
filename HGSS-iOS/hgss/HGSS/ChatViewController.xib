@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChatViewController" customModule="HGSS" customModuleProvider="target">
+            <connections>
+                <outlet property="constraint" destination="jLu-3b-1q8" id="kFN-A7-F93"/>
+                <outlet property="inputText" destination="Zg2-Uu-V6F" id="teU-a1-wS2"/>
+                <outlet property="showMsg" destination="GNZ-Bo-VbP" id="l7Y-mi-di9"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NBU-bE-afP">
+                    <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                    <color key="backgroundColor" red="0.085491962729999996" green="0.4667444825" blue="0.70379370450000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="LPQ-zF-VYx"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                    <state key="normal" title="SEND">
+                        <color key="titleColor" red="0.99990183119999998" green="1" blue="0.99987989659999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="sendMessage:" destination="-1" eventType="touchUpInside" id="UAQ-3f-rhW"/>
+                    </connections>
+                </button>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Unesi poruku.." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Zg2-Uu-V6F">
+                    <rect key="frame" x="0.0" y="467" width="375" height="150"/>
+                    <color key="backgroundColor" red="0.92540198559999998" green="0.92555379869999999" blue="0.92536979909999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="150" id="7hN-VZ-IyE"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Teo: IDEŠŠŠŠ" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GNZ-Bo-VbP">
+                    <rect key="frame" x="0.0" y="10" width="375" height="457"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="GNZ-Bo-VbP" secondAttribute="trailing" id="0vU-3g-KRE"/>
+                <constraint firstAttribute="bottom" secondItem="NBU-bE-afP" secondAttribute="bottom" id="5wb-wv-LCs"/>
+                <constraint firstAttribute="trailing" secondItem="Zg2-Uu-V6F" secondAttribute="trailing" id="Puq-Du-PUH"/>
+                <constraint firstItem="NBU-bE-afP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="QAK-Hb-ufL"/>
+                <constraint firstItem="GNZ-Bo-VbP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="WVk-2W-qLd"/>
+                <constraint firstItem="GNZ-Bo-VbP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="byI-lC-khh"/>
+                <constraint firstAttribute="trailing" secondItem="NBU-bE-afP" secondAttribute="trailing" id="erK-2E-f03"/>
+                <constraint firstItem="NBU-bE-afP" firstAttribute="top" secondItem="Zg2-Uu-V6F" secondAttribute="bottom" id="jLu-3b-1q8"/>
+                <constraint firstItem="Zg2-Uu-V6F" firstAttribute="top" secondItem="GNZ-Bo-VbP" secondAttribute="bottom" id="jaj-KQ-YUb"/>
+                <constraint firstItem="Zg2-Uu-V6F" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="kQ3-R3-Rvz"/>
+            </constraints>
+            <point key="canvasLocation" x="24.5" y="51.5"/>
+        </view>
+    </objects>
+</document>

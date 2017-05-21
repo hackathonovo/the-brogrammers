@@ -1,12 +1,15 @@
 PODS:
   - InteractiveSideMenu (1.0)
+  - Socket.IO-Client-Swift (8.3.3)
 
 DEPENDENCIES:
   - InteractiveSideMenu
+  - Socket.IO-Client-Swift
 
 SPEC CHECKSUMS:
   InteractiveSideMenu: 2966af15dee760f6c3e09a7a80a98c09fed3d7a4
+  Socket.IO-Client-Swift: a2faffdbde89c63aebc5d631041530c1068b02b8
 
-PODFILE CHECKSUM: e3203ce9ec34c04d07ede188a2990ee36f731188
+PODFILE CHECKSUM: 49bb680b3cf74abf5a8339ab0e361a125a956361
 
 COCOAPODS: 1.2.1
