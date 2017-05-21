@@ -296,5 +296,12 @@ public class HGSSController extends Controller {
 
     }
 
+    public Result charts(){
+        List<HGSSAction> actions = HGSSAction.findAll();
+
+        return ok(views.html.charts.render(actions));
+
+    }
+
 
 }
