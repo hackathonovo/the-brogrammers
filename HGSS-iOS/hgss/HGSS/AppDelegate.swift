@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static var user = User()
     static var actions = [Action]()
     static var pc: PushViewController?
+    static var action: Action?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -25,5 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         return true
     }
+    
 }
 

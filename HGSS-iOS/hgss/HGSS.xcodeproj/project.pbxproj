@@ -57,6 +57,13 @@
 		523145CB1ED119510066C2C8 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523145CA1ED119510066C2C8 /* LocationService.swift */; };
 		523145CF1ED11B7B0066C2C8 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523145CE1ED11B7B0066C2C8 /* User+CoreDataProperties.swift */; };
 		523145D11ED11BC70066C2C8 /* User+CoreDataClass .swift in Sources */ = {isa = PBXBuildFile; fileRef = 523145D01ED11BC70066C2C8 /* User+CoreDataClass .swift */; };
+		523145D51ED12D2C0066C2C8 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523145D31ED12D2C0066C2C8 /* ActionViewController.swift */; };
+		523145D61ED12D2D0066C2C8 /* ActionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 523145D41ED12D2C0066C2C8 /* ActionViewController.xib */; };
+		52DAD8701ED14860001D26E5 /* UpdateActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DAD86E1ED14860001D26E5 /* UpdateActionViewController.swift */; };
+		52DAD8711ED14860001D26E5 /* UpdateActionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52DAD86F1ED14860001D26E5 /* UpdateActionViewController.xib */; };
+		52DAD8751ED1699C001D26E5 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DAD8731ED1699C001D26E5 /* ChatViewController.swift */; };
+		52DAD8761ED1699C001D26E5 /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52DAD8741ED1699C001D26E5 /* ChatViewController.xib */; };
+		52DAD8781ED1720E001D26E5 /* UserShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DAD8771ED1720E001D26E5 /* UserShow.swift */; };
 		D450BFD06EB43629C00820B8 /* Pods_HGSS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4E5703E0C582ADE05844F12 /* Pods_HGSS.framework */; };
 /* End PBXBuildFile section */
 
@@ -114,6 +121,13 @@
 		523145CA1ED119510066C2C8 /* LocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		523145CE1ED11B7B0066C2C8 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		523145D01ED11BC70066C2C8 /* User+CoreDataClass .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass .swift"; sourceTree = "<group>"; };
+		523145D31ED12D2C0066C2C8 /* ActionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
+		523145D41ED12D2C0066C2C8 /* ActionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionViewController.xib; sourceTree = "<group>"; };
+		52DAD86E1ED14860001D26E5 /* UpdateActionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateActionViewController.swift; sourceTree = "<group>"; };
+		52DAD86F1ED14860001D26E5 /* UpdateActionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpdateActionViewController.xib; sourceTree = "<group>"; };
+		52DAD8731ED1699C001D26E5 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		52DAD8741ED1699C001D26E5 /* ChatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatViewController.xib; sourceTree = "<group>"; };
+		52DAD8771ED1720E001D26E5 /* UserShow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserShow.swift; sourceTree = "<group>"; };
 		B4E5703E0C582ADE05844F12 /* Pods_HGSS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HGSS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1BDF98568B290F0B8C027B2 /* Pods-HGSS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HGSS.release.xcconfig"; path = "Pods/Target Support Files/Pods-HGSS/Pods-HGSS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -153,6 +167,7 @@
 				52002B391ED062E600A1462E /* DatabaseController.swift */,
 				52002B3B1ED063D800A1462E /* DataInsert.swift */,
 				523145C81ED112F90066C2C8 /* Action.swift */,
+				52DAD8771ED1720E001D26E5 /* UserShow.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -239,6 +254,9 @@
 		5221E8A51ECCE4A9002012C4 /* UserInteface */ = {
 			isa = PBXGroup;
 			children = (
+				52DAD8721ED16980001D26E5 /* Chat */,
+				52DAD86D1ED14824001D26E5 /* UpdateAction */,
+				523145D21ED12CF50066C2C8 /* Action */,
 				523145BC1ED1095A0066C2C8 /* Actions */,
 				523145B71ED0FBC10066C2C8 /* Distres Call */,
 				523145A71ED0B2570066C2C8 /* Rescu Crew */,
@@ -358,6 +376,33 @@
 			name = ActionsCell;
 			sourceTree = "<group>";
 		};
+		523145D21ED12CF50066C2C8 /* Action */ = {
+			isa = PBXGroup;
+			children = (
+				523145D31ED12D2C0066C2C8 /* ActionViewController.swift */,
+				523145D41ED12D2C0066C2C8 /* ActionViewController.xib */,
+			);
+			name = Action;
+			sourceTree = "<group>";
+		};
+		52DAD86D1ED14824001D26E5 /* UpdateAction */ = {
+			isa = PBXGroup;
+			children = (
+				52DAD86E1ED14860001D26E5 /* UpdateActionViewController.swift */,
+				52DAD86F1ED14860001D26E5 /* UpdateActionViewController.xib */,
+			);
+			name = UpdateAction;
+			sourceTree = "<group>";
+		};
+		52DAD8721ED16980001D26E5 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				52DAD8731ED1699C001D26E5 /* ChatViewController.swift */,
+				52DAD8741ED1699C001D26E5 /* ChatViewController.xib */,
+			);
+			name = Chat;
+			sourceTree = "<group>";
+		};
 		69249B45ED9AD48EDA914056 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -448,6 +493,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				523145C71ED109BD0066C2C8 /* ActionsViewCell.xib in Resources */,
+				52DAD8711ED14860001D26E5 /* UpdateActionViewController.xib in Resources */,
 				52002B401ED06F3200A1462E /* LoginViewController.xib in Resources */,
 				523145B11ED0D77A0066C2C8 /* MemberTableViewCell.xib in Resources */,
 				5221E89B1ECCE418002012C4 /* Assets.xcassets in Resources */,
@@ -461,8 +507,10 @@
 				523145C01ED1097C0066C2C8 /* ActionsViewController.xib in Resources */,
 				52002B541ED08A1800A1462E /* UserInfoViewController.xib in Resources */,
 				520FDC9F1ECE5FB100015FF7 /* MainCollectionViewCell.xib in Resources */,
+				523145D61ED12D2D0066C2C8 /* ActionViewController.xib in Resources */,
 				523145AB1ED0B62E0066C2C8 /* RescueCrewViewController.xib in Resources */,
 				5221E8A91ECCE4EF002012C4 /* MainViewController.xib in Resources */,
+				52DAD8761ED1699C001D26E5 /* ChatViewController.xib in Resources */,
 				522A6AE61ED0A280001FD7A2 /* NewActionViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -525,7 +573,9 @@
 				52002B431ED071AA00A1462E /* LoginService.swift in Sources */,
 				523145C91ED112F90066C2C8 /* Action.swift in Sources */,
 				522A6AE51ED0A280001FD7A2 /* NewActionViewController.swift in Sources */,
+				52DAD8751ED1699C001D26E5 /* ChatViewController.swift in Sources */,
 				52002B3F1ED06F3200A1462E /* LoginViewController.swift in Sources */,
+				52DAD8701ED14860001D26E5 /* UpdateActionViewController.swift in Sources */,
 				523145AA1ED0B62E0066C2C8 /* RescueCrewViewController.swift in Sources */,
 				523145B01ED0D77A0066C2C8 /* MemberTableViewCell.swift in Sources */,
 				52002B341ED052C100A1462E /* Location+CoreDataClass.swift in Sources */,
@@ -536,6 +586,8 @@
 				523145BF1ED1097C0066C2C8 /* ActionsViewController.swift in Sources */,
 				52002B361ED052C100A1462E /* Path+CoreDataClass.swift in Sources */,
 				52002B2F1ED051AD00A1462E /* HGSSmodel.xcdatamodeld in Sources */,
+				523145D51ED12D2C0066C2C8 /* ActionViewController.swift in Sources */,
+				52DAD8781ED1720E001D26E5 /* UserShow.swift in Sources */,
 				520FDCA51ECED45B00015FF7 /* AdviceViewController.swift in Sources */,
 				523145CF1ED11B7B0066C2C8 /* User+CoreDataProperties.swift in Sources */,
 				52002B351ED052C100A1462E /* Location+CoreDataProperties.swift in Sources */,

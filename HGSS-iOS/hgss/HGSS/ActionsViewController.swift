@@ -26,11 +26,14 @@ class ActionsViewController: MenuItemContentViewController {
         nc.addObserver(forName:Notification.Name(rawValue:"Relode"),
                        object:nil, queue:nil,
                        using:relode)
+        nc.addObserver(forName:Notification.Name(rawValue:"GoToAction"),
+                       object:nil, queue:nil,
+                       using:goToAction)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        ns.getActions(username: AppDelegate.user.username!)
         actions = AppDelegate.actions
+        tableView.reloadData()
     }
     
     func relode(notification: Notification){
@@ -42,6 +45,18 @@ class ActionsViewController: MenuItemContentViewController {
     @IBAction func showMenu(_ sender: Any)
     {
         showMenu()
+    }
+    
+    func goToAction(notification: Notification){
+        guard let userInfo = notification.userInfo,
+            let action  = userInfo["action"] as? Action,
+            var users  = userInfo["users"] as? [UserShow] else {
+                print("No userInfo found in notification")
+                return
+        }
+        DispatchQueue.main.sync {
+            navigationController?.pushViewController(ActionViewController(action: action, users: users), animated: true)
+        }
     }
 }
 
@@ -64,7 +79,7 @@ extension ActionsViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         let cell = tableView.cellForRow(at: indexPath) as! ActionsViewCell
-        
+        ns.getAction(id: actions[indexPath.row].id)
     }
 
 }

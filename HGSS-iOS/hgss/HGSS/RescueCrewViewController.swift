@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import MessageUI
+
 
 class RescueCrewViewController: UIViewController
 {
@@ -45,7 +47,17 @@ class RescueCrewViewController: UIViewController
             }
         }
         netService.goAction(usernames: usernames)
-        returnHome()
+        if (MFMessageComposeViewController.canSendText()) {
+            let controller = MFMessageComposeViewController()
+            controller.body = "Ako ste u mogućnosti pridružite se akciji, u aplikaciji se potvrdite sudjelovanje na akciji"
+            controller.recipients = [String]()
+            for user in users!
+            {
+                controller.recipients?.append("+\(user.cellNumber)")
+            }
+            controller.messageComposeDelegate = self
+            self.present(controller, animated: true, completion: nil)
+        }
     }
     
     func returnHome()
@@ -78,6 +90,22 @@ extension RescueCrewViewController: UITableViewDelegate, UITableViewDataSource {
     {
         let cell = tableView.cellForRow(at: indexPath) as! MemberTableViewCell
         cell.changeState()
+    }
+
+}
+
+extension RescueCrewViewController: MFMessageComposeViewControllerDelegate
+{
+    func messageComposeViewController(_ controller: MFMessageComposeViewController!, didFinishWith result: MessageComposeResult) {
+        switch (result.rawValue) {
+        case MessageComposeResult.sent.rawValue:
+            print("Message was sent")
+            self.dismiss(animated: true, completion: nil)
+        default:
+            break;
+        }
+        self.dismiss(animated: true, completion: nil)
+        returnHome()
     }
 
 }

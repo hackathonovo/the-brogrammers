@@ -40,13 +40,15 @@ class LoginService
                         }
                         let name = json["firstName"] as! String
                         let lastname = json["lastName"] as! String
-                        let skill = json["skill"] as! String
-                        let role = json["role"] as! String
+                        let skillTmp = json["skill"] as! [String: Any]
+                        let skil = skillTmp["skill"] as! String
+                        let roleTmp = json["role"] as! [String: Any]
+                        let role = roleTmp["role"] as! String
                         let isAva = json["isAvailable"] as! Bool
                         AppDelegate.user = DatabaseController.getUser(username: username)
                         NotificationCenter.default.post(name:Notification.Name(rawValue:"LoginSuccess"),
                                                         object: nil,
-                                                        userInfo: ["success":true, "name": name, "role": role, "skill": skill, "lastname": lastname, "isAvailable": isAva])
+                                                        userInfo: ["success":true, "name": name, "role": role, "skill": skil, "lastname": lastname, "isAvailable": isAva])
                     }
                     else
                     {

@@ -30,21 +30,24 @@
                     </constraints>
                 </mapView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d1N-xb-OUH">
-                    <rect key="frame" x="0.0" y="330" width="125" height="30"/>
+                    <rect key="frame" x="0.0" y="330" width="125" height="70"/>
                     <constraints>
+                        <constraint firstAttribute="height" constant="70" id="I1l-aw-PWJ"/>
                         <constraint firstAttribute="width" constant="125" id="jlM-NT-ZJo"/>
                     </constraints>
-                    <state key="normal" title="Start"/>
                     <connections>
                         <action selector="startPressed:" destination="-1" eventType="touchUpInside" id="Soh-Jw-ygm"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AO3-NQ-INR">
-                    <rect key="frame" x="195" y="330" width="125" height="30"/>
+                    <rect key="frame" x="195" y="330" width="125" height="70"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="125" id="Giq-TV-7ma"/>
+                        <constraint firstAttribute="height" constant="70" id="dSQ-NH-3ql"/>
                     </constraints>
-                    <state key="normal" title="Stop"/>
+                    <connections>
+                        <action selector="stopPressed:" destination="-1" eventType="touchUpInside" id="zzd-R5-S7R"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Route" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CmU-Ss-86j">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
@@ -61,27 +64,40 @@
                     <state key="normal" image="Menu"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lv3-kf-GNa">
-                    <rect key="frame" x="125" y="330" width="70" height="30"/>
-                    <state key="normal" title="Pause"/>
+                    <rect key="frame" x="125" y="330" width="70" height="70"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="70" id="b5E-n8-nlS"/>
+                    </constraints>
+                    <connections>
+                        <action selector="pausePressed:" destination="-1" eventType="touchUpInside" id="Cx1-Eb-UUR"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pace:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Za-hD-2nz">
-                    <rect key="frame" x="0.0" y="411" width="320" height="21"/>
+                    <rect key="frame" x="0.0" y="481" width="320" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
+                    <color key="textColor" red="0.085491962729999996" green="0.4667444825" blue="0.70379370450000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bMg-zp-yn0">
-                    <rect key="frame" x="0.0" y="375" width="320" height="21"/>
+                    <rect key="frame" x="0.0" y="430" width="320" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
+                    <color key="textColor" red="0.085491962729999996" green="0.4667444825" blue="0.70379370450000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4v-c3-u6z">
-                    <rect key="frame" x="0.0" y="447" width="320" height="21"/>
+                    <rect key="frame" x="0.0" y="532" width="320" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
+                    <color key="textColor" red="0.085491962729999996" green="0.4667444825" blue="0.70379370450000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="start" translatesAutoresizingMaskIntoConstraints="NO" id="5Um-0D-sYo">
+                    <rect key="frame" x="28" y="343" width="69" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="stop" translatesAutoresizingMaskIntoConstraints="NO" id="4P7-Yo-Ctg">
+                    <rect key="frame" x="223" y="343" width="69" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -89,10 +105,10 @@
                 <constraint firstAttribute="trailing" secondItem="bMg-zp-yn0" secondAttribute="trailing" id="5Ao-fP-NZd"/>
                 <constraint firstItem="AO3-NQ-INR" firstAttribute="leading" secondItem="lv3-kf-GNa" secondAttribute="trailing" id="6JC-QL-95k"/>
                 <constraint firstItem="lv3-kf-GNa" firstAttribute="top" secondItem="MQW-Hq-2Yq" secondAttribute="bottom" id="71M-8e-a2Q"/>
-                <constraint firstItem="4Za-hD-2nz" firstAttribute="top" secondItem="bMg-zp-yn0" secondAttribute="bottom" constant="15" id="75H-b1-uzj"/>
+                <constraint firstItem="4Za-hD-2nz" firstAttribute="top" secondItem="bMg-zp-yn0" secondAttribute="bottom" constant="30" id="75H-b1-uzj"/>
                 <constraint firstItem="AO3-NQ-INR" firstAttribute="top" secondItem="MQW-Hq-2Yq" secondAttribute="bottom" id="9Vi-XI-95U"/>
                 <constraint firstItem="c4v-c3-u6z" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Cfr-VJ-nu4"/>
-                <constraint firstItem="bMg-zp-yn0" firstAttribute="top" secondItem="d1N-xb-OUH" secondAttribute="bottom" constant="15" id="D62-Mt-YEa"/>
+                <constraint firstItem="bMg-zp-yn0" firstAttribute="top" secondItem="d1N-xb-OUH" secondAttribute="bottom" constant="30" id="D62-Mt-YEa"/>
                 <constraint firstItem="MQW-Hq-2Yq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="VrK-RS-zl0"/>
                 <constraint firstAttribute="trailing" secondItem="CmU-Ss-86j" secondAttribute="trailing" id="YDY-iQ-r09"/>
                 <constraint firstItem="lv3-kf-GNa" firstAttribute="leading" secondItem="d1N-xb-OUH" secondAttribute="trailing" id="cKA-gy-ftN"/>
@@ -103,7 +119,7 @@
                 <constraint firstAttribute="trailing" secondItem="AO3-NQ-INR" secondAttribute="trailing" id="jQn-57-GxM"/>
                 <constraint firstAttribute="trailing" secondItem="MQW-Hq-2Yq" secondAttribute="trailing" id="jax-qs-bxZ"/>
                 <constraint firstItem="d1N-xb-OUH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="paJ-YH-gwt"/>
-                <constraint firstItem="c4v-c3-u6z" firstAttribute="top" secondItem="4Za-hD-2nz" secondAttribute="bottom" constant="15" id="tzC-4o-uK5"/>
+                <constraint firstItem="c4v-c3-u6z" firstAttribute="top" secondItem="4Za-hD-2nz" secondAttribute="bottom" constant="30" id="tzC-4o-uK5"/>
                 <constraint firstItem="MQW-Hq-2Yq" firstAttribute="top" secondItem="CmU-Ss-86j" secondAttribute="bottom" id="uBJ-D0-GWQ"/>
                 <constraint firstItem="bMg-zp-yn0" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="upd-jG-Lgi"/>
                 <constraint firstItem="wOl-XV-4ht" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="vW2-DT-hbg"/>
@@ -115,5 +131,7 @@
     </objects>
     <resources>
         <image name="Menu" width="24" height="17"/>
+        <image name="start" width="230" height="256"/>
+        <image name="stop" width="508" height="508"/>
     </resources>
 </document>

@@ -22,6 +22,6 @@ extension User {
     @NSManaged public var skill: String?
     @NSManaged public var username: String?
     @NSManaged public var isAvailable: Bool
-    @NSManaged public var cellNumber: Int32
+    @NSManaged public var cellNumber: String
 
 }

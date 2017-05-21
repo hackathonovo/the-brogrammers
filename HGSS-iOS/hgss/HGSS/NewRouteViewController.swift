@@ -25,6 +25,7 @@ class NewRouteViewController: MenuItemContentViewController {
     var recording = false
     var mapPathCoordinates: [CLLocationCoordinate2D] = []
     let dataInsert = DataInsert()
+    let ns = NetworkService()
     
     var currentPath: Path?
     var seconds = 0.0
@@ -75,6 +76,12 @@ class NewRouteViewController: MenuItemContentViewController {
         startLocationUpdates()
     }
     
+
+    @IBAction func stopPressed(_ sender: Any)
+    {
+        locationManager.stopUpdatingLocation()
+        timer.invalidate()
+    }
     
 }
 
@@ -87,7 +94,7 @@ extension NewRouteViewController: CLLocationManagerDelegate
         let distanceQuantity = HKQuantity(unit: HKUnit.meter(), doubleValue: distance)
         distanceLabel.text = "Distance: " + distanceQuantity.description
         let paceUnit = HKUnit.second().unitDivided(by: HKUnit.meter())
-        let paceQuantity = HKQuantity(unit: paceUnit, doubleValue: seconds / distance)
+        let paceQuantity = HKQuantity(unit: paceUnit, doubleValue: distance / seconds)
         paceLabel.text = "Pace: " + paceQuantity.description
     }
     
@@ -98,7 +105,7 @@ extension NewRouteViewController: CLLocationManagerDelegate
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         for location in locations {
             if location.horizontalAccuracy < 20 && recording{
-                //update distance
+                ns.sendLocation(location: location.coordinate)
                 mapPathCoordinates.append(location.coordinate)
                 let polyline = MKPolyline(coordinates: &mapPathCoordinates, count: mapPathCoordinates.count)
                 mapView.add(polyline)
