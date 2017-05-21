@@ -4,6 +4,9 @@
   <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/landing.css")">
 
   <div class="window text-center">
+    <div class="row text-center">
+      <img src="@routes.Assets.at("images/hgss-logo.png")" class="img-responsive logoHGSS" alt="HGSS logo">
+    </div>
     <div class="row text-center separate">
       <a type="button" style="text-decoration:none;" class="btn btn-primary categoryButton"
       href="@routes.HGSSController.getUsers()">
@@ -20,13 +23,11 @@
         Sifranici<br> <i class="fa fa-cog"></i>
       </a>
       <a type="button" style="text-decoration:none;" class="btn btn-primary categoryButton"
-      href="@routes.HGSSController.getActions()">
+      href="@routes.HGSSController.charts()">
         Statistika<br><i class="fa fa-bar-chart"></i>
       </a>
     </div>
-    <div class="row text-center">
-      <img src="@routes.Assets.at("images/hgss-logo.png")" class="img-responsive" alt="HGSS logo">
-    </div>
+
 
   </div>
 

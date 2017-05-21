@@ -224,8 +224,13 @@ public class HGSSController extends Controller {
         return ok(views.html.actions.render(actions));
     }
 
-    public Result action() {
-        return ok(views.html.action.render(null,HGSSActionType.findAll()));
+    public Result action(Long id) {
+        if (id == null) {
+            return ok(views.html.action.render(null, HGSSActionType.findAll()));
+        } else {
+            HGSSAction action = HGSSAction.findById(id);
+            return ok(views.html.action.render(action, HGSSActionType.findAll()));
+        }
     }
 
     @BodyParser.Of(BodyParser.Json.class)
