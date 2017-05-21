@@ -73,9 +73,44 @@
                 return;
               }
             });
-            
 
-          }
+            @if(edit) {
+              var markers = [
+                @for(user <- action.users) {
+                  @for(location <- user.currentLocations) {
+                    {
+                      "name": @user.firstName,
+                      "coords": "@location.latitude,@location.longitude"
+                    },
+                  }
+                }
+              ];
+
+            $(markers).each(function() {
+
+              // console.log(typeof(this.p));
+
+              var lat_lon = this.coords.split(',');
+              var icon = '@routes.Assets.at("images/pointer-gss.png")';
+
+              var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(lat_lon[0],lat_lon[1]),
+                title: this.name,
+                desc: this.desc,
+                icon: icon,
+                map: map
+              });
+
+            });
+
+
+
+
+                      };
+
+
+
+            }
   </script>
 
   <div class="window">

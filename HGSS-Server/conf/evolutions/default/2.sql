@@ -78,3 +78,13 @@ INSERT INTO hgsschat_message (id, hgssaction_id, username, message, date)
   VALUES (5, 2, 'hbaric', 'Spasili smo covjeka!', '2015-01-06 12:16:22');
 
 ALTER SEQUENCE hgsschat_message_seq RESTART WITH 20;
+
+INSERT INTO hgssuser_location (id, hgssuser_id, longitude, latitude) VALUES (1, 2, 45.787, 16.754);
+INSERT INTO hgssuser_location (id, hgssuser_id, longitude, latitude) VALUES (2, 2, 45.887, 16.754);
+INSERT INTO hgssuser_location (id, hgssuser_id, longitude, latitude) VALUES (3, 2, 45.987, 16.754);
+INSERT INTO hgssuser_location (id, hgssuser_id, longitude, latitude) VALUES (4, 2, 46.087, 16.754);
+INSERT INTO hgssuser_location (id, hgssuser_id, longitude, latitude) VALUES (5, 2, 46.287, 16.754);
+INSERT INTO hgssuser_location (id, hgssuser_id, longitude, latitude) VALUES (6, 2, 46.387, 16.754);
+
+
+ALTER SEQUENCE hgssuser_location_seq RESTART WITH 20;
