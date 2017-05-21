@@ -17,6 +17,8 @@ import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import play.data.FormFactory;
@@ -307,5 +309,41 @@ public class HGSSController extends Controller {
         return ok();
     }
 
+    public Result zones() {
+        return ok(views.html.zones.render());
+    }
+
+    public Result codes() {
+        List<String> roles = new ArrayList<>();
+        roles.add("sup1");
+        roles.add("sup2");
+        roles.add("sup3");
+        List<String> skilles = new ArrayList<>();
+        skilles.add("sup1");
+        skilles.add("sup2");
+        skilles.add("sup3");
+        List<String> actionTypes = new ArrayList<>();
+        actionTypes.add("sup1");
+        actionTypes.add("sup2");
+        actionTypes.add("sup3");
+        return ok(views.html.codes.render(roles,skilles,actionTypes));
+    }
+
+    public Result saveCode() {
+        DynamicForm userForm = formFactory.form().bindFromRequest();
+        String role = userForm.get("roleInput");
+        if (role != null) {
+            redirect(role);
+        }
+        String skill = userForm.get("skillInput");
+        if (skill != null) {
+            ok(skill);
+        }
+        String actionType = userForm.get("actionTypeInput");
+        if (actionType != null) {
+
+        }
+        return badRequest();
+    }
 
 }

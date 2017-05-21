@@ -162,12 +162,9 @@ create index ix_hgssuser_location_id on hgssuser (location_id);
 alter table hgssuser add constraint fk_hgssuser_station_id foreign key (station_id) references hgssstation (id) on delete restrict on update restrict;
 create index ix_hgssuser_station_id on hgssuser (station_id);
 
-<<<<<<< HEAD
-=======
 alter table hgssuser_location add constraint fk_hgssuser_location_hgssuser_id foreign key (hgssuser_id) references hgssuser (id) on delete restrict on update restrict;
 create index ix_hgssuser_location_hgssuser_id on hgssuser_location (hgssuser_id);
 
->>>>>>> 087acce5627dc37b12d690ba75ce56c29b22dc18
 alter table hgsszone add constraint fk_hgsszone_hgssaction_id foreign key (hgssaction_id) references hgssaction (id) on delete restrict on update restrict;
 create index ix_hgsszone_hgssaction_id on hgsszone (hgssaction_id);
 
@@ -210,12 +207,9 @@ drop index if exists ix_hgssuser_location_id;
 alter table if exists hgssuser drop constraint if exists fk_hgssuser_station_id;
 drop index if exists ix_hgssuser_station_id;
 
-<<<<<<< HEAD
-=======
 alter table if exists hgssuser_location drop constraint if exists fk_hgssuser_location_hgssuser_id;
 drop index if exists ix_hgssuser_location_hgssuser_id;
 
->>>>>>> 087acce5627dc37b12d690ba75ce56c29b22dc18
 alter table if exists hgsszone drop constraint if exists fk_hgsszone_hgssaction_id;
 drop index if exists ix_hgsszone_hgssaction_id;
 

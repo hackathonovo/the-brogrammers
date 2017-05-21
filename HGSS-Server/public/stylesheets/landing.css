@@ -1,5 +1,8 @@
 .categoryButton {
     font-size: 3em;
-    margin: 40px;
-    text-decoration: none; !important;
+    margin: 20px;
+    width: 250px !important;
+    height: 150px !important;
+    vertical-align: middle;
+
 }
