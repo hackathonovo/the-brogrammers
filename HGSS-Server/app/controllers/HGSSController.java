@@ -397,7 +397,6 @@ public class HGSSController extends Controller {
         return ok();
     }
 
-    @BodyParser.Of(BodyParser.Json.class)
     public Result listMessages(Long id){
         Logger.debug("----------- Request: listMessages(id) -----------");
         Logger.debug("Received id: " + id);
@@ -411,8 +410,7 @@ public class HGSSController extends Controller {
 
         return ok(json);
     }
-
-    @BodyParser.Of(BodyParser.Json.class)
+    
     public Result closeAction(Long id){
         Logger.debug("----------- Request: closeAction(id) -----------");
         Logger.debug("Received id: " + id);
