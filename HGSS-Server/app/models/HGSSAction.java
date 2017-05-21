@@ -26,11 +26,14 @@ public class HGSSAction extends Model {
     public Double longitude;
     public Double latitude;
 
-    @OneToMany (cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     public List<HGSSChatMessage> messages;
 
     @ManyToOne
     public HGSSUser owner;
+
+    @ManyToMany
+    public List<HGSSUser> users;
 
     @OneToMany(cascade = CascadeType.ALL)
     public List<HGSSZone> zones;

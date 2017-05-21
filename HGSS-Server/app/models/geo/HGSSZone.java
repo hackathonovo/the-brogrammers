@@ -13,7 +13,7 @@ public class HGSSZone {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     public Long id;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
-    public List<HGSSLocation> zone;
+    @OneToMany(cascade = CascadeType.ALL)
+    public List<HGSSLocation> locations;
 
 }

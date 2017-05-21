@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AdviceViewController" customModule="HGSS" customModuleProvider="target">
+            <connections>
+                <outlet property="lblTitle" destination="dCB-vK-jzq" id="4LB-UM-1Om"/>
+                <outlet property="textView" destination="zrQ-WH-UME" id="FAQ-Oc-dYE"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zrQ-WH-UME">
+                    <rect key="frame" x="0.0" y="80" width="320" height="447"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCB-vK-jzq">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                    <color key="backgroundColor" red="0.085491962729999996" green="0.4667444825" blue="0.70379370450000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="80" id="C5f-G7-qex"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="22"/>
+                    <color key="textColor" red="0.99990183119999998" green="1" blue="0.99987989659999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eum-oJ-2yn">
+                    <rect key="frame" x="0.0" y="537" width="320" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eJa-8E-4Hn">
+                    <rect key="frame" x="15" y="30" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="20" id="5c5-dM-6Td"/>
+                        <constraint firstAttribute="height" constant="20" id="Lbu-9L-GZD"/>
+                    </constraints>
+                    <state key="normal" image="back"/>
+                    <connections>
+                        <action selector="back:" destination="-1" eventType="touchUpInside" id="Ohg-IP-XYG"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="eum-oJ-2yn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="1pK-v3-FYO"/>
+                <constraint firstAttribute="bottom" secondItem="eum-oJ-2yn" secondAttribute="bottom" constant="10" id="20t-vf-UbR"/>
+                <constraint firstItem="zrQ-WH-UME" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="2CB-Fs-UmB"/>
+                <constraint firstItem="dCB-vK-jzq" firstAttribute="leading" secondItem="zrQ-WH-UME" secondAttribute="leading" id="9ch-V1-DBP"/>
+                <constraint firstItem="zrQ-WH-UME" firstAttribute="top" secondItem="dCB-vK-jzq" secondAttribute="bottom" id="QEq-yd-FlB"/>
+                <constraint firstItem="dCB-vK-jzq" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Yh3-0w-2F4"/>
+                <constraint firstItem="eJa-8E-4Hn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="Yl1-gx-kXD"/>
+                <constraint firstItem="eJa-8E-4Hn" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="ZbG-nY-96O"/>
+                <constraint firstAttribute="trailing" secondItem="dCB-vK-jzq" secondAttribute="trailing" id="cPW-1f-6da"/>
+                <constraint firstAttribute="trailing" secondItem="zrQ-WH-UME" secondAttribute="trailing" id="dQX-ed-9BY"/>
+                <constraint firstAttribute="trailing" secondItem="eum-oJ-2yn" secondAttribute="trailing" id="hvO-TP-gzL"/>
+                <constraint firstItem="eum-oJ-2yn" firstAttribute="top" secondItem="zrQ-WH-UME" secondAttribute="bottom" constant="10" id="vBf-KE-yC2"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="back" width="192" height="320"/>
+    </resources>
+</document>

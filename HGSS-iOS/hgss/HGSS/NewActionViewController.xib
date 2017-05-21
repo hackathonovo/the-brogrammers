@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewActionViewController" customModule="HGSS" customModuleProvider="target">
+            <connections>
+                <outlet property="actionDesc" destination="GwI-9K-qWp" id="cZU-vp-3YL"/>
+                <outlet property="bottomDescConst" destination="Eu4-jh-J98" id="adE-wM-Gv6"/>
+                <outlet property="btnProced" destination="BcD-gR-bpx" id="KUR-b1-3rT"/>
+                <outlet property="map" destination="Xdu-Tf-ljq" id="5sP-T6-3Ck"/>
+                <outlet property="nameOfAction" destination="xw2-CC-QTB" id="B41-Bn-Mhe"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GwI-9K-qWp">
+                    <rect key="frame" x="0.0" y="319" width="320" height="199"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="199" id="6uk-LH-gTj"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="199" id="ivq-dc-ta0"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BcD-gR-bpx">
+                    <rect key="frame" x="0.0" y="518" width="320" height="50"/>
+                    <color key="backgroundColor" red="0.085491962729999996" green="0.4667444825" blue="0.70379370450000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="rvx-rk-R1H"/>
+                    </constraints>
+                    <state key="normal" title="Nastavi">
+                        <color key="titleColor" red="0.9685322642326355" green="0.96869415044784546" blue="0.96851092576980591" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="proced:" destination="-1" eventType="touchUpInside" id="0up-vQ-TXv"/>
+                    </connections>
+                </button>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Unesi naziv potrage" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xw2-CC-QTB">
+                    <rect key="frame" x="0.0" y="281" width="320" height="38"/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Xdu-Tf-ljq">
+                    <rect key="frame" x="0.0" y="-8" width="320" height="289"/>
+                </mapView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Xdu-Tf-ljq" secondAttribute="trailing" id="3x4-yj-hV0"/>
+                <constraint firstItem="GwI-9K-qWp" firstAttribute="top" secondItem="xw2-CC-QTB" secondAttribute="bottom" id="5Jh-ge-qe3"/>
+                <constraint firstAttribute="trailing" secondItem="GwI-9K-qWp" secondAttribute="trailing" id="5je-6O-hT5"/>
+                <constraint firstItem="GwI-9K-qWp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="70p-s0-VkN"/>
+                <constraint firstAttribute="trailing" secondItem="xw2-CC-QTB" secondAttribute="trailing" id="Bf0-EI-Lkq"/>
+                <constraint firstItem="Xdu-Tf-ljq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Bhx-Y5-9JN"/>
+                <constraint firstItem="xw2-CC-QTB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="CER-OP-0hj"/>
+                <constraint firstAttribute="trailing" secondItem="BcD-gR-bpx" secondAttribute="trailing" id="ElH-9d-Ht3"/>
+                <constraint firstAttribute="bottom" secondItem="BcD-gR-bpx" secondAttribute="bottom" id="Eu4-jh-J98"/>
+                <constraint firstItem="BcD-gR-bpx" firstAttribute="top" secondItem="GwI-9K-qWp" secondAttribute="bottom" id="Hqy-0a-O6b"/>
+                <constraint firstItem="xw2-CC-QTB" firstAttribute="top" secondItem="Xdu-Tf-ljq" secondAttribute="bottom" id="K1p-df-9NL"/>
+                <constraint firstItem="Xdu-Tf-ljq" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="-8" id="OgI-Qr-EBL"/>
+                <constraint firstItem="GwI-9K-qWp" firstAttribute="top" secondItem="Xdu-Tf-ljq" secondAttribute="bottom" constant="38" id="YcF-dT-pgN"/>
+                <constraint firstItem="BcD-gR-bpx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="c6f-op-0vs"/>
+            </constraints>
+            <point key="canvasLocation" x="24" y="51"/>
+        </view>
+    </objects>
+</document>
