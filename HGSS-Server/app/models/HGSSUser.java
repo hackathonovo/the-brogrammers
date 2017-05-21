@@ -112,6 +112,10 @@ public class HGSSUser extends Model {
         return finder.where().eq("station", station).eq("isAvailable", true).findList();
     }
 
+    public static List<HGSSUser> findAvailableUsers() {
+        return finder.where().eq("isAvailable", true).findList();
+    }
+
     public static class UsernameValidator extends Constraints.Validator<String> {
         @Override
         public boolean isValid(String username) {

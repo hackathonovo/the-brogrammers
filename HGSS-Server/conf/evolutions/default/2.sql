@@ -77,3 +77,9 @@ INSERT INTO hgsschat_message (id, hgssaction_id, username, message, date)
   VALUES (5, 2, 'hbaric', 'Spasili smo covjeka!', '2015-01-06 12:16:22');
 
 ALTER SEQUENCE hgsschat_message_seq RESTART WITH 20;
+
+INSERT INTO hgssaction_hgssuser (hgssaction_id, hgssuser_id) VALUES (1, 2);
+INSERT INTO hgssaction_hgssuser (hgssaction_id, hgssuser_id) VALUES (1, 3);
+INSERT INTO hgssaction_hgssuser (hgssaction_id, hgssuser_id) VALUES (1, 4);
+INSERT INTO hgssaction_hgssuser (hgssaction_id, hgssuser_id) VALUES (2, 4);
+INSERT INTO hgssaction_hgssuser (hgssaction_id, hgssuser_id) VALUES (2, 5);
