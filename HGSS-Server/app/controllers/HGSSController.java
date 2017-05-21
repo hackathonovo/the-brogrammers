@@ -301,7 +301,7 @@ public class HGSSController extends Controller {
     }
 
     public Result saveAction() {
-        return ok();
+        return redirect(routes.Public.landing());
     }
 
     public Result saveMap() {
