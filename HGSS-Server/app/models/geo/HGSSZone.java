@@ -14,6 +14,6 @@ public class HGSSZone {
     public Long id;
 
     @OneToMany(cascade = CascadeType.PERSIST)
-    public List<HGSSLocation> zone;
+    public List<HGSSLocation> locations;
 
 }

@@ -69,7 +69,7 @@ public class HGSSController extends Controller {
             return status(UNKNOWN_USER_STATUS);
         }
 
-        user.currentLocations.add(location);
+        //user.currentLocations.add(location);
 
         user.update();
 
@@ -104,6 +104,11 @@ public class HGSSController extends Controller {
         JsonNode jsonAction = Json.toJson(action);
         ((ObjectNode) jsonAction).put("owner", action.owner.username);
         Logger.debug("Response action: " + jsonAction);
+
+        Logger.debug(action.messages + "");
+        Logger.debug(action.messages.size() + "");
+
+        Logger.debug("bla:" + action.zones.get(0).locations.size());
 
         return ok(jsonAction);
     }
