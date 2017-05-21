@@ -1,4 +1,6 @@
-@(user: HGSSUser)
+@import models.codebook.HGSSRole
+@import models.codebook.HGSSSkill
+@(user: HGSSUser, roles: List[HGSSRole], skills: List[HGSSSkill])
 @edit = @{user!=null}
 
 @main("Registracija spasitelj") {
@@ -234,20 +236,18 @@
             </div>
             <div class="form-group">
                 <label for="skill">Iskustvo</label>
-                <select type="text" class="form-control" name="skill" id="skill">
-                    <option value="alpinizam">alpinizam</option>
-                    <option value="penjanje">penjanje</option>
-                    <option value="speologija">speologija</option>
-                    <option value="skijanje">skijanje</option>
-                    <option value="medicina">medicina</option>
+                <select type="text" class="form-control" name="skill" id="skill" @if(edit){value="@user.skill.toString"}>
+                    @for(skill <- skills){
+                        <option>@skill.toString()</option>
+                    }
                 </select>
             </div>
             <div class="form-group">
                 <label for="role">Rank</label>
-                <select type="text" class="form-control" name="role" id="role">
-                    <option value="clan">clan</option>
-                    <option value="pripravnik">pripravnik</option>
-                    <option value="spasavatelj">spasavatelj</option>
+                <select type="text" class="form-control" name="role" id="role" @if(edit){value="@user.role.toString"}>
+                @for(role <- roles){
+                    <option>@role.toString()</option>
+                }
                 </select>
             </div>
             <div class="form-group">
@@ -314,6 +314,14 @@
       </div>
     </form>
   </div>
+
+    @if(edit) {
+    <script>
+            $('.selDiv option[value="SEL1"]');
+            $('.selDiv option[value="SEL1"]')
+    </script>
+
+    }
 
 
   <script>

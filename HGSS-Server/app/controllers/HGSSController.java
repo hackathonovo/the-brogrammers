@@ -8,6 +8,9 @@ import models.HGSSChatMessage;
 import models.HGSSStation;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.HGSSUser;
+import models.codebook.HGSSActionType;
+import models.codebook.HGSSRole;
+import models.codebook.HGSSSkill;
 import models.geo.HGSSLocation;
 import models.geo.HGSSUserLocation;
 import play.data.DynamicForm;
@@ -137,13 +140,13 @@ public class HGSSController extends Controller {
         station.save();
         location.save();
 
-        HGSSUser user = new HGSSUser(username, password, firstName, lastName, role, skill, location,
-                phoneNumber, availableFrom, availableUntil, station);
+        HGSSUser user = new HGSSUser(username, password, firstName, lastName, HGSSRole.findByRole(role),
+                HGSSSkill.findBySkill(skill), location, phoneNumber, availableFrom, availableUntil, station);
 
         if (HGSSUser.findUserByPhoneNumber(phoneNumber) != null) {
             user.update();
         } else {
-        user.save();
+            user.save();
         }
 
         flash("success", "Korisnik dodan!");
@@ -152,10 +155,10 @@ public class HGSSController extends Controller {
 
     public Result user(Long id){
         if (id == null) {
-            return ok(views.html.registerUser.render(null));
+            return ok(views.html.registerUser.render(null, HGSSRole.findAll(), HGSSSkill.findAll()));
         }
         HGSSUser user = HGSSUser.findUserById(id);
-        return ok(views.html.registerUser.render(user));
+        return ok(views.html.registerUser.render(user, HGSSRole.findAll(), HGSSSkill.findAll()));
     }
 
     public Result setAvailibility(){
@@ -222,7 +225,7 @@ public class HGSSController extends Controller {
     }
 
     public Result action() {
-        return ok(views.html.action.render(null));
+        return ok(views.html.action.render(null,HGSSActionType.findAll()));
     }
 
     @BodyParser.Of(BodyParser.Json.class)
@@ -230,13 +233,13 @@ public class HGSSController extends Controller {
         Logger.debug("----------- Request: initAction -----------");
 
         JsonNode json = request().body().asJson();
+        Logger.debug("Received json: " + json);
+
         String username = json.findPath("username").textValue();
         String title = json.findPath("title").textValue();
         Double longitude = json.findPath("longitude").doubleValue();
         Double latitude = json.findPath("latitude").doubleValue();
         String description = json.findPath("description").textValue();
-
-        Logger.debug("Received json: " + json);
 
         HGSSUser owner = HGSSUser.findUserByUsername(username);
 
@@ -260,8 +263,8 @@ public class HGSSController extends Controller {
             jsonUser.put("username", user.username);
             jsonUser.put("firstName", user.firstName);
             jsonUser.put("lastName", user.lastName);
-            jsonUser.put("skill", user.skill);
-            jsonUser.put("role", user.role);
+            jsonUser.put("skill", user.skill.skill);
+            jsonUser.put("role", user.role.role);
             jsonUsers.add(jsonUser);
         }
 
@@ -304,7 +307,24 @@ public class HGSSController extends Controller {
 
     @BodyParser.Of(BodyParser.Json.class)
     public Result updateAction(Long id) {
-        Logger.debug("----------- Request: updateAction -----------");
+        Logger.debug("----------- Request: updateAction(id) -----------");
+
+        JsonNode json = request().body().asJson();
+        Logger.debug("Received json: " + json);
+
+        String title = json.findPath("title").textValue();
+        Double longitude = json.findPath("longitude").doubleValue();
+        Double latitude = json.findPath("latitude").doubleValue();
+        String description = json.findPath("description").textValue();
+
+        HGSSAction action = HGSSAction.findById(id);
+        action.title = title;
+        action.description = description;
+        action.longitude = longitude;
+        action.latitude = latitude;
+
+        action.update();
+        Logger.debug("Action successfully updated...");
 
         return ok();
     }
@@ -314,26 +334,19 @@ public class HGSSController extends Controller {
     }
 
     public Result codes() {
-        List<String> roles = new ArrayList<>();
-        roles.add("sup1");
-        roles.add("sup2");
-        roles.add("sup3");
-        List<String> skilles = new ArrayList<>();
-        skilles.add("sup1");
-        skilles.add("sup2");
-        skilles.add("sup3");
-        List<String> actionTypes = new ArrayList<>();
-        actionTypes.add("sup1");
-        actionTypes.add("sup2");
-        actionTypes.add("sup3");
-        return ok(views.html.codes.render(roles,skilles,actionTypes));
+        return ok(views.html.codes.render(
+                HGSSRole.findAll(),
+                HGSSSkill.findAll(),
+                HGSSActionType.findAll()));
     }
 
     public Result saveCode() {
         DynamicForm userForm = formFactory.form().bindFromRequest();
         String role = userForm.get("roleInput");
         if (role != null) {
-            redirect(role);
+            HGSSRole hRole = new HGSSRole(role);
+            hRole.save();
+            return redirect(routes.HGSSController.codes());
         }
         String skill = userForm.get("skillInput");
         if (skill != null) {
@@ -344,6 +357,19 @@ public class HGSSController extends Controller {
 
         }
         return badRequest();
+    }
+
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result joinAction() {
+        Logger.debug("----------- Request: joinAction -----------");
+
+        JsonNode json = request().body().asJson();
+        Logger.debug("Received json: " + json);
+
+        String username = json.findPath("username").textValue();
+        Long id = json.findPath("id").longValue();
+
+        return ok();
     }
 
 }

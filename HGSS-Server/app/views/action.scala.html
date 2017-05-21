@@ -1,4 +1,5 @@
-@(action: HGSSAction)
+@import models.codebook.HGSSActionType
+@(action: HGSSAction, actionTypes: List[HGSSActionType])
 @edit = @{action != null}
 
 @main("Akcija") {
@@ -24,6 +25,14 @@
             <input type="text" class="form-control" name="description" id="description" data-validetta="required"
             value="@if(edit){action.description}">
           </div>
+          <div class="form-group">
+            <label for="actionType">Vrsta</label>
+            <select type="text" class="form-control" name="actionType" id="actionType" @if(edit){value="@action.actionType.toString"}>
+            @for(actionType <- actionTypes){
+              <option>@actionType.toString()</option>
+            }
+            </select>
+          </div>
               <div class="form-group">
                 <label for="dostupanOd">Vrijeme</label>
                   <input type="datetime-local" id="dostupanOd" class="form-control" value="@if(edit){user.availableFrom}else{09:00}">
@@ -39,7 +48,7 @@
             </div>
             <ul id="list" class="list-group location-list"></ul>
           </div>
-          <a class="btn btn-default" href="@routes.HGSSController.zones()">Postavi zone</a>
+          <a class="btn btn-default" href="@routes.HGSSController.zones()">Zone</a>
 
           <div class="row">
           <button type="submit" class="btn btn-primary separate">Submit</button>

@@ -1,3 +1,23 @@
+INSERT INTO hgssaction_type (id, action_type) VALUES (1, 'Skijanje');
+INSERT INTO hgssaction_type (id, action_type) VALUES (2, 'Potraga');
+INSERT INTO hgssaction_type (id, action_type) VALUES (3, 'Hitan slucaj');
+
+ALTER SEQUENCE hgssaction_type_seq RESTART WITH 10;
+
+INSERT INTO hgssrole (id, role) VALUES (1, 'clan');
+INSERT INTO hgssrole (id, role) VALUES (2, 'pripravnik');
+INSERT INTO hgssrole (id, role) VALUES (3, 'spasavatelj');
+
+ALTER SEQUENCE hgssrole_seq RESTART WITH 10;
+
+INSERT INTO hgssskill (id, skill) VALUES (1, 'alpinizam');
+INSERT INTO hgssskill (id, skill) VALUES (2, 'penjanje');
+INSERT INTO hgssskill (id, skill) VALUES (3, 'speologija');
+INSERT INTO hgssskill (id, skill) VALUES (4, 'skijanje');
+INSERT INTO hgssskill (id, skill) VALUES (5, 'medicina');
+
+ALTER SEQUENCE hgssskill_seq RESTART WITH 10;
+
 INSERT INTO hgssstation (id, station_name, longitude, latitude)
   VALUES (1, 'Bjelovar', 45.887, 16.854);
 
@@ -9,16 +29,16 @@ VALUES (3, 'Čakovec', 46.392, 16.418);
 
 ALTER SEQUENCE hgssstation_seq RESTART WITH 10;
 
-INSERT INTO hgssuser (id, username, password, first_name, last_name, role, skill, is_available, station_id, phone_number)
-  VALUES (1, 'admin', 'admin', 'Teo', 'Toplak', 'ROLE1', 'SKILL1', FALSE, 1, '385995109450');
-INSERT INTO hgssuser (id, username, password, first_name, last_name, role, skill, is_available, station_id, phone_number)
-  VALUES (2, 'vsako', 'admin', 'Viseslav', 'Sako', 'ROLE2', 'SKILL2', TRUE, 2, '385996811041');
-INSERT INTO hgssuser (id, username, password, first_name, last_name, role, skill, is_available, station_id, phone_number)
-  VALUES (3, 'hbaric', 'admin', 'Hari', 'Baric', 'ROLE3', 'SKILL3', TRUE, 2, '385917306800');
-INSERT INTO hgssuser (id, username, password, first_name, last_name, role, skill, is_available, station_id, phone_number)
-  VALUES (4, 'dpenic', 'admin', 'Domagoj', 'Penic', 'ROLE3', 'SKILL2', FALSE, 3, '385995037013');
-INSERT INTO hgssuser (id, username, password, first_name, last_name, role, skill, is_available, station_id, phone_number)
-  VALUES (5, 'pperic', 'admin', 'Pero', 'Peric', 'ROLE3', 'SKILL1', TRUE, 3, '385995037013');
+INSERT INTO hgssuser (id, username, password, first_name, last_name, role_id, skill_id, is_available, station_id, phone_number)
+  VALUES (1, 'admin', 'admin', 'Teo', 'Toplak', 1, 1, FALSE, 1, '385995109450');
+INSERT INTO hgssuser (id, username, password, first_name, last_name, role_id, skill_id, is_available, station_id, phone_number)
+  VALUES (2, 'vsako', 'admin', 'Viseslav', 'Sako', 2, 3, TRUE, 2, '385996811041');
+INSERT INTO hgssuser (id, username, password, first_name, last_name, role_id, skill_id, is_available, station_id, phone_number)
+  VALUES (3, 'hbaric', 'admin', 'Hari', 'Baric', 2, 2, TRUE, 2, '385917306800');
+INSERT INTO hgssuser (id, username, password, first_name, last_name, role_id, skill_id, is_available, station_id, phone_number)
+  VALUES (4, 'dpenic', 'admin', 'Domagoj', 'Penic', 3, 3, FALSE, 3, '385995037013');
+INSERT INTO hgssuser (id, username, password, first_name, last_name, role_id, skill_id, is_available, station_id, phone_number)
+  VALUES (5, 'pperic', 'admin', 'Pero', 'Peric', 3, 1, TRUE, 3, '385995037013');
 
 ALTER SEQUENCE hgssuser_seq RESTART WITH 10;
 

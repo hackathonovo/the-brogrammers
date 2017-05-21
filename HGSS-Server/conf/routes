@@ -39,6 +39,8 @@ GET     /getactions         controllers.HGSSController.getActionsApp()
 GET     /getaction/:id      controllers.HGSSController.getAction(id:Long)
 POST    /updateLocation     controllers.HGSSController.updateLocation()
 POST    /updateaction/:id   controllers.HGSSController.updateAction(id:Long)
+
 GET     /zones              controllers.HGSSController.zones()
 GET     /codes              controllers.HGSSController.codes()
 POST    /saveCode              controllers.HGSSController.saveCode()
+POST    /joinaction         controllers.HGSSController.joinAction()
