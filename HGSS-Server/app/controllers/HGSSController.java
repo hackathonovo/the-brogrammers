@@ -301,6 +301,7 @@ public class HGSSController extends Controller {
     }
 
     public Result saveAction() {
+        flash("success", "Akcija stvorena!");
         return redirect(routes.Public.landing());
     }
 
