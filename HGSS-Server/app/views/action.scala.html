@@ -111,7 +111,20 @@
     <form id="actionForm" action="" method="post" id="register_form">
       <div class="row separate">
         <div class="col-md-offset-3 col-md-6">
-          <div class="form-group">
+
+          @if(edit) {
+            @if(action.isActive){
+              <div class="row separate">
+                <div class="col-md-offset-4 col-md-2">
+                  <span class="text-center" style="color: green"><i class="fa fa-check"></i> u tijeku</span>
+                </div>
+                <div class="col-md-2">
+                  <a type="button" href="@routes.HGSSController.saveAction()" class="btn btn-default" >zavrsi akciju</a>
+                </div>
+              </div>
+            }
+          }
+          <div class="form-group separate">
             <label for="title">Naslov</label>
             <input type="text" class="form-control" name="title" id="title" data-validetta="required"
             value="@if(edit){@action.title}">
@@ -152,6 +165,7 @@
           <div class="form-group">
           <a class="btn btn-default" href="@routes.HGSSController.zones()">Zone</a>
           </div>
+
 
           <h2 class="separate">Sudjelovali spasioci</h2>
           <table class="table">
