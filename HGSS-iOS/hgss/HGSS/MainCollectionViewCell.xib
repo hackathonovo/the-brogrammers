@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="MainCollectionViewCell" customModule="HGSS" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="162" height="210"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="162" height="210"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kgm-FE-lxS">
+                        <rect key="frame" x="0.0" y="0.0" width="162" height="210"/>
+                    </imageView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="Kgm-FE-lxS" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="0vm-cD-Lma"/>
+                <constraint firstAttribute="bottom" secondItem="Kgm-FE-lxS" secondAttribute="bottom" id="OiB-mS-O95"/>
+                <constraint firstAttribute="trailing" secondItem="Kgm-FE-lxS" secondAttribute="trailing" id="gd0-Hy-p3f"/>
+                <constraint firstItem="Kgm-FE-lxS" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="pGn-qh-ZcT"/>
+            </constraints>
+            <size key="customSize" width="162" height="212"/>
+            <connections>
+                <outlet property="imageView" destination="Kgm-FE-lxS" id="u8M-vd-oeW"/>
+            </connections>
+            <point key="canvasLocation" x="90" y="135"/>
+        </collectionViewCell>
+    </objects>
+</document>
