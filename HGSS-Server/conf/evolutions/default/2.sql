@@ -44,7 +44,9 @@ ALTER SEQUENCE hgssuser_seq RESTART WITH 10;
 INSERT INTO hgssaction (id, title, longitude, latitude, owner_id, description, is_active, action_type_id)
   VALUES (1, 'Title1', 45.323, 15.898, 2, 'Description of Action1', TRUE, 1);
 INSERT INTO hgssaction (id, title, longitude, latitude, owner_id, description, is_active, action_type_id)
-  VALUES (2, 'Title2', 46.323, 16.898, 2, 'Description of Action2', TRUE, 2);
+  VALUES (2, 'Title2', 46.323, 16.898, 3, 'Description of Action2', FALSE, 2);
+INSERT INTO hgssaction (id, title, longitude, latitude, owner_id, description, is_active, action_type_id)
+  VALUES (3, 'Title3', 45.423, 16.798, 4, 'Description of Action3', TRUE, 3);
 
 ALTER SEQUENCE hgssaction_seq RESTART WITH 10;
 
@@ -83,3 +85,6 @@ INSERT INTO hgssaction_hgssuser (hgssaction_id, hgssuser_id) VALUES (1, 3);
 INSERT INTO hgssaction_hgssuser (hgssaction_id, hgssuser_id) VALUES (1, 4);
 INSERT INTO hgssaction_hgssuser (hgssaction_id, hgssuser_id) VALUES (2, 4);
 INSERT INTO hgssaction_hgssuser (hgssaction_id, hgssuser_id) VALUES (2, 5);
+INSERT INTO hgssaction_hgssuser (hgssaction_id, hgssuser_id) VALUES (3, 2);
+INSERT INTO hgssaction_hgssuser (hgssaction_id, hgssuser_id) VALUES (3, 4);
+INSERT INTO hgssaction_hgssuser (hgssaction_id, hgssuser_id) VALUES (3, 5);
