@@ -29,16 +29,16 @@ VALUES (3, 'Čakovec', 46.392, 16.418);
 
 ALTER SEQUENCE hgssstation_seq RESTART WITH 10;
 
-INSERT INTO hgssuser (id, username, password, first_name, last_name, role_id, skill_id, is_available, station_id, phone_number)
-  VALUES (1, 'admin', 'admin', 'Teo', 'Toplak', 1, 1, FALSE, 1, '385995109450');
-INSERT INTO hgssuser (id, username, password, first_name, last_name, role_id, skill_id, is_available, station_id, phone_number)
-  VALUES (2, 'vsako', 'admin', 'Viseslav', 'Sako', 2, 3, TRUE, 2, '385996811041');
-INSERT INTO hgssuser (id, username, password, first_name, last_name, role_id, skill_id, is_available, station_id, phone_number)
-  VALUES (3, 'hbaric', 'admin', 'Hari', 'Baric', 2, 2, TRUE, 2, '385917306800');
-INSERT INTO hgssuser (id, username, password, first_name, last_name, role_id, skill_id, is_available, station_id, phone_number)
-  VALUES (4, 'dpenic', 'admin', 'Domagoj', 'Penic', 3, 3, FALSE, 3, '385995037013');
-INSERT INTO hgssuser (id, username, password, first_name, last_name, role_id, skill_id, is_available, station_id, phone_number)
-  VALUES (5, 'pperic', 'admin', 'Pero', 'Peric', 3, 1, TRUE, 3, '385995037013');
+INSERT INTO hgssuser (id, username, password, first_name, last_name, role_id, skill_id, is_available, station_id, phone_number, location_name, location_long, location_lat)
+  VALUES (1, 'admin', 'admin', 'Teo', 'Toplak', 1, 1, FALSE, 1, '385995109450', 'Delnice', 45.826925, 15.883377);
+INSERT INTO hgssuser (id, username, password, first_name, last_name, role_id, skill_id, is_available, station_id, phone_number, location_name, location_long, location_lat)
+  VALUES (2, 'vsako', 'admin', 'Viseslav', 'Sako', 2, 3, TRUE, 2, '385996811041', 'Delnice', 45.626925, 15.883377);
+INSERT INTO hgssuser (id, username, password, first_name, last_name, role_id, skill_id, is_available, station_id, phone_number, location_name, location_long, location_lat)
+  VALUES (3, 'hbaric', 'admin', 'Hari', 'Baric', 2, 2, TRUE, 2, '385917306800', 'Samobor', 45.826925, 15.683377);
+INSERT INTO hgssuser (id, username, password, first_name, last_name, role_id, skill_id, is_available, station_id, phone_number, location_name, location_long, location_lat)
+  VALUES (4, 'dpenic', 'admin', 'Domagoj', 'Penic', 3, 3, FALSE, 3, '385995037013', 'Samobor', 45.826925, 15.983377);
+INSERT INTO hgssuser (id, username, password, first_name, last_name, role_id, skill_id, is_available, station_id, phone_number, location_name, location_long, location_lat)
+  VALUES (5, 'pperic', 'admin', 'Pero', 'Peric', 3, 1, TRUE, 3, '385995037013', 'Samobor', 45.726925, 15.583377);
 
 ALTER SEQUENCE hgssuser_seq RESTART WITH 10;
 
@@ -78,12 +78,3 @@ INSERT INTO hgsschat_message (id, hgssaction_id, username, message, date)
   VALUES (5, 2, 'hbaric', 'Spasili smo covjeka!', '2015-01-06 12:16:22');
 
 ALTER SEQUENCE hgsschat_message_seq RESTART WITH 20;
-
-INSERT INTO hgssuser_location (id, hgssuser_id, longitude, latitude)
-  VALUES (1, 2, 45.726565, 15.934867);
-INSERT INTO hgssuser_location (id, hgssuser_id, longitude, latitude)
-  VALUES (2, 2, 45.704296, 15.923550);
-INSERT INTO hgssuser_location (id, hgssuser_id, longitude, latitude)
-  VALUES (3, 2, 45.651103, 15.899887);
-INSERT INTO hgssuser_location (id, hgssuser_id, longitude, latitude)
-  VALUES (4, 2, 45.626647, 15.870052);

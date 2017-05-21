@@ -135,17 +135,17 @@
                 var marker;
                 @if(edit) {
                     marker = new google.maps.Marker({
-                        position: {lat: @user.location.latitude, lng: @user.location.longitude},
-                        title: '@user.location.stationName',
+                        position: {lat: @user.locationLat, lng: @user.locationLong},
+                        title: '@user.station.stationName',
                         icon: '@routes.Assets.at("images/home-pin2.png")',
                         map: map,
                         animation: google.maps.Animation.DROP
                     });
-                    marker.setPosition({lat:@user.location.latitude,lng:@user.location.longitude});
+                    marker.setPosition({lat:@user.locationLat,lng:@user.locationLong});
                     marker.setVisible(true);
-                    $('#pac-input').val('@user.location.stationName');
-                    $('#location-lng').val(@user.location.longitude);
-                    $('#location-lat').val(@user.location.latitude);
+                    $('#pac-input').val('@user.station.stationName');
+                    $('#location-lng').val(@user.locationLong);
+                    $('#location-lat').val(@user.locationLat);
                 }
                 var input = document.getElementById('pac-input');
                 var searchBox = new google.maps.places.SearchBox(input);
@@ -283,9 +283,9 @@
           <label for="places">Lokacije</label>
           <div class="input-group">
             <input type="text" id="pac-input" class="form-control" name="location" placeholder="Radno mjesto, stan"
-            value="@if(edit){@user.location}"/>
-              <input type="hidden" class="form-control" name="location-lng" id="location-lng" value="@if(edit){@user.location.longitude}">
-              <input type="hidden" class="form-control" name="location-lat" id="location-lat" value="@if(edit){@user.location.latitude}">
+            value="@if(edit){@user.locationName}"/>
+              <input type="hidden" class="form-control" name="location-lng" id="location-lng" value="@if(edit){@user.locationLong}">
+              <input type="hidden" class="form-control" name="location-lat" id="location-lat" value="@if(edit){@user.locationLat}">
             <span class="input-group-addon">
                 <span class="glyphicon glyphicon-search"></span>
             </span>

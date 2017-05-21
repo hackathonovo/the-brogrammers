@@ -119,7 +119,9 @@ create table hgssuser (
   password                      varchar(255),
   first_name                    varchar(255),
   last_name                     varchar(255),
-  location_id                   bigint,
+  location_name                 varchar(255),
+  location_long                 float,
+  location_lat                  float,
   available_from                varchar(255),
   available_until               varchar(255),
   is_available                  boolean,
@@ -181,9 +183,6 @@ create index ix_hgsschat_message_hgssaction_id on hgsschat_message (hgssaction_i
 alter table hgsslocation add constraint fk_hgsslocation_hgsszone_id foreign key (hgsszone_id) references hgsszone (id) on delete restrict on update restrict;
 create index ix_hgsslocation_hgsszone_id on hgsslocation (hgsszone_id);
 
-alter table hgssuser add constraint fk_hgssuser_location_id foreign key (location_id) references hgssstation (id) on delete restrict on update restrict;
-create index ix_hgssuser_location_id on hgssuser (location_id);
-
 alter table hgssuser add constraint fk_hgssuser_role_id foreign key (role_id) references hgssrole (id) on delete restrict on update restrict;
 create index ix_hgssuser_role_id on hgssuser (role_id);
 
@@ -234,9 +233,6 @@ drop index if exists ix_hgsschat_message_hgssaction_id;
 
 alter table if exists hgsslocation drop constraint if exists fk_hgsslocation_hgsszone_id;
 drop index if exists ix_hgsslocation_hgsszone_id;
-
-alter table if exists hgssuser drop constraint if exists fk_hgssuser_location_id;
-drop index if exists ix_hgssuser_location_id;
 
 alter table if exists hgssuser drop constraint if exists fk_hgssuser_role_id;
 drop index if exists ix_hgssuser_role_id;

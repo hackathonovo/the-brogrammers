@@ -58,7 +58,7 @@ public class HGSSController extends Controller {
 
         JsonNode json = request().body().asJson();
 
-        Logger.debug("Recieved json: " + json);
+        Logger.debug("Received json: " + json);
 
         String username = json.findPath("username").textValue();
         Double longitude = json.findPath("longitude").doubleValue();
@@ -136,12 +136,13 @@ public class HGSSController extends Controller {
         Double locationLng = Double.parseDouble(userForm.get("location-lng"));
         Double locationLat = Double.parseDouble(userForm.get("location-lat"));
         HGSSStation station = new HGSSStation(stationName, stationLng, stationLat);
-        HGSSStation location = new HGSSStation(locationName, locationLng, locationLat);
+        HGSSUserLocation location = new HGSSUserLocation(locationLng, locationLat);
         station.save();
         location.save();
 
         HGSSUser user = new HGSSUser(username, password, firstName, lastName, HGSSRole.findByRole(role),
-                HGSSSkill.findBySkill(skill), location, phoneNumber, availableFrom, availableUntil, station);
+                HGSSSkill.findBySkill(skill), locationLng, locationLat, phoneNumber, availableFrom, availableUntil, station,
+                locationName);
 
         if (HGSSUser.findUserByPhoneNumber(phoneNumber) != null) {
             user.update();
@@ -270,6 +271,7 @@ public class HGSSController extends Controller {
             jsonUser.put("lastName", user.lastName);
             jsonUser.put("skill", user.skill.skill);
             jsonUser.put("role", user.role.role);
+            jsonUser.put("phoneNumber", user.phoneNumber);
             jsonUsers.add(jsonUser);
         }
 
