@@ -1,18 +1,15 @@
 package models.geo;
 
 import com.avaje.ebean.Model;
+import models.HGSSUser;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by Hari on 20.05.17..
  */
 @Entity
 public class HGSSUserLocation extends Model{
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

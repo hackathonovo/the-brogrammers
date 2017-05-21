@@ -1,6 +1,7 @@
 package models;
 
 import com.avaje.ebean.Model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import models.codebook.HGSSRole;
 import models.codebook.HGSSSkill;
 import models.geo.HGSSUserLocation;
@@ -33,8 +34,10 @@ public class HGSSUser extends Model {
     public String lastName;
 
     //living location
-    @ManyToOne(fetch = FetchType.LAZY)
-    public HGSSStation location;
+    public String locationName;
+
+    public Double locationLong;
+    public Double locationLat;
 
     //time available from
     public String availableFrom;
@@ -59,8 +62,8 @@ public class HGSSUser extends Model {
     public HGSSStation station;
 
     public HGSSUser(String username, String password, String firstName, String lastName,
-                    HGSSRole role, HGSSSkill skill, HGSSStation location, String phoneNumber,
-                    String availableFrom, String availableUntil, HGSSStation station){
+                    HGSSRole role, HGSSSkill skill, Double locationLong, Double locationLat, String phoneNumber,
+                    String availableFrom, String availableUntil, HGSSStation station, String locationName){
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -68,10 +71,12 @@ public class HGSSUser extends Model {
         this.role = role;
         this.skill = skill;
         this.station = station;
-        this.location = location;
+        this.locationLong = locationLong;
+        this.locationLat = locationLat;
         this.phoneNumber = phoneNumber;
         this.availableFrom = availableFrom;
         this.availableUntil = availableUntil;
+        this.locationName = locationName;
     }
 
 
