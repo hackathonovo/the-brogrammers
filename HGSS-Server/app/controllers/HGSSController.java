@@ -432,5 +432,30 @@ public class HGSSController extends Controller {
         return ok();
     }
 
+    public Result listMessages(Long id){
+        Logger.debug("----------- Request: listMessages(id) -----------");
+        Logger.debug("Received id: " + id);
+
+        HGSSAction action = HGSSAction.findById(id);
+        List<HGSSChatMessage> messages = action.messages;
+
+        JsonNode json = Json.toJson(messages);
+
+        Logger.debug("Response json: " + json);
+
+        return ok(json);
+    }
+    
+    public Result closeAction(Long id){
+        Logger.debug("----------- Request: closeAction(id) -----------");
+        Logger.debug("Received id: " + id);
+
+        HGSSAction action = HGSSAction.findById(id);
+        action.isActive = false;
+
+        action.update();
+
+        return ok();
+    }
 
 }
