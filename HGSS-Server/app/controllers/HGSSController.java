@@ -296,5 +296,12 @@ public class HGSSController extends Controller {
 
     }
 
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result updateAction(Long id) {
+        Logger.debug("----------- Request: updateAction -----------");
+
+        return ok();
+    }
+
 
 }
