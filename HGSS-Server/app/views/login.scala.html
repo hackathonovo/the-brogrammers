@@ -2,8 +2,9 @@
 
 @main("Login") {
 
-  <div class="window"><h1 class="text-center horizontalLine"><span>Login</span></h1>
+  <div class="window">
     <div class="col-4-md col-md-offset-5">
+      <img src="http://www.gss.hr/css/images/gss-logo.png" width="180" height="180">
         @helper.form(action=routes.Public.login2()) {
           <fieldset class="separate">
             @helper.inputText(userForm("username"), '_showConstraints -> false, '_showErrors -> false)

@@ -41,4 +41,5 @@ POST    /sendlocation       controllers.HGSSController.updateLocation()
 GET     /charts             controllers.HGSSController.charts()
 POST    /updateaction/:id   controllers.HGSSController.updateAction(id:Long)
 POST    /joinaction         controllers.HGSSController.joinAction()
+POST    /saveMessage/:id    controllers.HGSSController.saveMessage(id:Long)
 

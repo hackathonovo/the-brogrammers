@@ -21,6 +21,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import play.data.FormFactory;
@@ -315,11 +316,43 @@ public class HGSSController extends Controller {
 
     public Result charts(){
         List<HGSSAction> actions = HGSSAction.findAll();
+        Logger.debug("" + actions.size());
+        List<Integer> sizes = new ArrayList<>();
 
-        return ok(views.html.charts.render(actions));
+        for(HGSSAction a: actions){
+            Logger.debug("" + a.users.size());
+            sizes.add(a.users.size());
+        }
+
+        return ok(views.html.charts.render(actions,sizes));
 
     }
 
+
+    public Result saveMessage(Long id){
+        Logger.debug("----------- Request: saveMessage(id) -----------");
+
+        JsonNode json = request().body().asJson();
+        Logger.debug("Received json: " + json);
+
+        HGSSAction action = HGSSAction.findById(id);
+
+        if(action == null){
+            Logger.debug("Return: " + UNKNOWN_USER_STATUS);
+            return status(UNKNOWN_USER_STATUS);
+        }
+
+        String username = json.findPath("username").textValue();
+        String message = json.findPath("message").textValue();
+
+        HGSSChatMessage msg = new HGSSChatMessage(username,message,new Date());
+
+        action.messages.add(msg);
+
+        action.update();
+
+        return ok();
+    }
 
     @BodyParser.Of(BodyParser.Json.class)
     public Result updateAction(Long id) {
