@@ -1,5 +1,16 @@
 .categoryButton {
     font-size: 3em;
-    margin: 40px;
-    text-decoration: none; !important;
+    margin: 15px;
+    width: 250px !important;
+    height: 150px !important;
+    vertical-align: middle;
+    border-radius: 20px;
+
+}
+
+.logoHGSS {
+    width: 210px;
+    height: 200px;
+    margin: auto;
+
 }

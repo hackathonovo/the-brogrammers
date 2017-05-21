@@ -1,0 +1,64 @@
+@import models.codebook.HGSSRole
+@import models.codebook.HGSSSkill
+@import models.codebook.HGSSActionType
+@(roles: List[HGSSRole], skills: List[HGSSSkill], actionTypes: List[HGSSActionType])
+
+@main("Sifranici") {
+
+  <div class="window">
+    <form action="@routes.HGSSController.saveCode()" method="post">
+      <div class="row separate">
+        <div class="col-md-offset-3 col-md-6">
+          <div class="row separate">
+            <div class="col-md-4">
+              <select type="text" class="form-control" name="roles" id="roles">
+                @for(role <- roles) {
+                  <option>@role.toString</option>
+                }
+              </select>
+            </div>
+            <div class="col-md-4">
+              <input type="text" class="form-control" name="roleInput" id="roleInput" placeholder="Nova rola">
+            </div>
+            <div class="col-md-4">
+              <button class="btn btn-primary"><i class="fa fa-plus"></i></button>
+            </div>
+          </div>
+          <div class="row separate">
+            <div class="col-md-4">
+              <select type="text" class="form-control" name="skills" id="skills">
+              @for(skill <- skills) {
+                <option>@skill.toString</option>
+              }
+              </select>
+            </div>
+            <div class="col-md-4">
+              <input type="text" class="form-control" name="skillInput" id="skillInput" placeholder="Novo iskustvo">
+            </div>
+            <div class="col-md-4">
+              <button class="btn btn-primary"><i class="fa fa-plus"></i></button>
+            </div>
+          </div>
+          <div class="row separate">
+            <div class="col-md-4">
+              <select type="text" class="form-control" name="actionTypes" id="actionTypes">
+              @for(actionType <- actionTypes) {
+                <option>@actionType.toString</option>
+              }
+              </select>
+            </div>
+            <div class="col-md-4">
+              <input type="text" class="form-control" name="actionTypeInput" id="actionTypeInput" placeholder="Nova vrsta akcije">
+            </div>
+            <div class="col-md-4">
+              <button class="btn btn-primary"><i class="fa fa-plus"></i></button>
+            </div>
+          </div>
+
+            <a href="@routes.Public.landing()" class="btn btn-primary separate"><i class="fa fa-arrow-left"></i> Back</a>
+        </div>
+      </div>
+    </form>
+  </div>
+
+}

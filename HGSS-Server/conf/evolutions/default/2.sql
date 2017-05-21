@@ -1,3 +1,23 @@
+INSERT INTO hgssaction_type (id, action_type) VALUES (1, 'Skijanje');
+INSERT INTO hgssaction_type (id, action_type) VALUES (2, 'Potraga');
+INSERT INTO hgssaction_type (id, action_type) VALUES (3, 'Hitan slucaj');
+
+ALTER SEQUENCE hgssaction_type_seq RESTART WITH 10;
+
+INSERT INTO hgssrole (id, role) VALUES (1, 'clan');
+INSERT INTO hgssrole (id, role) VALUES (2, 'pripravnik');
+INSERT INTO hgssrole (id, role) VALUES (3, 'spasavatelj');
+
+ALTER SEQUENCE hgssrole_seq RESTART WITH 10;
+
+INSERT INTO hgssskill (id, skill) VALUES (1, 'alpinizam');
+INSERT INTO hgssskill (id, skill) VALUES (2, 'penjanje');
+INSERT INTO hgssskill (id, skill) VALUES (3, 'speologija');
+INSERT INTO hgssskill (id, skill) VALUES (4, 'skijanje');
+INSERT INTO hgssskill (id, skill) VALUES (5, 'medicina');
+
+ALTER SEQUENCE hgssskill_seq RESTART WITH 10;
+
 INSERT INTO hgssstation (id, station_name, longitude, latitude)
   VALUES (1, 'Bjelovar', 45.887, 16.854);
 
@@ -9,23 +29,25 @@ VALUES (3, 'Čakovec', 46.392, 16.418);
 
 ALTER SEQUENCE hgssstation_seq RESTART WITH 10;
 
-INSERT INTO hgssuser (id, username, password, first_name, last_name, role, skill, is_available, station_id)
-  VALUES (1, 'admin', 'admin', 'Teo', 'Toplak', 'ROLE1', 'SKILL1', FALSE, 1);
-INSERT INTO hgssuser (id, username, password, first_name, last_name, role, skill, is_available, station_id)
-  VALUES (2, 'vsako', 'admin', 'Viseslav', 'Sako', 'ROLE2', 'SKILL2', TRUE, 2);
-INSERT INTO hgssuser (id, username, password, first_name, last_name, role, skill, is_available, station_id)
-  VALUES (3, 'hbaric', 'admin', 'Hari', 'Baric', 'ROLE3', 'SKILL3', TRUE, 2);
-INSERT INTO hgssuser (id, username, password, first_name, last_name, role, skill, is_available, station_id)
-  VALUES (4, 'dpenic', 'admin', 'Domagoj', 'Penic', 'ROLE3', 'SKILL2', FALSE, 3);
-INSERT INTO hgssuser (id, username, password, first_name, last_name, role, skill, is_available, station_id)
-  VALUES (5, 'pperic', 'admin', 'Pero', 'Peric', 'ROLE3', 'SKILL1', TRUE, 3);
+INSERT INTO hgssuser (id, username, password, first_name, last_name, role_id, skill_id, is_available, station_id, phone_number, location_name, location_long, location_lat)
+  VALUES (1, 'admin', 'admin', 'Teo', 'Toplak', 1, 1, FALSE, 1, '385995109450', 'Delnice', 45.826925, 15.883377);
+INSERT INTO hgssuser (id, username, password, first_name, last_name, role_id, skill_id, is_available, station_id, phone_number, location_name, location_long, location_lat)
+  VALUES (2, 'vsako', 'admin', 'Viseslav', 'Sako', 2, 3, TRUE, 2, '385996811041', 'Delnice', 45.626925, 15.883377);
+INSERT INTO hgssuser (id, username, password, first_name, last_name, role_id, skill_id, is_available, station_id, phone_number, location_name, location_long, location_lat)
+  VALUES (3, 'hbaric', 'admin', 'Hari', 'Baric', 2, 2, TRUE, 2, '385917306800', 'Samobor', 45.826925, 15.683377);
+INSERT INTO hgssuser (id, username, password, first_name, last_name, role_id, skill_id, is_available, station_id, phone_number, location_name, location_long, location_lat)
+  VALUES (4, 'dpenic', 'admin', 'Domagoj', 'Penic', 3, 3, FALSE, 3, '385995037013', 'Samobor', 45.826925, 15.983377);
+INSERT INTO hgssuser (id, username, password, first_name, last_name, role_id, skill_id, is_available, station_id, phone_number, location_name, location_long, location_lat)
+  VALUES (5, 'pperic', 'admin', 'Pero', 'Peric', 3, 1, TRUE, 3, '385995037013', 'Samobor', 45.726925, 15.583377);
 
 ALTER SEQUENCE hgssuser_seq RESTART WITH 10;
 
-INSERT INTO hgssaction (id, title, longitude, latitude, owner_id, description, is_active)
-  VALUES (1, 'Title1', 45.323, 15.898, 2, 'Description of Action1', TRUE);
-INSERT INTO hgssaction (id, title, longitude, latitude, owner_id, description, is_active)
-  VALUES (2, 'Title2', 46.323, 16.898, 2, 'Description of Action2', TRUE);
+INSERT INTO hgssaction (id, title, longitude, latitude, owner_id, description, is_active, action_type_id)
+  VALUES (1, 'Title1', 45.323, 15.898, 2, 'Description of Action1', TRUE, 1);
+INSERT INTO hgssaction (id, title, longitude, latitude, owner_id, description, is_active, action_type_id)
+  VALUES (2, 'Title2', 46.323, 16.898, 3, 'Description of Action2', FALSE, 2);
+INSERT INTO hgssaction (id, title, longitude, latitude, owner_id, description, is_active, action_type_id)
+  VALUES (3, 'Title3', 45.423, 16.798, 4, 'Description of Action3', TRUE, 3);
 
 ALTER SEQUENCE hgssaction_seq RESTART WITH 10;
 
@@ -34,12 +56,46 @@ INSERT INTO hgsszone (id, hgssaction_id) VALUES (2, 2);
 
 ALTER SEQUENCE hgsszone_seq RESTART WITH 10;
 
-INSERT INTO hgsslocation (hgsszone_id, longitude, latitude) VALUES (1, 46.392, 16.418);
-INSERT INTO hgsslocation (hgsszone_id, longitude, latitude) VALUES (1, 46.592, 16.418);
-INSERT INTO hgsslocation (hgsszone_id, longitude, latitude) VALUES (1, 46.592, 16.218);
-INSERT INTO hgsslocation (hgsszone_id, longitude, latitude) VALUES (1, 46.392, 16.218);
+INSERT INTO hgsslocation (id, hgsszone_id, latitude, longitude) VALUES (1, 1, 46.392, 16.418);
+INSERT INTO hgsslocation (id, hgsszone_id, latitude, longitude) VALUES (2, 1, 46.592, 16.418);
+INSERT INTO hgsslocation (id, hgsszone_id, latitude, longitude) VALUES (3, 1, 46.592, 16.218);
+INSERT INTO hgsslocation (id, hgsszone_id, latitude, longitude) VALUES (4, 1, 46.392, 16.218);
 
-INSERT INTO hgsslocation (hgsszone_id, longitude, latitude) VALUES (2, 45.787, 16.754);
-INSERT INTO hgsslocation (hgsszone_id, longitude, latitude) VALUES (2, 45.987, 16.754);
-INSERT INTO hgsslocation (hgsszone_id, longitude, latitude) VALUES (2, 45.987, 16.554);
-INSERT INTO hgsslocation (hgsszone_id, longitude, latitude) VALUES (2, 45.787, 16.554);
+INSERT INTO hgsslocation (id, hgsszone_id, latitude, longitude) VALUES (5, 2, 45.787, 16.754);
+INSERT INTO hgsslocation (id, hgsszone_id, latitude, longitude) VALUES (6, 2, 45.987, 16.754);
+INSERT INTO hgsslocation (id, hgsszone_id, latitude, longitude) VALUES (7, 2, 45.987, 16.554);
+INSERT INTO hgsslocation (id, hgsszone_id, latitude, longitude) VALUES (8, 2, 45.787, 16.554);
+
+ALTER SEQUENCE hgsslocation_seq RESTART WITH 20;
+
+INSERT INTO hgsschat_message (id, hgssaction_id, username, message, date)
+    VALUES (1, 1, 'vsako', 'Bok svima, nova akcija!', '2011-05-16 15:36:38');
+INSERT INTO hgsschat_message (id, hgssaction_id, username, message, date)
+  VALUES (2, 1, 'pperic', 'Opet neki Ceh...', '2012-12-12 10:01:34');
+INSERT INTO hgsschat_message (id, hgssaction_id, username, message, date)
+  VALUES (3, 2, 'pperic', 'Meni se ne da fakat.', '2012-05-16 22:44:17');
+INSERT INTO hgsschat_message (id, hgssaction_id, username, message, date)
+  VALUES (4, 2, 'hbaric', 'Aj zovi ove iz Varazdina', '2015-06-26 15:36:38');
+INSERT INTO hgsschat_message (id, hgssaction_id, username, message, date)
+  VALUES (5, 2, 'hbaric', 'Spasili smo covjeka!', '2015-01-06 12:16:22');
+
+ALTER SEQUENCE hgsschat_message_seq RESTART WITH 20;
+
+INSERT INTO hgssuser_location (id, hgssuser_id, latitude, longitude) VALUES (1, 2, 45.787, 16.754);
+INSERT INTO hgssuser_location (id, hgssuser_id, latitude, longitude) VALUES (2, 2, 45.887, 16.754);
+INSERT INTO hgssuser_location (id, hgssuser_id, latitude, longitude) VALUES (3, 2, 45.987, 16.754);
+INSERT INTO hgssuser_location (id, hgssuser_id, latitude, longitude) VALUES (4, 2, 46.087, 16.754);
+INSERT INTO hgssuser_location (id, hgssuser_id, latitude, longitude) VALUES (5, 2, 46.287, 16.754);
+INSERT INTO hgssuser_location (id, hgssuser_id, latitude, longitude) VALUES (6, 2, 46.387, 16.754);
+
+
+ALTER SEQUENCE hgssuser_location_seq RESTART WITH 20;
+
+INSERT INTO hgssaction_hgssuser (hgssaction_id, hgssuser_id) VALUES (1, 2);
+INSERT INTO hgssaction_hgssuser (hgssaction_id, hgssuser_id) VALUES (1, 3);
+INSERT INTO hgssaction_hgssuser (hgssaction_id, hgssuser_id) VALUES (1, 4);
+INSERT INTO hgssaction_hgssuser (hgssaction_id, hgssuser_id) VALUES (2, 4);
+INSERT INTO hgssaction_hgssuser (hgssaction_id, hgssuser_id) VALUES (2, 5);
+INSERT INTO hgssaction_hgssuser (hgssaction_id, hgssuser_id) VALUES (3, 2);
+INSERT INTO hgssaction_hgssuser (hgssaction_id, hgssuser_id) VALUES (3, 4);
+INSERT INTO hgssaction_hgssuser (hgssaction_id, hgssuser_id) VALUES (3, 5);

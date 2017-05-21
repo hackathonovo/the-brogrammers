@@ -1,4 +1,5 @@
-@(action: HGSSAction)
+@import models.codebook.HGSSActionType
+@(action: HGSSAction, actionTypes: List[HGSSActionType])
 @edit = @{action != null}
 
 @main("Akcija") {
@@ -15,98 +16,11 @@
   @*jscolor*@
   <script src="@routes.Assets.at("javascripts/jscolor.min.js")" type="text/javascript"></script>
 
-  <div class="window">
-    <form id="actionForm" action="" method="post" id="register_form">
-      <div class="row separate">
-        <div class="col-md-offset-3 col-md-6">
-          <div class="form-group">
-            <label for="description">Opis</label>
-            <input type="text" class="form-control" name="description" id="description" data-validetta="required"
-            value="@if(edit){action.description}">
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="dostupanOd">Dostupan od</label>
-                <div class="input-group clockpicker">
-                  <input type="text" id="dostupanOd" class="form-control" value="@if(edit){user.availableFrom}else{09:00}">
-                  <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-time"></span>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="dostupanDo">Dostupan do</label>
-                <div class="input-group clockpicker">
-                  <input type="text" id="dostupanDo" class="form-control" value="@if(edit){user.availableUntil}else{17:00}">
-                  <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-time"></span>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="places">Lokacije</label>
-            <div class="input-group">
-              <input type="text" id="pac-input" class="form-control" name="location" placeholder="Radno mjesto, stan"
-              value="@if(edit){user.location}"/>
-              <span class="input-group-addon">
-                <span class="glyphicon glyphicon-search"></span>
-              </span>
-            </div>
-            <ul id="list" class="list-group location-list"></ul>
-          </div>
-          <div class="row">
-            <div id="map"></div>
-            <div id="infowindow-content">
-              <img src="" width="16" height="16" id="place-icon">
-              <span id="place-name" class="title"></span><br>
-              <span id="place-address"></span>
-            </div>
-            <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOVsLLDx5MQmY4CUaD9-kt5Dqw5tPjJV4&libraries=drawing&callback=initMap">
-            </script>
-          </div>
-          <div class="polygonPanel">
-
-            <button id="polyColor" class="btn btn-default jscolor {valueElement:null,value:'66ccff'}">
-              Boja zone
-            </button>
-            <button id="okColor" class="btn btn-default">Ok</button>
-          </div>
-
-
-          <button type="submit" class="btn btn-primary separate">Submit</button>
-
-        </div>
-      </div>
-    </form>
-  </div>
-
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOVsLLDx5MQmY4CUaD9-kt5Dqw5tPjJV4&libraries=places&callback=initAutocomplete"
+  async defer></script>
 
   <script>
-
-            var polyArray = [];
-            var base;
-            var polyColors = [];
-            var currentColor;
-
-
-          function getRandomColor() {
-            var letters = '0123456789ABCDEF';
-            var color = '#';
-            for (var i = 0; i < 6; i++ ) {
-              color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
-          }
-          // This example requires the Places library. Include the libraries=places
-          // parameter when you first load the API. For example:
-          // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-          function initMap() {
+          function initAutocomplete() {
 
             var map = new google.maps.Map(document.getElementById("map"), {
               zoom: 7,
@@ -114,117 +28,174 @@
               mapTypeId: google.maps.MapTypeId.ROADMAP
             });
 
-            var drawingManager = new google.maps.drawing.DrawingManager({
-              drawingControl: true,
-              drawingControlOptions: {
-                position: google.maps.ControlPosition.TOP_CENTER,
-                drawingModes: ['marker', 'polygon']
-              },
-              markerOptions: {
-                icon: '@routes.Assets.at("images/pointer-gss.png")',
-                draggable: true
-              },
-              polygonOptions: {
-                editable: true,
-                fillColor: getRandomColor(),
-                opacity: 0.2
-              }
-            });
-            drawingManager.setMap(map);
-
-            google.maps.event.addListener(drawingManager, 'overlaycomplete', function(event) {
-              if (event.type == google.maps.drawing.OverlayType.POLYGON) {
-                //Add 'event.overlay', which is Circle, to array
-                polyArray.push(event.overlay);
-                polyColors.push(currentColor);
-                alert(event.overlay.getPath().length);
-              }
-              if (event.type == google.maps.drawing.OverlayType.MARKER) {
-                base = event.overlay;
-              }
+            var map_infowindow = new google.maps.InfoWindow({
+              content: 'map_infowindow'
             });
 
-            $('#okColor').click(function () {
-              drawingManager.setMap(null);
-              drawingManager = new google.maps.drawing.DrawingManager({
-                drawingControl: true,
-                drawingControlOptions: {
-                  position: google.maps.ControlPosition.TOP_CENTER,
-                  drawingModes: ['marker', 'polygon']
-                },
-                markerOptions: {
+            var marker;
+            @if(edit) {
+            marker = new google.maps.Marker({
+              position: {lat: @action.latitude, lng: @action.longitude},
+              title: '@action.title',
+              icon: '@routes.Assets.at("images/home-pin2.png")',
+              map: map,
+              animation: google.maps.Animation.DROP
+            });
+            marker.setPosition({lat:@action.latitude,lng:@action.longitude});
+            marker.setVisible(true);
+            $('#pac-input').val('@action.title');
+            $('#location-lng').val(@action.longitude);
+            $('#location-lat').val(@action.latitude);
+            }
+            var input = document.getElementById('pac-input');
+            var searchBox = new google.maps.places.SearchBox(input);
+            searchBox.addListener('places_changed', function () {
+              if(marker!=null) {
+                marker.setMap(null);
+              }
+              var places = searchBox.getPlaces();
+              if (places.length == 1) {
+                var place = places[0];
+                marker = new google.maps.Marker({
+                  position: place.location,
+                  title: place.name,
                   icon: '@routes.Assets.at("images/pointer-gss.png")',
-                  draggable: true
-                },
-                polygonOptions: {
-                  editable: true,
-                  fillColor: $('#polyColor').css("background-color"),
-                  opacity: 0.2
-                }
-              });
-              drawingManager.setMap(map);
-              currentColor = $('#polyColor').css("background-color");
-            });
-
-          }
-
-            $('#actionForm').submit(function(e) {
-              e.preventDefault();
-              e.returnValue = false;
-              alert(polyColors.length);
-              var polys = [];
-              for(var index=0;index<polyArray.length;index++) {
-                alert(polyColors[index]);
+                  map: map,
+                  animation: google.maps.Animation.DROP
+                });
+                marker.setPosition(place.geometry.location);
+                marker.setVisible(true);
+                $('#pac-input').val(place.name);
+                $('#location-lng').val(marker.position.lng());
+                $('#location-lat').val(marker.position.lat());
+              } else {
+                alert("Odaberi samo jednu lokaciju!");
+                return;
               }
-
-
-//              $.ajax({
-//                type: 'POST',
-//                url: '/saveMap',
-//                data: JSON.stringify(polyArray),
-//                headers: {
-//                  'Content-Type': 'application/json'
-//                },
-//                success: function() { // your success handler
-//                  alert("nice!")
-//                },
-//                error: function() { // your error handler
-//                  alert("bed :(((")
-//                }
-//              });
-
-
-              @*var $form = $(this);*@
-              @*// this is the important part. you want to submit*@
-              @*// the form but only after the ajax call is completed*@
-              @*$.ajax({*@
-              @*type: 'post',*@
-              @*url: '@routes.HGSSController.saveAction()',*@
-              @*context: $form, // context will be "this" in your handlers*@
-              @*success: function() { // your success handler*@
-              @*},*@
-              @*error: function() { // your error handler*@
-              @*},*@
-              @*complete: function() {*@
-              @*// make sure that you are no longer handling the submit event; clear handler*@
-              @*this.off('submit');*@
-              @*// actually submit the form*@
-              @*this.submit();*@
-              @*}*@
-              @*});*@
             });
 
+            @if(edit) {
+              var markers = [
+                @for(user <- action.users) {
+                  @for(location <- user.currentLocations) {
+                    {
+                      "name": '@user.firstName',
+                      "coords": "@location.latitude,@location.longitude"
+                    },
+                  }
+                }
+              ];
+
+            $(markers).each(function() {
+
+              // console.log(typeof(this.p));
+
+              var lat_lon = this.coords.split(',');
+              var icon = '@routes.Assets.at("images/pointer-gss.png")';
+
+              var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(lat_lon[0],lat_lon[1]),
+                title: this.name,
+                desc: this.desc,
+                icon: icon,
+                map: map
+              });
+              marker.setVisible(true);
+            });
+                      };
+
+            }
   </script>
 
+  <div class="window">
+    <form id="actionForm" action="" method="post" id="register_form">
+      <div class="row separate">
+        <div class="col-md-offset-3 col-md-6">
 
-  <script>
-          $("#register_form").validetta({
-            realTime: true,
-            display : 'inline',
-            errorTemplateClass : 'validetta-inline'
-          });
+          @if(edit) {
+            @if(action.isActive){
+              <div class="row separate">
+                <div class="col-md-offset-4 col-md-2">
+                  <span class="text-center" style="color: green"><i class="fa fa-check"></i> u tijeku</span>
+                </div>
+                <div class="col-md-2">
+                  <a type="button" href="@routes.HGSSController.saveAction()" class="btn btn-default" >zavrsi akciju</a>
+                </div>
+              </div>
+            }
+          }
+          <div class="form-group separate">
+            <label for="title">Naslov</label>
+            <input type="text" class="form-control" name="title" id="title" data-validetta="required"
+            value="@if(edit){@action.title}">
+          </div>
+          <div class="form-group">
+            <label for="description">Opis</label>
+            <input type="text" class="form-control" name="description" id="description" data-validetta="required"
+            value="@if(edit){@action.description}">
+          </div>
+          <div class="form-group">
+            <label for="actionType">Vrsta</label>
+            <select type="text" class="form-control" name="actionType" id="actionType" @if(edit){value="@action.actionType.toString"}>
+            @for(actionType <- actionTypes){
+              <option>@actionType.toString()</option>
+            }
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="pac-input">Mjesto dogadaja</label>
+          <div class="input-group">
+            <input type="text" id="pac-input" class="form-control" name="location" value="@if(edit){@action.title}"/>
+            <input type="hidden" class="form-control" name="location-lng" id="location-lng" value="@if(edit){@action.longitude}">
+            <input type="hidden" class="form-control" name="location-lat" id="location-lat" value="@if(edit){@action.latitude}">
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-search"></span>
+            </span>
+          </div>
+          </div>
+          <div class="row">
+              <div id="map"></div>
+              <div id="infowindow-content">
+                <img src="" width="16" height="16" id="place-icon">
+                <span id="place-name" class="title"></span><br>
+                <span id="place-address"></span>
+            </div>
+          </div>
 
-  </script>
+          <div class="form-group">
+          <a class="btn btn-default" href="@routes.HGSSController.zones()">Zone</a>
+          </div>
+
+
+          <h2 class="separate">Sudjelovali spasioci</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Ime</th>
+                <th>Prezime</th>
+                <th>Uloga</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for(user <- action.users) {
+              <tr>
+                <td>@user.firstName</td>
+                <td>@user.lastName</td>
+                <td>@user.role</td>
+              </tr>
+              }
+              </tbody>
+          </table>
+
+          <div class="row">
+          <button type="submit" class="btn btn-primary separate">Ok</button>
+          </div>
+
+        </div>
+      </div>
+    </form>
+  </div>
+
 
   @*activate all tooltips*@
   <script>

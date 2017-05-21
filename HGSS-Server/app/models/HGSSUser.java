@@ -1,9 +1,10 @@
 package models;
 
 import com.avaje.ebean.Model;
-import com.avaje.ebean.QueryEachConsumer;
-import com.avaje.ebeaninternal.server.lib.util.Str;
-import models.geo.HGSSLocation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import models.codebook.HGSSRole;
+import models.codebook.HGSSSkill;
+import models.geo.HGSSUserLocation;
 import play.data.validation.Constraints;
 import play.libs.F;
 
@@ -32,11 +33,11 @@ public class HGSSUser extends Model {
     public String firstName;
     public String lastName;
 
-    public String role;
-    public String skill;
-
     //living location
-    public String location;
+    public String locationName;
+
+    public Double locationLong;
+    public Double locationLat;
 
     //time available from
     public String availableFrom;
@@ -46,17 +47,23 @@ public class HGSSUser extends Model {
 
     public Boolean isAvailable;
 
+    @OneToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    public List<HGSSUserLocation> currentLocations;
+
     public String phoneNumber;
 
-    @OneToMany (cascade = CascadeType.ALL)
-    public List<HGSSLocation> currentLocations;
+    @ManyToOne
+    public HGSSRole role;
+
+    @ManyToOne
+    public HGSSSkill skill;
 
     @ManyToOne(fetch = FetchType.LAZY)
     public HGSSStation station;
 
     public HGSSUser(String username, String password, String firstName, String lastName,
-                    String role, String skill, String location, String phoneNumber,
-                    String availableFrom, String availableUntil, HGSSStation station){
+                    HGSSRole role, HGSSSkill skill, Double locationLong, Double locationLat, String phoneNumber,
+                    String availableFrom, String availableUntil, HGSSStation station, String locationName){
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -64,10 +71,12 @@ public class HGSSUser extends Model {
         this.role = role;
         this.skill = skill;
         this.station = station;
-        this.location = location;
+        this.locationLong = locationLong;
+        this.locationLat = locationLat;
         this.phoneNumber = phoneNumber;
         this.availableFrom = availableFrom;
         this.availableUntil = availableUntil;
+        this.locationName = locationName;
     }
 
 
@@ -101,6 +110,10 @@ public class HGSSUser extends Model {
 
     public static List<HGSSUser> findAvailableUsers(HGSSStation station){
         return finder.where().eq("station", station).eq("isAvailable", true).findList();
+    }
+
+    public static List<HGSSUser> findAvailableUsers() {
+        return finder.where().eq("isAvailable", true).findList();
     }
 
     public static class UsernameValidator extends Constraints.Validator<String> {

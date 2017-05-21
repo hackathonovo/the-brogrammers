@@ -1,4 +1,6 @@
-@(user: HGSSUser)
+@import models.codebook.HGSSRole
+@import models.codebook.HGSSSkill
+@(user: HGSSUser, roles: List[HGSSRole], skills: List[HGSSSkill])
 @edit = @{user!=null}
 
 @main("Registracija spasitelj") {
@@ -18,23 +20,6 @@
 
     <script>
             function initAutocomplete() {
-                var input = document.getElementById('pac-input');
-                var searchBox = new google.maps.places.SearchBox(input);
-                searchBox.addListener('places_changed', function () {
-                    var places = searchBox.getPlaces();
-                    if (places.length == 1) {
-                        $('#pac-input').val(place.name);
-                    } else {
-                        alert("Odaberi samo jednu lokaciju!");
-                        return;
-                    }
-                });
-
-
-
-
-
-
                 var markers = [{
                     "name": "Bjelovar",
                     "coords": "45.887861,16.854645",
@@ -147,6 +132,48 @@
                     content: 'map_infowindow'
                 });
 
+                var marker;
+                @if(edit) {
+                    marker = new google.maps.Marker({
+                        position: {lat: @user.locationLat, lng: @user.locationLong},
+                        title: '@user.station.stationName',
+                        icon: '@routes.Assets.at("images/home-pin2.png")',
+                        map: map,
+                        animation: google.maps.Animation.DROP
+                    });
+                    marker.setPosition({lat:@user.locationLat,lng:@user.locationLong});
+                    marker.setVisible(true);
+                    $('#pac-input').val('@user.station.stationName');
+                    $('#location-lng').val(@user.locationLong);
+                    $('#location-lat').val(@user.locationLat);
+                }
+                var input = document.getElementById('pac-input');
+                var searchBox = new google.maps.places.SearchBox(input);
+                searchBox.addListener('places_changed', function () {
+                    if(marker!=null) {
+                        marker.setMap(null);
+                    }
+                    var places = searchBox.getPlaces();
+                    if (places.length == 1) {
+                        var place = places[0];
+                        marker = new google.maps.Marker({
+                            position: place.location,
+                            title: place.name,
+                            icon: '@routes.Assets.at("images/home-pin2.png")',
+                            map: map,
+                            animation: google.maps.Animation.DROP
+                        });
+                        marker.setPosition(place.geometry.location);
+                        marker.setVisible(true);
+                        $('#pac-input').val(place.name);
+                        $('#location-lng').val(marker.position.lng());
+                        $('#location-lat').val(marker.position.lat());
+                    } else {
+                        alert("Odaberi samo jednu lokaciju!");
+                        return;
+                    }
+                });
+
                 $(markers).each(function() {
 
                     // console.log(typeof(this.p));
@@ -209,20 +236,18 @@
             </div>
             <div class="form-group">
                 <label for="skill">Iskustvo</label>
-                <select type="text" class="form-control" name="skill" id="skill">
-                    <option value="alpinizam">alpinizam</option>
-                    <option value="penjanje">penjanje</option>
-                    <option value="speologija">speologija</option>
-                    <option value="skijanje">skijanje</option>
-                    <option value="medicina">medicina</option>
+                <select type="text" class="form-control" name="skill" id="skill" @if(edit){value="@user.skill.toString"}>
+                    @for(skill <- skills){
+                        <option>@skill.toString()</option>
+                    }
                 </select>
             </div>
             <div class="form-group">
                 <label for="role">Rank</label>
-                <select type="text" class="form-control" name="role" id="role">
-                    <option value="clan">clan</option>
-                    <option value="pripravnik">pripravnik</option>
-                    <option value="spasavatelj">spasavatelj</option>
+                <select type="text" class="form-control" name="role" id="role" @if(edit){value="@user.skill.toString"}>
+                @for(role <- roles){
+                    <option>@role.toString()</option>
+                }
                 </select>
             </div>
             <div class="form-group">
@@ -258,7 +283,9 @@
           <label for="places">Lokacije</label>
           <div class="input-group">
             <input type="text" id="pac-input" class="form-control" name="location" placeholder="Radno mjesto, stan"
-            value="@if(edit){@user.location}"/>
+            value="@if(edit){@user.locationName}"/>
+              <input type="hidden" class="form-control" name="location-lng" id="location-lng" value="@if(edit){@user.locationLong}">
+              <input type="hidden" class="form-control" name="location-lat" id="location-lat" value="@if(edit){@user.locationLat}">
             <span class="input-group-addon">
                 <span class="glyphicon glyphicon-search"></span>
             </span>
@@ -287,6 +314,14 @@
       </div>
     </form>
   </div>
+
+    @if(edit) {
+    <script>
+            $('.selDiv option[value="SEL1"]');
+            $('.selDiv option[value="SEL1"]')
+    </script>
+
+    }
 
 
   <script>
