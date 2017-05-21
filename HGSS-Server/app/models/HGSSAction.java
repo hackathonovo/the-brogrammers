@@ -19,10 +19,15 @@ public class HGSSAction extends Model {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     public Long id;
 
+    public String title;
+
     public String description;
 
     public Double longitude;
     public Double latitude;
+
+    @OneToMany (cascade = CascadeType.ALL)
+    public List<HGSSChatMessage> messages;
 
     @ManyToOne
     public HGSSUser owner;
@@ -32,8 +37,9 @@ public class HGSSAction extends Model {
 
     public Boolean isActive;
 
-    public HGSSAction(HGSSUser owner, Double longitude, Double latitude, String description){
+    public HGSSAction(HGSSUser owner, String title, Double longitude, Double latitude, String description){
         this.owner = owner;
+        this.title = title;
         this.longitude = longitude;
         this.latitude = latitude;
         this.description = description;
@@ -50,6 +56,10 @@ public class HGSSAction extends Model {
 
     public static List<HGSSAction> findAll() {
         return finder.all();
+    }
+
+    public static HGSSAction findById(Long id) {
+        return finder.byId(id);
     }
 
     public static List<HGSSAction> findActiveActions(){
