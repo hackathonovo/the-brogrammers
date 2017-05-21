@@ -338,6 +338,12 @@ public class HGSSController extends Controller {
         String username = json.findPath("username").textValue();
         Long id = json.findPath("id").longValue();
 
+        HGSSAction action = HGSSAction.findById(id);
+        action.users.add(HGSSUser.findUserByUsername(username));
+        action.update();
+
+        Logger.debug("User successfully joined the action...");
+
         return ok();
     }
 

@@ -41,10 +41,10 @@ INSERT INTO hgssuser (id, username, password, first_name, last_name, role_id, sk
 
 ALTER SEQUENCE hgssuser_seq RESTART WITH 10;
 
-INSERT INTO hgssaction (id, title, longitude, latitude, owner_id, description, is_active)
-  VALUES (1, 'Title1', 45.323, 15.898, 2, 'Description of Action1', TRUE);
-INSERT INTO hgssaction (id, title, longitude, latitude, owner_id, description, is_active)
-  VALUES (2, 'Title2', 46.323, 16.898, 2, 'Description of Action2', TRUE);
+INSERT INTO hgssaction (id, title, longitude, latitude, owner_id, description, is_active, action_type_id)
+  VALUES (1, 'Title1', 45.323, 15.898, 2, 'Description of Action1', TRUE, 1);
+INSERT INTO hgssaction (id, title, longitude, latitude, owner_id, description, is_active, action_type_id)
+  VALUES (2, 'Title2', 46.323, 16.898, 2, 'Description of Action2', TRUE, 2);
 
 ALTER SEQUENCE hgssaction_seq RESTART WITH 10;
 
@@ -77,3 +77,12 @@ INSERT INTO hgsschat_message (id, hgssaction_id, username, message, date)
   VALUES (5, 2, 'hbaric', 'Spasili smo covjeka!', '2015-01-06 12:16:22');
 
 ALTER SEQUENCE hgsschat_message_seq RESTART WITH 20;
+
+INSERT INTO hgssuser_location (id, hgssuser_id, longitude, latitude)
+  VALUES (1, 2, 45.726565, 15.934867);
+INSERT INTO hgssuser_location (id, hgssuser_id, longitude, latitude)
+  VALUES (2, 2, 45.704296, 15.923550);
+INSERT INTO hgssuser_location (id, hgssuser_id, longitude, latitude)
+  VALUES (3, 2, 45.651103, 15.899887);
+INSERT INTO hgssuser_location (id, hgssuser_id, longitude, latitude)
+  VALUES (4, 2, 45.626647, 15.870052);
