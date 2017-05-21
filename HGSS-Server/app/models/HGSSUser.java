@@ -33,7 +33,8 @@ public class HGSSUser extends Model {
     public String lastName;
 
     //living location
-    public String location;
+    @ManyToOne(fetch = FetchType.LAZY)
+    public HGSSStation location;
 
     //time available from
     public String availableFrom;
@@ -58,7 +59,7 @@ public class HGSSUser extends Model {
     public HGSSStation station;
 
     public HGSSUser(String username, String password, String firstName, String lastName,
-                    HGSSRole role, HGSSSkill skill, String location, String phoneNumber,
+                    HGSSRole role, HGSSSkill skill, HGSSStation location, String phoneNumber,
                     String availableFrom, String availableUntil, HGSSStation station){
         this.username = username;
         this.password = password;

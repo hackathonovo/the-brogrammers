@@ -124,7 +124,7 @@ public class HGSSController extends Controller {
         String firstName = userForm.get("firstName");
         String lastName = userForm.get("lastName");
         String role = userForm.get("role");
-        String location = userForm.get("location");
+        String locationName = userForm.get("location");
         String skill = userForm.get("skill");
         String stationName = userForm.get("station");
         String phoneNumber = userForm.get("phoneNumber");
@@ -132,8 +132,12 @@ public class HGSSController extends Controller {
         String availableUntil = userForm.get("availableUntil");
         Double stationLng = Double.parseDouble(userForm.get("station-lng"));
         Double stationLat = Double.parseDouble(userForm.get("station-lat"));
+        Double locationLng = Double.parseDouble(userForm.get("location-lng"));
+        Double locationLat = Double.parseDouble(userForm.get("location-lat"));
         HGSSStation station = new HGSSStation(stationName, stationLng, stationLat);
+        HGSSStation location = new HGSSStation(locationName, locationLng, locationLat);
         station.save();
+        location.save();
 
         HGSSUser user = new HGSSUser(username, password, firstName, lastName, HGSSRole.findByRole(role),
                 HGSSSkill.findBySkill(skill), location, phoneNumber, availableFrom, availableUntil, station);
