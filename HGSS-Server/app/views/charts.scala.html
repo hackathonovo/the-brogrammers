@@ -2,21 +2,25 @@
 @main("Charts") {
 
   <div class="window">
-    <h1 class="horizontalLine"><span>Trips</span></h1>
+    <h1 class="horizontalLine"><span>Statistika</span></h1>
+    <div class="row" >
+      <div class="col-md-offset-2 col-md-8">
+      <canvas id="myChart" width="400" height="400"></canvas>
+      </div>
 
-    <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
     <script>
 
             var ctx = document.getElementById("myChart").getContext("2d")
 
             var myChart = new Chart(ctx, {
-              type: 'line',
+              type: 'bar',
               data: {
-                labels: [ @for(action <- actions) {"@action.title",}"Red", "Blue", "Yellow", "Green"],
+                labels: [ "Akcija1", "Akcija2", "Akcija3", "Akcija4","Akcija5"],
                 datasets: [{
-                  label: '# of Votes',
-                  data: [12, 19, 3, 5, 2, 3],
+                  label: '# broj spašavatelja',
+                  data: [12, 16, 3, 8, 2],
                   backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -47,9 +51,6 @@
               }
             });
     </script>
-
-
-    @for(action <- actions) {" <p>@action.title </p>"}
 
   </div>
 }
