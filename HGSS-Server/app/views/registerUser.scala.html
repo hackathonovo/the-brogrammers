@@ -18,23 +18,6 @@
 
     <script>
             function initAutocomplete() {
-                var input = document.getElementById('pac-input');
-                var searchBox = new google.maps.places.SearchBox(input);
-                searchBox.addListener('places_changed', function () {
-                    var places = searchBox.getPlaces();
-                    if (places.length == 1) {
-                        $('#pac-input').val(place.name);
-                    } else {
-                        alert("Odaberi samo jednu lokaciju!");
-                        return;
-                    }
-                });
-
-
-
-
-
-
                 var markers = [{
                     "name": "Bjelovar",
                     "coords": "45.887861,16.854645",
@@ -145,6 +128,48 @@
 
                 var map_infowindow = new google.maps.InfoWindow({
                     content: 'map_infowindow'
+                });
+
+                var marker;
+                @if(edit) {
+                    marker = new google.maps.Marker({
+                        position: {lat: @user.location.latitude, lng: @user.location.longitude},
+                        title: '@user.location.stationName',
+                        icon: '@routes.Assets.at("images/home-pin2.png")',
+                        map: map,
+                        animation: google.maps.Animation.DROP
+                    });
+                    marker.setPosition({lat:@user.location.latitude,lng:@user.location.longitude});
+                    marker.setVisible(true);
+                    $('#pac-input').val('@user.location.stationName');
+                    $('#location-lng').val(@user.location.longitude);
+                    $('#location-lat').val(@user.location.latitude);
+                }
+                var input = document.getElementById('pac-input');
+                var searchBox = new google.maps.places.SearchBox(input);
+                searchBox.addListener('places_changed', function () {
+                    if(marker!=null) {
+                        marker.setMap(null);
+                    }
+                    var places = searchBox.getPlaces();
+                    if (places.length == 1) {
+                        var place = places[0];
+                        marker = new google.maps.Marker({
+                            position: place.location,
+                            title: place.name,
+                            icon: '@routes.Assets.at("images/home-pin2.png")',
+                            map: map,
+                            animation: google.maps.Animation.DROP
+                        });
+                        marker.setPosition(place.geometry.location);
+                        marker.setVisible(true);
+                        $('#pac-input').val(place.name);
+                        $('#location-lng').val(marker.position.lng());
+                        $('#location-lat').val(marker.position.lat());
+                    } else {
+                        alert("Odaberi samo jednu lokaciju!");
+                        return;
+                    }
                 });
 
                 $(markers).each(function() {
@@ -259,6 +284,8 @@
           <div class="input-group">
             <input type="text" id="pac-input" class="form-control" name="location" placeholder="Radno mjesto, stan"
             value="@if(edit){@user.location}"/>
+              <input type="hidden" class="form-control" name="location-lng" id="location-lng" value="@if(edit){@user.location.longitude}">
+              <input type="hidden" class="form-control" name="location-lat" id="location-lat" value="@if(edit){@user.location.latitude}">
             <span class="input-group-addon">
                 <span class="glyphicon glyphicon-search"></span>
             </span>

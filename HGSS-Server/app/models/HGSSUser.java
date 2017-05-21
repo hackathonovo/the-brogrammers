@@ -1,7 +1,8 @@
 package models;
 
 import com.avaje.ebean.Model;
-import models.geo.HGSSLocation;
+import models.codebook.HGSSRole;
+import models.codebook.HGSSSkill;
 import models.geo.HGSSUserLocation;
 import play.data.validation.Constraints;
 import play.libs.F;
@@ -31,11 +32,9 @@ public class HGSSUser extends Model {
     public String firstName;
     public String lastName;
 
-    public String role;
-    public String skill;
-
     //living location
-    public String location;
+    @ManyToOne(fetch = FetchType.LAZY)
+    public HGSSStation location;
 
     //time available from
     public String availableFrom;
@@ -50,12 +49,17 @@ public class HGSSUser extends Model {
 
     public String phoneNumber;
 
+    @ManyToOne
+    public HGSSRole role;
+
+    @ManyToOne
+    public HGSSSkill skill;
 
     @ManyToOne(fetch = FetchType.LAZY)
     public HGSSStation station;
 
     public HGSSUser(String username, String password, String firstName, String lastName,
-                    String role, String skill, String location, String phoneNumber,
+                    HGSSRole role, HGSSSkill skill, HGSSStation location, String phoneNumber,
                     String availableFrom, String availableUntil, HGSSStation station){
         this.username = username;
         this.password = password;
