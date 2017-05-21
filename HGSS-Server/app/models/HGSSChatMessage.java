@@ -2,8 +2,7 @@ package models;
 
 import com.avaje.ebean.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -11,17 +10,20 @@ import java.util.List;
  * Created by Hari on 20.5.2017..
  */
 @Entity
-public class HGSSChatMessage extends Model{
+public class HGSSChatMessage extends Model {
 
-    @ManyToOne
-    public HGSSUser user;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    public Long id;
+
+    public String username;
 
     public String message;
 
     public Date date;
 
-    public HGSSChatMessage(HGSSUser user, String message, Date date) {
-        this.user = user;
+    public HGSSChatMessage(String username, String message, Date date) {
+        this.username = username;
         this.message = message;
         this.date = date;
     }
@@ -34,7 +36,7 @@ public class HGSSChatMessage extends Model{
 
     @Override
     public String toString() {
-        return "{time=" + date.getTime() + ", user=" + user.username + ", message=" + message + "}";
+        return "{time=" + date.getTime() + ", user=" + username + ", message=" + message + "}";
     }
 
 

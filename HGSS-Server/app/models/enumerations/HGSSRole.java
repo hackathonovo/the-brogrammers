@@ -5,8 +5,8 @@ package models.enumerations;
  */
 public enum HGSSRole {
 
-    ROLE_1,
-    ROLE_2,
-    ROLE_3
+    CLAN,
+    PRIPRAVNIK,
+    SPASAVATELJ
 
 }

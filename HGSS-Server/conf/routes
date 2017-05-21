@@ -23,7 +23,7 @@ GET     /createtrip         controllers.BTController.createTrip()
 POST    /saveTrip           controllers.BTController.saveTrip()
 
 #HGSS
-GET     /user               controllers.HGSSController.user()
+GET     /user               controllers.HGSSController.user(id: java.lang.Long ?= null)
 GET     /users              controllers.HGSSController.getUsers()
 GET     /stations           controllers.HGSSController.getStations()
 POST    /login              controllers.HGSSController.login()
