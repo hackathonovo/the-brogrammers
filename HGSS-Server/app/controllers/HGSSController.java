@@ -304,6 +304,15 @@ public class HGSSController extends Controller {
 
     }
 
+
+    public Result charts(){
+        List<HGSSAction> actions = HGSSAction.findAll();
+
+        return ok(views.html.charts.render(actions));
+
+    }
+
+
     @BodyParser.Of(BodyParser.Json.class)
     public Result updateAction(Long id) {
         Logger.debug("----------- Request: updateAction(id) -----------");
@@ -346,5 +355,6 @@ public class HGSSController extends Controller {
 
         return ok();
     }
+
 
 }
