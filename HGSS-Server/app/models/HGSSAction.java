@@ -1,6 +1,7 @@
 package models;
 
 import com.avaje.ebean.Model;
+import models.codebook.HGSSActionType;
 import models.geo.HGSSZone;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,6 +40,9 @@ public class HGSSAction extends Model {
     public List<HGSSZone> zones;
 
     public Boolean isActive;
+
+    @ManyToOne
+    public HGSSActionType actionType;
 
     public HGSSAction(HGSSUser owner, String title, Double longitude, Double latitude, String description){
         this.owner = owner;
