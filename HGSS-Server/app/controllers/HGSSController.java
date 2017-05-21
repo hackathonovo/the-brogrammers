@@ -107,6 +107,10 @@ public class HGSSController extends Controller {
 
         HGSSAction action = HGSSAction.findById(id);
 
+        // Mock
+        //List<HGSSUser> users = HGSSUser.findAvailableUsers();
+        //action.users = users;
+
         JsonNode jsonAction = Json.toJson(action);
         ((ObjectNode) jsonAction).put("owner", action.owner.username);
         Logger.debug("Response action: " + jsonAction);
@@ -290,6 +294,8 @@ public class HGSSController extends Controller {
 
         JsonNode json = request().body().asJson();
         List<String> usernames = json.findValuesAsText("username");
+
+
 
         return badRequest();
     }

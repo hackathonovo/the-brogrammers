@@ -79,7 +79,7 @@
                 @for(user <- action.users) {
                   @for(location <- user.currentLocations) {
                     {
-                      "name": @user.firstName,
+                      "name": '@user.firstName',
                       "coords": "@location.latitude,@location.longitude"
                     },
                   }
@@ -100,15 +100,9 @@
                 icon: icon,
                 map: map
               });
-
+              marker.setVisible(true);
             });
-
-
-
-
                       };
-
-
 
             }
   </script>
@@ -154,12 +148,33 @@
                 <span id="place-address"></span>
             </div>
           </div>
+
           <div class="form-group">
           <a class="btn btn-default" href="@routes.HGSSController.zones()">Zone</a>
           </div>
 
+          <h2 class="separate">Sudjelovali spasioci</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Ime</th>
+                <th>Prezime</th>
+                <th>Uloga</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for(user <- action.users) {
+              <tr>
+                <td>@user.firstName</td>
+                <td>@user.lastName</td>
+                <td>@user.role</td>
+              </tr>
+              }
+              </tbody>
+          </table>
+
           <div class="row">
-          <button type="submit" class="btn btn-primary separate">Submit</button>
+          <button type="submit" class="btn btn-primary separate">Ok</button>
           </div>
 
         </div>

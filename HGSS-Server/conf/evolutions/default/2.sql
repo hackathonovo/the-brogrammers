@@ -54,15 +54,15 @@ INSERT INTO hgsszone (id, hgssaction_id) VALUES (2, 2);
 
 ALTER SEQUENCE hgsszone_seq RESTART WITH 10;
 
-INSERT INTO hgsslocation (id, hgsszone_id, longitude, latitude) VALUES (1, 1, 46.392, 16.418);
-INSERT INTO hgsslocation (id, hgsszone_id, longitude, latitude) VALUES (2, 1, 46.592, 16.418);
-INSERT INTO hgsslocation (id, hgsszone_id, longitude, latitude) VALUES (3, 1, 46.592, 16.218);
-INSERT INTO hgsslocation (id, hgsszone_id, longitude, latitude) VALUES (4, 1, 46.392, 16.218);
+INSERT INTO hgsslocation (id, hgsszone_id, latitude, longitude) VALUES (1, 1, 46.392, 16.418);
+INSERT INTO hgsslocation (id, hgsszone_id, latitude, longitude) VALUES (2, 1, 46.592, 16.418);
+INSERT INTO hgsslocation (id, hgsszone_id, latitude, longitude) VALUES (3, 1, 46.592, 16.218);
+INSERT INTO hgsslocation (id, hgsszone_id, latitude, longitude) VALUES (4, 1, 46.392, 16.218);
 
-INSERT INTO hgsslocation (id, hgsszone_id, longitude, latitude) VALUES (5, 2, 45.787, 16.754);
-INSERT INTO hgsslocation (id, hgsszone_id, longitude, latitude) VALUES (6, 2, 45.987, 16.754);
-INSERT INTO hgsslocation (id, hgsszone_id, longitude, latitude) VALUES (7, 2, 45.987, 16.554);
-INSERT INTO hgsslocation (id, hgsszone_id, longitude, latitude) VALUES (8, 2, 45.787, 16.554);
+INSERT INTO hgsslocation (id, hgsszone_id, latitude, longitude) VALUES (5, 2, 45.787, 16.754);
+INSERT INTO hgsslocation (id, hgsszone_id, latitude, longitude) VALUES (6, 2, 45.987, 16.754);
+INSERT INTO hgsslocation (id, hgsszone_id, latitude, longitude) VALUES (7, 2, 45.987, 16.554);
+INSERT INTO hgsslocation (id, hgsszone_id, latitude, longitude) VALUES (8, 2, 45.787, 16.554);
 
 ALTER SEQUENCE hgsslocation_seq RESTART WITH 20;
 
@@ -79,12 +79,18 @@ INSERT INTO hgsschat_message (id, hgssaction_id, username, message, date)
 
 ALTER SEQUENCE hgsschat_message_seq RESTART WITH 20;
 
-INSERT INTO hgssuser_location (id, hgssuser_id, longitude, latitude) VALUES (1, 2, 45.787, 16.754);
-INSERT INTO hgssuser_location (id, hgssuser_id, longitude, latitude) VALUES (2, 2, 45.887, 16.754);
-INSERT INTO hgssuser_location (id, hgssuser_id, longitude, latitude) VALUES (3, 2, 45.987, 16.754);
-INSERT INTO hgssuser_location (id, hgssuser_id, longitude, latitude) VALUES (4, 2, 46.087, 16.754);
-INSERT INTO hgssuser_location (id, hgssuser_id, longitude, latitude) VALUES (5, 2, 46.287, 16.754);
-INSERT INTO hgssuser_location (id, hgssuser_id, longitude, latitude) VALUES (6, 2, 46.387, 16.754);
+INSERT INTO hgssuser_location (id, hgssuser_id, latitude, longitude) VALUES (1, 2, 45.787, 16.754);
+INSERT INTO hgssuser_location (id, hgssuser_id, latitude, longitude) VALUES (2, 2, 45.887, 16.754);
+INSERT INTO hgssuser_location (id, hgssuser_id, latitude, longitude) VALUES (3, 2, 45.987, 16.754);
+INSERT INTO hgssuser_location (id, hgssuser_id, latitude, longitude) VALUES (4, 2, 46.087, 16.754);
+INSERT INTO hgssuser_location (id, hgssuser_id, latitude, longitude) VALUES (5, 2, 46.287, 16.754);
+INSERT INTO hgssuser_location (id, hgssuser_id, latitude, longitude) VALUES (6, 2, 46.387, 16.754);
 
 
 ALTER SEQUENCE hgssuser_location_seq RESTART WITH 20;
+
+INSERT INTO hgssaction_hgssuser (hgssaction_id, hgssuser_id) VALUES (1, 2);
+INSERT INTO hgssaction_hgssuser (hgssaction_id, hgssuser_id) VALUES (1, 3);
+INSERT INTO hgssaction_hgssuser (hgssaction_id, hgssuser_id) VALUES (1, 4);
+INSERT INTO hgssaction_hgssuser (hgssaction_id, hgssuser_id) VALUES (2, 4);
+INSERT INTO hgssaction_hgssuser (hgssaction_id, hgssuser_id) VALUES (2, 5);
