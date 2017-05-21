@@ -9,6 +9,7 @@ import models.HGSSStation;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.HGSSUser;
 import models.geo.HGSSLocation;
+import models.geo.HGSSUserLocation;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.Logger;
@@ -58,7 +59,7 @@ public class HGSSController extends Controller {
         Double longitude = json.findPath("longitude").doubleValue();
         Double latitude = json.findPath("latitude").doubleValue();
 
-        HGSSLocation location = new HGSSLocation(longitude, latitude);
+        HGSSUserLocation location = new HGSSUserLocation(longitude, latitude);
 
         Logger.debug("Location to be added: long:" + location.longitude + " lat: " + location.latitude);
 
