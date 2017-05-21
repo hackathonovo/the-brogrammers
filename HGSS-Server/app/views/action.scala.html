@@ -168,25 +168,26 @@
 
 
           <h2 class="separate">Sudjelovali spasioci</h2>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Ime</th>
-                <th>Prezime</th>
-                <th>Uloga</th>
-              </tr>
-            </thead>
-            <tbody>
+          @if(edit) {
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Ime</th>
+                  <th>Prezime</th>
+                  <th>Uloga</th>
+                </tr>
+              </thead>
+              <tbody>
               @for(user <- action.users) {
-              <tr>
-                <td>@user.firstName</td>
-                <td>@user.lastName</td>
-                <td>@user.role</td>
-              </tr>
+                <tr>
+                  <td>@user.firstName</td>
+                  <td>@user.lastName</td>
+                  <td>@user.role</td>
+                </tr>
               }
               </tbody>
-          </table>
-
+            </table>
+          }
           <div class="row">
           <button type="submit" class="btn btn-primary separate">Ok</button>
           </div>

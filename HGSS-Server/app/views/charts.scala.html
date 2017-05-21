@@ -19,7 +19,7 @@
               data: {
                 labels: [  @for(action <- actions) {"@action.title", } ""],
                 datasets: [{
-                  label: '# broj spašavatelja',
+                  label: '# broj spasavatelja po akcijama',
                   data: [@for(size <- sizes) { @size,} 0 ],
                   backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
