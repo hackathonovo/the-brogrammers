@@ -105,11 +105,6 @@ public class HGSSController extends Controller {
         ((ObjectNode) jsonAction).put("owner", action.owner.username);
         Logger.debug("Response action: " + jsonAction);
 
-        Logger.debug(action.messages + "");
-        Logger.debug(action.messages.size() + "");
-
-        Logger.debug("bla:" + action.zones.get(0).locations.size());
-
         return ok(jsonAction);
     }
 
